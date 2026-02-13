@@ -20,6 +20,11 @@ RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|tt
 RewriteRule ^ - [L]
 
 # ============================================
+# Root-level fayllar (robots.txt, sitemap.xml)
+# ============================================
+RewriteRule ^(robots\.txt|sitemap\.xml|favicon\.ico)$ - [L]
+
+# ============================================
 # Uploads qovluğu - birbaşa giriş
 # ============================================
 RewriteRule ^uploads/ - [L]

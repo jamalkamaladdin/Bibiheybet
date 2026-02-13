@@ -870,21 +870,22 @@ RewriteRule ^(?!admin|public|uploads|includes)(.*)$ public/index.php?lang=az&rou
 - [x] SEO sahələri (meta title, meta desc, OG image — hər dil üçün)
 - [x] admin.css genişləndi (qalereya grid, drag & drop stilləri, spinner, responsive)
 
-### FAZA 5: Frontend Əsas / Foundation
-> **Agent 5 - Frontend Təməl Qurulması**
->
-> Frontend-in işləməsi üçün lazım olan əsas infrastruktur. Dizayndan asılı deyil.
+### FAZA 5: Frontend Əsas / Foundation ✅
+> **Agent 5 - Frontend Təməl Qurulması** — *Tamamlandı: 13 Fevral 2026*
 
-- [ ] Router (`public/index.php`) - URL parsing, dil detection, template yükləmə
-- [ ] `.htaccess` - URL rewriting qaydaları (dil prefix, SEO-friendly URL-lər)
-- [ ] `public/assets/css/global.css` - CSS reset, CSS custom properties, @font-face (Space Grotesk), tipografiya əsasları
-- [ ] `public/assets/fonts/` - Space Grotesk woff2 font faylları (variable + statik)
-- [ ] `public/templates/header.php` - Sayt header skeleti (logo, menyu, dil switch, hamburger)
-- [ ] `public/templates/footer.php` - Sayt footer skeleti (copyright, separator)
-- [ ] `public/assets/js/app.js` - Ümumi JS (dil switch handler, utility funksiyaları)
-- [ ] `includes/seo.php` inteqrasiyası - hər template-ə SEO meta tag inject
-- [ ] `includes/lang.php` inteqrasiyası - frontend dil detection + cookie/session yadda saxlama
-- [ ] Dil seçici UI elementi (header-də: AZ | EN | RU)
+- [x] Router (`public/index.php`) - URL parsing, dil detection, route resolve, template yükləmə
+- [x] `.htaccess` yeniləndi - robots.txt/sitemap.xml/favicon.ico pass-through əlavə edildi
+- [x] `public/assets/css/global.css` - CSS reset, CSS custom properties, @font-face (Space Grotesk variable + statik), tipografiya, rəng paleti, layout, kart, düymə, utility class-lar
+- [x] `public/assets/fonts/` - Qovluq yaradıldı (.gitkeep), woff2 faylları manual əlavə olunmalıdır
+- [x] `public/templates/header.php` - `bb_frontend_header()` funksiyası: HTML head, SEO meta inject, logo, dil switch (AZ|EN|RU), hamburger, mobil menyu paneli, sosial linklər
+- [x] `public/templates/footer.php` - `bb_frontend_footer()` funksiyası: separator, copyright, JS include
+- [x] `public/assets/js/app.js` - Hamburger menyu (açma/bağlama, ESC, overlay), dil switch (cookie sync), sticky header, lazy load (IntersectionObserver), cookie utility
+- [x] `includes/seo.php` inteqrasiyası - hər template `bb_render_meta()` vasitəsilə SEO meta tag-lar alır
+- [x] `includes/lang.php` genişləndi - statik səhifə route-ları (about-hazrat, about-mosque, prayers), menyu sistemi (`$bb_menu`, `bb_get_menu()`), dil switch URL (`bb_lang_switch_url()`), menyu aktiv yoxlama (`bb_is_menu_active()`)
+- [x] Dil seçici UI elementi (header-də: AZ | EN | RU - aktiv dil span, digərləri link)
+- [x] Placeholder template-lər: home.php, articles.php, article-single.php, pilgrimages.php, pilgrimage-single.php, page.php, 404.php
+- [x] Tək element template-ləri (article-single, pilgrimage-single) DB-dən data çəkir, SEO + hreflang işləyir
+- [x] Statik səhifə template (page.php) - 3 statik səhifə üçün ortaq template, çoxdilli dəstək
 
 ### FAZA 6: Frontend - Header, Footer & Naviqasiya
 > **Agent 6 - Header/Footer Dizayn & Funksionallıq**
@@ -1004,4 +1005,4 @@ FAZA 1 (Foundation)
 
 ---
 
-*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 13 Fevral 2026 (FAZA 4 tamamlandı)*
+*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 13 Fevral 2026 (FAZA 5 tamamlandı)*

@@ -11,22 +11,31 @@
  */
 $bb_route_map = [
     'az' => [
-        'articles'    => 'meqaleler',
-        'article'     => 'meqale',
-        'pilgrimages' => 'ziyaretgahlar',
-        'pilgrimage'  => 'ziyaretgah',
+        'articles'     => 'meqaleler',
+        'article'      => 'meqale',
+        'pilgrimages'  => 'ziyaretgahlar',
+        'pilgrimage'   => 'ziyaretgah',
+        'about-hazrat' => 'hezret-haqqinda',
+        'about-mosque' => 'mescid-haqqinda',
+        'prayers'      => 'dua-ve-ziyaretname',
     ],
     'en' => [
-        'articles'    => 'articles',
-        'article'     => 'article',
-        'pilgrimages' => 'pilgrimages',
-        'pilgrimage'  => 'pilgrimage',
+        'articles'     => 'articles',
+        'article'      => 'article',
+        'pilgrimages'  => 'pilgrimages',
+        'pilgrimage'   => 'pilgrimage',
+        'about-hazrat' => 'about-hazrat',
+        'about-mosque' => 'about-mosque',
+        'prayers'      => 'prayers',
     ],
     'ru' => [
-        'articles'    => 'stati',
-        'article'     => 'statya',
-        'pilgrimages' => 'svyatyni',
-        'pilgrimage'  => 'svyatynya',
+        'articles'     => 'stati',
+        'article'      => 'statya',
+        'pilgrimages'  => 'svyatyni',
+        'pilgrimage'   => 'svyatynya',
+        'about-hazrat' => 'o-hazrat',
+        'about-mosque' => 'o-mecheti',
+        'prayers'      => 'molitvy',
     ],
 ];
 
@@ -303,4 +312,112 @@ function bb_get_alternate_urls(string $routeName, array $slugs): array
     }
 
     return $urls;
+}
+
+// ============================================
+// Frontend Menyu Sistemi
+// ============================================
+
+/** Sayt menyusu - hər dil üçün label və route adı */
+$bb_menu = [
+    'az' => [
+        ['label' => 'Ana səhifə',         'route' => ''],
+        ['label' => 'Həzrət haqqında',     'route' => 'about-hazrat'],
+        ['label' => 'Məscid haqqında',     'route' => 'about-mosque'],
+        ['label' => 'Dua və ziyarətnamə',  'route' => 'prayers'],
+        ['label' => 'Ziyarətgahlar',       'route' => 'pilgrimages'],
+        ['label' => 'Məqalələr',           'route' => 'articles'],
+    ],
+    'en' => [
+        ['label' => 'Home',            'route' => ''],
+        ['label' => 'About Hazrat',    'route' => 'about-hazrat'],
+        ['label' => 'About Mosque',    'route' => 'about-mosque'],
+        ['label' => 'Prayers',         'route' => 'prayers'],
+        ['label' => 'Pilgrimages',     'route' => 'pilgrimages'],
+        ['label' => 'Articles',        'route' => 'articles'],
+    ],
+    'ru' => [
+        ['label' => 'Главная',     'route' => ''],
+        ['label' => 'О Хазрат',    'route' => 'about-hazrat'],
+        ['label' => 'О Мечети',    'route' => 'about-mosque'],
+        ['label' => 'Молитвы',     'route' => 'prayers'],
+        ['label' => 'Святыни',     'route' => 'pilgrimages'],
+        ['label' => 'Статьи',      'route' => 'articles'],
+    ],
+];
+
+/** Menyu elementlərini qaytarır */
+function bb_get_menu(?string $lang = null): array
+{
+    global $bb_menu;
+    if ($lang === null) {
+        $lang = bb_get_lang();
+    }
+    return $bb_menu[$lang] ?? $bb_menu['az'];
+}
+
+/**
+ * Dil switch URL yaradır (cari səhifənin hədəf dildəki versiyası).
+ * Tək element səhifələri üçün alternate_urls global-dan istifadə edir.
+ */
+function bb_lang_switch_url(string $targetLang): string
+{
+    global $bb_page_context;
+
+    $ctx = $bb_page_context ?? [];
+    $pageName = $ctx['name'] ?? 'home';
+    $routeName = $ctx['route'] ?? null;
+
+    // Əgər template alternate URL-lər təyin edibsə (tək məqalə/ziyarətgah üçün)
+    if (!empty($ctx['alternate_urls'][$targetLang])) {
+        return $ctx['alternate_urls'][$targetLang];
+    }
+
+    // Ana səhifə
+    if ($pageName === 'home') {
+        return bb_lang_url('', $targetLang);
+    }
+
+    // Siyahı səhifələri (articles, pilgrimages)
+    if (in_array($routeName, ['articles', 'pilgrimages'])) {
+        return bb_lang_url(bb_get_route($routeName, $targetLang) . '/', $targetLang);
+    }
+
+    // Statik səhifələr (about-hazrat, about-mosque, prayers)
+    if (in_array($routeName, ['about-hazrat', 'about-mosque', 'prayers'])) {
+        return bb_lang_url(bb_get_route($routeName, $targetLang) . '/', $targetLang);
+    }
+
+    // Default: ana səhifə
+    return bb_lang_url('', $targetLang);
+}
+
+/** Cari URL-in menyu itemə uyğun olub-olmadığını yoxlayır */
+function bb_is_menu_active(string $currentRoute, string $menuRoute, string $lang): bool
+{
+    // Ana səhifə
+    if (empty($menuRoute)) {
+        return empty($currentRoute);
+    }
+
+    $routeSlug = bb_get_route($menuRoute, $lang);
+    $firstSegment = explode('/', trim($currentRoute, '/'))[0] ?? '';
+
+    // Tam uyğunluq və ya alt-route uyğunluğu
+    if ($firstSegment === $routeSlug) {
+        return true;
+    }
+
+    // Tək element səhifələri üçün (article -> articles menyusu aktiv olsun)
+    $parentMap = ['article' => 'articles', 'pilgrimage' => 'pilgrimages'];
+    foreach ($parentMap as $child => $parent) {
+        if ($menuRoute === $parent) {
+            $childSlug = bb_get_route($child, $lang);
+            if ($firstSegment === $childSlug) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
