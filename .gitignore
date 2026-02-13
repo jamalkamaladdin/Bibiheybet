@@ -1,0 +1,41 @@
+# ============================================
+# Bibiheybet.com - Git Ignore
+# ============================================
+
+# Environment variables (credentials)
+.env
+.env.local
+.env.*.local
+
+# Real konfiqurasiya (credential-lar)
+config.php
+
+# İstifadəçi yükləmələri (serverdə yerləşir)
+uploads/articles/*
+uploads/pilgrimages/*
+uploads/media/*
+!uploads/articles/.gitkeep
+!uploads/pilgrimages/.gitkeep
+!uploads/media/.gitkeep
+
+# Dizayn mənbə faylları
+*.psd
+assets/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+vendor/

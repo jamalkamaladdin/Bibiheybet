@@ -1,0 +1,49 @@
+# ============================================
+# Bibiheybet.com - URL Rewriting
+# ============================================
+# Apache mod_rewrite tələb olunur.
+# ============================================
+
+RewriteEngine On
+
+# ============================================
+# HTTPS yönləndirmə (produksiya üçün)
+# ============================================
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ============================================
+# Statik fayllar - rewrite olunmasın
+# ============================================
+# CSS, JS, şəkillər, fontlar, audio faylları birbaşa xidmət olunur
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot|mp3|mp4|pdf)$ [NC]
+RewriteRule ^ - [L]
+
+# ============================================
+# Uploads qovluğu - birbaşa giriş
+# ============================================
+RewriteRule ^uploads/ - [L]
+
+# ============================================
+# Admin panel routing
+# ============================================
+# Admin fayllarına birbaşa giriş icazəsi
+RewriteRule ^admin/ - [L]
+
+# ============================================
+# Dil routing (EN, RU)
+# ============================================
+# /en/... və /ru/... URL-ləri public/index.php-yə yönləndirilir
+RewriteRule ^(en|ru)/(.*)$ public/index.php?lang=$1&route=$2 [L,QSA]
+
+# ============================================
+# Default dil routing (AZ)
+# ============================================
+# admin, public, uploads, includes, database xaric hər şey
+# public/index.php-yə AZ dili ilə yönləndirilir
+RewriteCond %{REQUEST_URI} !^/admin [NC]
+RewriteCond %{REQUEST_URI} !^/public [NC]
+RewriteCond %{REQUEST_URI} !^/uploads [NC]
+RewriteCond %{REQUEST_URI} !^/includes [NC]
+RewriteCond %{REQUEST_URI} !^/database [NC]
+RewriteRule ^(.*)$ public/index.php?lang=az&route=$1 [L,QSA]
