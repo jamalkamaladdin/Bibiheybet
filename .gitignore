@@ -18,9 +18,9 @@ uploads/media/*
 !uploads/pilgrimages/.gitkeep
 !uploads/media/.gitkeep
 
-# Dizayn mənbə faylları
+# Dizayn mənbə faylları (yalnız kök qovluğundakı)
 *.psd
-assets/
+/assets/
 
 # OS files
 .DS_Store
