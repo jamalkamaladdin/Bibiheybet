@@ -935,3 +935,525 @@ body.bb-login-page {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+   FAZA 3: ƏLAVƏ STİLLƏR
+   ============================================ */
+
+/* --- Card Wrapper --- */
+.bb-card {
+    background: var(--admin-content-bg);
+    border-radius: var(--admin-radius);
+    padding: 20px;
+    border: 1px solid var(--admin-border);
+    margin-bottom: 20px;
+}
+
+.bb-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--admin-text);
+}
+
+/* --- Form Layout (2 sütun: main + sidebar) --- */
+.bb-form-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+}
+
+.bb-form-main {}
+
+.bb-form-sidebar .bb-card {
+    position: sticky;
+    top: calc(var(--admin-topbar-height) + 20px);
+}
+
+/* --- Form Row (yan-yana sahələr) --- */
+.bb-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* --- Form Actions --- */
+.bb-form-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* --- Form Hint --- */
+.bb-form-hint {
+    display: block;
+    font-size: 12px;
+    color: var(--admin-text-muted);
+    margin-top: 4px;
+}
+
+/* --- Required Star --- */
+.bb-required {
+    color: var(--admin-error);
+}
+
+/* --- Slug Group --- */
+.bb-slug-group {
+    position: relative;
+}
+
+.bb-slug-group input {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+}
+
+/* --- Table Actions (inline buttons) --- */
+.bb-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* --- Table Wrapper (overflow) --- */
+.bb-table-wrapper {
+    background: var(--admin-content-bg);
+    border-radius: var(--admin-radius);
+    border: 1px solid var(--admin-border);
+    overflow-x: auto;
+}
+
+.bb-table-wrapper .bb-admin-table td:first-child,
+.bb-table-wrapper .bb-admin-table th:first-child {
+    padding-left: 16px;
+}
+
+.bb-table-wrapper .bb-admin-table td:last-child,
+.bb-table-wrapper .bb-admin-table th:last-child {
+    padding-right: 16px;
+}
+
+/* --- Filter Bar --- */
+.bb-filter-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--admin-border);
+}
+
+.bb-filter-link {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--admin-text-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color var(--admin-transition), border-color var(--admin-transition);
+}
+
+.bb-filter-link:hover {
+    color: var(--admin-text);
+    text-decoration: none;
+}
+
+.bb-filter-link.active {
+    color: var(--admin-primary);
+    border-bottom-color: var(--admin-primary);
+}
+
+/* --- SEO Panel (Collapse/Expand) --- */
+.bb-seo-panel {
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius-sm);
+    margin-top: 16px;
+}
+
+.bb-seo-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--admin-text-muted);
+    cursor: pointer;
+    font-family: var(--admin-font);
+    transition: background var(--admin-transition);
+}
+
+.bb-seo-toggle:hover {
+    background: #f1f5f9;
+}
+
+.bb-seo-arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+.bb-seo-panel.open .bb-seo-arrow {
+    transform: rotate(180deg);
+}
+
+.bb-seo-body {
+    display: none;
+    padding: 14px;
+    border-top: 1px solid var(--admin-border);
+}
+
+.bb-seo-panel.open .bb-seo-body {
+    display: block;
+}
+
+/* --- Image Upload (Drag & Drop) --- */
+.bb-image-upload {
+    position: relative;
+}
+
+.bb-image-upload .bb-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.bb-drop-zone {
+    border: 2px dashed var(--admin-border);
+    border-radius: var(--admin-radius-sm);
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--admin-transition), background var(--admin-transition);
+}
+
+.bb-drop-zone:hover,
+.bb-drop-zone.bb-drop-active {
+    border-color: var(--admin-primary);
+    background: var(--admin-info-bg);
+}
+
+.bb-drop-text {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+}
+
+/* Image Preview */
+.bb-image-preview {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    border-radius: var(--admin-radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--admin-border);
+}
+
+.bb-image-preview img {
+    display: block;
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.bb-preview-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    background: rgba(220, 38, 38, 0.85);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--admin-transition);
+}
+
+.bb-preview-remove:hover {
+    background: var(--admin-error);
+}
+
+/* --- Code inline --- */
+.bb-admin-table code {
+    font-size: 12px;
+    padding: 2px 6px;
+    background: #f1f5f9;
+    border-radius: 3px;
+    color: var(--admin-text-muted);
+}
+
+/* ============================================
+   FAZA 3: RESPONSIVE ƏLAVƏLƏR
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .bb-form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .bb-form-sidebar .bb-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .bb-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .bb-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bb-actions {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .bb-actions .bb-btn {
+        width: 100%;
+    }
+
+    .bb-filter-bar {
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================
+   FAZA 4: QALEREYA STİLLƏRİ
+   ============================================ */
+
+/* --- Qalereya Upload Zone --- */
+.bb-gallery-upload-zone {
+    border: 2px dashed var(--admin-border);
+    border-radius: var(--admin-radius-sm);
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--admin-transition), background var(--admin-transition);
+    margin-bottom: 20px;
+}
+
+.bb-gallery-upload-zone:hover,
+.bb-gallery-upload-zone.bb-drop-active {
+    border-color: var(--admin-primary);
+    background: var(--admin-info-bg);
+}
+
+/* --- Qalereya Grid --- */
+.bb-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+/* --- Qalereya Item --- */
+.bb-gallery-item {
+    background: var(--admin-content-bg);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius-sm);
+    overflow: hidden;
+    transition: box-shadow var(--admin-transition), opacity var(--admin-transition), transform var(--admin-transition);
+}
+
+.bb-gallery-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Qalereya Şəkil --- */
+.bb-gallery-img {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+.bb-gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- Qalereya Sil Düyməsi --- */
+.bb-gallery-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+    background: rgba(220, 38, 38, 0.85);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--admin-transition), background var(--admin-transition);
+    z-index: 2;
+}
+
+.bb-gallery-item:hover .bb-gallery-remove {
+    opacity: 1;
+}
+
+.bb-gallery-remove:hover {
+    background: var(--admin-error);
+}
+
+/* --- Qalereya Drag Handle --- */
+.bb-gallery-drag-handle {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 26px;
+    height: 26px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    opacity: 0;
+    transition: opacity var(--admin-transition);
+    z-index: 2;
+}
+
+.bb-gallery-item:hover .bb-gallery-drag-handle {
+    opacity: 1;
+}
+
+.bb-gallery-drag-handle:active {
+    cursor: grabbing;
+}
+
+/* --- Qalereya Başlıqlar --- */
+.bb-gallery-captions {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bb-gallery-caption {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 12px;
+    font-family: var(--admin-font);
+    color: var(--admin-text);
+    background: #ffffff;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius-sm);
+    outline: none;
+    transition: border-color var(--admin-transition), box-shadow var(--admin-transition);
+}
+
+.bb-gallery-caption:focus {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.bb-gallery-caption::placeholder {
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+/* --- Drag & Drop States --- */
+.bb-gallery-dragging {
+    opacity: 0.4;
+    transform: scale(0.95);
+}
+
+.bb-gallery-drag-over {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* --- Fade Out Animasiya (silmə) --- */
+.bb-gallery-fade-out {
+    animation: bbGalleryFadeOut 0.3s ease forwards;
+}
+
+@keyframes bbGalleryFadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+}
+
+/* --- Yükləmə Spinner --- */
+.bb-gallery-loading {
+    pointer-events: none;
+}
+
+.bb-gallery-loading .bb-gallery-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bb-gallery-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--admin-border);
+    border-top-color: var(--admin-primary);
+    border-radius: 50%;
+    animation: bbSpin 0.7s linear infinite;
+}
+
+@keyframes bbSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Qalereya Empty --- */
+.bb-gallery-empty {
+    padding: 16px 0;
+}
+
+/* --- FAZA 4: Responsive --- */
+@media (max-width: 768px) {
+    .bb-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    .bb-gallery-remove,
+    .bb-gallery-drag-handle {
+        opacity: 1;
+    }
+
+    .bb-gallery-caption {
+        font-size: 11px;
+        padding: 5px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bb-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+}

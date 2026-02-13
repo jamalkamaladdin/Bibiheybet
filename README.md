@@ -349,33 +349,47 @@ bibiheybet/
 │   ├── index.php                 # Dashboard
 │   ├── login.php                 # Giriş səhifəsi
 │   ├── logout.php                # Çıxış
+│   ├── upload.php                # TinyMCE inline şəkil yükləmə endpoint
 │   │
 │   ├── articles/
-│   │   ├── index.php             # Məqalə siyahısı
+│   │   ├── index.php             # Məqalə siyahısı (pagination + filtr)
 │   │   ├── create.php            # Yeni məqalə (3 dil tabları)
 │   │   ├── edit.php              # Redaktə
-│   │   └── delete.php            # Silmə
+│   │   ├── delete.php            # Silmə
+│   │   └── form.php              # Ortaq form template (create/edit paylaşır)
 │   │
 │   ├── categories/
 │   │   ├── index.php             # Kateqoriya siyahısı
-│   │   ├── create.php            # Yeni kateqoriya
+│   │   ├── create.php            # Yeni kateqoriya (3 dil tabları)
 │   │   ├── edit.php              # Redaktə
 │   │   └── delete.php            # Silmə
 │   │
 │   ├── pilgrimages/
-│   │   ├── index.php             # Ziyarətgah siyahısı
-│   │   ├── create.php            # Yeni ziyarətgah (3 dil tabları + qalereya)
-│   │   ├── edit.php              # Redaktə
-│   │   └── delete.php            # Silmə
+│   │   ├── index.php             # Ziyarətgah siyahısı (pagination + filtr)
+│   │   ├── create.php            # Yeni ziyarətgah (3 dil tabları)
+│   │   ├── edit.php              # Redaktə (+ qalereya idarəsi)
+│   │   ├── delete.php            # Silmə (şəkillər + qalereya ilə birlikdə)
+│   │   ├── form.php              # Ortaq form template (create/edit paylaşır)
+│   │   ├── gallery-upload.php    # Qalereya şəkil yükləmə (AJAX)
+│   │   ├── gallery-delete.php    # Qalereya şəkil silmə (AJAX)
+│   │   ├── gallery-reorder.php   # Qalereya sıralama (AJAX)
+│   │   └── gallery-caption.php   # Qalereya başlıq yeniləmə (AJAX)
 │   │
 │   └── assets/                   # Admin panel asset-ləri
 │       ├── css/
 │       │   └── admin.css         # Admin panel stilləri
 │       ├── js/
 │       │   ├── admin.js          # Ümumi admin JS (tab switch, alerts)
-│       │   ├── editor.js         # TinyMCE inisiasiya
+│       │   ├── editor.js         # TinyMCE inisializasiya + image upload handler
 │       │   ├── media-upload.js   # Fayl yükləmə (drag & drop, preview)
-│       │   └── gallery.js        # Qalereya idarəsi (sıralama, silmə)
+│       │   └── gallery.js        # Qalereya idarəsi (sıralama, silmə) — FAZA 4
+│       ├── tinymce/              # TinyMCE 7 self-hosted (MIT)
+│       │   ├── tinymce.min.js
+│       │   ├── plugins/
+│       │   ├── skins/
+│       │   ├── themes/
+│       │   ├── models/
+│       │   └── icons/
 │       └── img/
 │           └── admin-logo.png
 │
@@ -822,29 +836,39 @@ RewriteRule ^(?!admin|public|uploads|includes)(.*)$ public/index.php?lang=az&rou
 - [x] `admin/assets/js/admin.js` - Sidebar toggle, flash auto-dismiss, `bbConfirm()` modal, `initTabs()` tab switch utility
 - [x] Middleware: `bb_admin_header()` içindəki `bb_require_auth()` ilə hər admin səhifə auth yoxlayır
 
-### FAZA 3: Admin - Kateqoriyalar & Məqalələr
-> **Agent 3 - Content Management**
+### FAZA 3: Admin - Kateqoriyalar & Məqalələr ✅
+> **Agent 3 - Content Management** — *Tamamlandı: 13 Fevral 2026*
 
-- [ ] Kateqoriya CRUD (siyahı, yaratma, redaktə, silmə)
-- [ ] Məqalə CRUD (siyahı, yaratma, redaktə, silmə)
-- [ ] 3 dil tab interfeysi
-- [ ] TinyMCE inteqrasiyası (self-hosted)
-- [ ] Featured image yükləmə (+ dil fərqli foto seçimi)
-- [ ] SEO sahələri (collapse panel)
-- [ ] Slug auto-generation (Azərbaycan simvolları dəstəyi: ə, ı, ö, ü, ş, ç, ğ)
-- [ ] Status management (draft/published)
-- [ ] `admin/assets/js/editor.js`
-- [ ] `admin/assets/js/media-upload.js`
+- [x] Kateqoriya CRUD (siyahı, yaratma, redaktə, silmə)
+- [x] Məqalə CRUD (siyahı, yaratma, redaktə, silmə)
+- [x] 3 dil tab interfeysi
+- [x] TinyMCE 7 inteqrasiyası (self-hosted, admin/assets/tinymce/)
+- [x] Featured image yükləmə (+ dil fərqli foto seçimi)
+- [x] SEO sahələri (collapse panel: meta title, meta desc, OG image)
+- [x] Slug auto-generation (Azərbaycan simvolları dəstəyi: ə, ı, ö, ü, ş, ç, ğ)
+- [x] Status management (draft/published) + nəşr tarixi
+- [x] `admin/assets/js/editor.js` — TinyMCE init, image upload handler, RTL dəstəyi
+- [x] `admin/assets/js/media-upload.js` — Drag & drop, preview, client-side yoxlanış
+- [x] `admin/upload.php` — TinyMCE inline image upload endpoint
+- [x] `admin/articles/form.php` — Ortaq form template (create/edit paylaşır)
+- [x] Pagination (məqalə siyahısında, səhifə başı 15)
+- [x] Status filtri (hamısı / nəşr / qaralama)
+- [x] admin.css genişləndi (SEO panel, image upload, form layout, filter bar)
 
-### FAZA 4: Admin - Ziyarətgahlar
-> **Agent 4 - Pilgrimage Management**
+### FAZA 4: Admin - Ziyarətgahlar ✅
+> **Agent 4 - Pilgrimage Management** — *Tamamlandı: 13 Fevral 2026*
 
-- [ ] Ziyarətgah CRUD (siyahı, yaratma, redaktə, silmə)
-- [ ] 3 dil tab interfeysi
-- [ ] Featured image + dil fərqli foto
-- [ ] Qalereya sistemi (multiple upload, drag & drop sıralama, silmə)
-- [ ] Qalereya caption-ları (3 dildə)
-- [ ] `admin/assets/js/gallery.js`
+- [x] Ziyarətgah CRUD (siyahı, yaratma, redaktə, silmə)
+- [x] 3 dil tab interfeysi (AZ/EN/RU)
+- [x] Featured image + dil fərqli foto
+- [x] Qalereya sistemi (multiple upload, drag & drop sıralama, silmə — AJAX)
+- [x] Qalereya caption-ları (3 dildə, debounce ilə auto-save)
+- [x] `admin/assets/js/gallery.js` — qalereya idarəsi (upload, sıralama, silmə, caption)
+- [x] `admin/pilgrimages/form.php` — ortaq form template (create/edit paylaşır)
+- [x] AJAX endpoints: `gallery-upload.php`, `gallery-delete.php`, `gallery-reorder.php`, `gallery-caption.php`
+- [x] Pagination + status filtri (siyahı səhifəsi)
+- [x] SEO sahələri (meta title, meta desc, OG image — hər dil üçün)
+- [x] admin.css genişləndi (qalereya grid, drag & drop stilləri, spinner, responsive)
 
 ### FAZA 5: Frontend Əsas / Foundation
 > **Agent 5 - Frontend Təməl Qurulması**
@@ -980,4 +1004,4 @@ FAZA 1 (Foundation)
 
 ---
 
-*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 13 Fevral 2026 (FAZA 2 tamamlandı)*
+*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 13 Fevral 2026 (FAZA 4 tamamlandı)*

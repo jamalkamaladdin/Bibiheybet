@@ -140,6 +140,23 @@ function bb_generate_csrf(): string
 }
 
 /**
+ * CSRF token yaradır və yalnız token dəyərini qaytarır.
+ * AJAX sorğularda istifadə üçün.
+ * 
+ * @return string Token dəyəri
+ */
+function bb_generate_csrf_token(): string
+{
+    bb_start_session();
+
+    $token = bin2hex(random_bytes(32));
+    $_SESSION['csrf_token'] = $token;
+    $_SESSION['csrf_token_time'] = time();
+
+    return $token;
+}
+
+/**
  * CSRF token-i doğrulayır.
  * 
  * @param string $token POST-dan gələn token
