@@ -139,7 +139,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
             <!-- Top bar: logo (mobil) + nav + lang + hamburger -->
             <div class="bb-hero-topbar">
                 <a href="<?= bb_lang_url('', $lang) ?>" class="bb-hero-mobile-logo" aria-label="<?= bb_sanitize(SITE_NAME) ?>">
-                    <img src="/public/assets/img/logo-esas.png" alt="<?= bb_sanitize(SITE_NAME) ?>">
+                    <img src="/public/assets/img/logo.png" alt="<?= bb_sanitize(SITE_NAME) ?>">
                 </a>
 
                 <nav class="bb-hero-nav" aria-label="Əsas naviqasiya">
@@ -178,7 +178,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
 
             <!-- Logo (desktop) -->
             <a href="<?= bb_lang_url('', $lang) ?>" class="bb-hero-logo" aria-label="<?= bb_sanitize(SITE_NAME) ?>">
-                <img src="/public/assets/img/logo-esas.png" alt="<?= bb_sanitize(SITE_NAME) ?>">
+                <img src="/public/assets/img/logo.png" alt="<?= bb_sanitize(SITE_NAME) ?>">
             </a>
 
             <!-- Məscid illustrasiyası -->
