@@ -169,19 +169,21 @@
     .bb-player-title {
         font-size: 0.72rem;
     }
-
-    .bb-player-volume-wrap {
-        display: none;
-    }
 }
 
+/* Mobildə volume slider gizlət, düymə görsənsin */
 @media (max-width: 480px) {
     .bb-player-volume-wrap {
-        display: none;
+        display: flex;
     }
 
-    .bb-player-volume-wrap.bb-vol-open {
-        display: flex;
+    .bb-player-volume {
+        display: none;
+        width: 60px;
+    }
+
+    .bb-player-volume-wrap.bb-vol-open .bb-player-volume {
+        display: block;
     }
 
     .bb-player-inner {

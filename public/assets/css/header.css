@@ -10,12 +10,41 @@
    ============================================ */
 .bb-hero-header {
     position: relative;
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     background-color: var(--bb-bg-primary);
+}
+
+/* Mobildə hero header kompakt (sadəcə logo + menu) */
+@media (max-width: 1023px) {
+    .bb-hero-header {
+        min-height: auto;
+    }
+
+    .bb-hero-bg,
+    .bb-hero-logo,
+    .bb-hero-title,
+    .bb-hero-mosque {
+        display: none !important;
+    }
+
+    .bb-hero-content {
+        padding: 0 var(--bb-space-md);
+    }
+
+    .bb-hero-topbar {
+        padding: var(--bb-space-sm) 0;
+        min-height: var(--bb-header-height);
+    }
+}
+
+/* Desktopda hero tam ekran */
+@media (min-width: 1024px) {
+    .bb-hero-header {
+        min-height: 100vh;
+    }
 }
 
 /* Fon naxışları */
@@ -70,7 +99,7 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: var(--bb-space-md);
     padding-top: 0;
 }
@@ -170,7 +199,7 @@
 /* Hero məscid */
 .bb-hero-mosque {
     width: 100%;
-    max-width: 750px;
+    max-width: 900px;
     margin-top: auto;
 }
 
@@ -539,9 +568,14 @@
         justify-content: center;
     }
 
-    /* Hero logo göstər (mərkəzləşdirilmiş) */
+    /* Hero logo göstər (mərkəzləşdirilmiş, menyudan üstdə) */
     .bb-hero-logo {
         display: block;
+        order: -1;
+    }
+
+    .bb-hero-topbar {
+        order: 0;
     }
 
     .bb-hero-header .bb-hamburger {
@@ -573,7 +607,7 @@
     }
 
     .bb-hero-mosque {
-        max-width: 850px;
+        max-width: 1020px;
     }
 
     /* Kompakt header: desktop nav göstər (flex row with lang) */

@@ -51,8 +51,16 @@
             updateMuteState();
         });
 
-        // Volume button - mute toggle
+        // Volume button - mute toggle + mobile slider toggle
         volBtn.addEventListener('click', function () {
+            var volWrap = volBtn.closest('.bb-player-volume-wrap');
+            var isMobile = window.innerWidth <= 480;
+
+            if (isMobile) {
+                // Mobildə: slider toggle et
+                volWrap.classList.toggle('bb-vol-open');
+            }
+
             audio.muted = !audio.muted;
             if (audio.muted) {
                 volumeSlider.value = 0;
