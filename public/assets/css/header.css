@@ -2,7 +2,7 @@
  * Bibiheybet.com - Header Stilləri
  * 
  * Hero header (ana səhifə), kompakt header (digər səhifələr),
- * hamburger menyu, mobil menyu, sticky davranış.
+ * hamburger menyu, mobil menyu (fullscreen), sticky davranış.
  */
 
 /* ============================================
@@ -30,7 +30,7 @@
     position: absolute;
     width: 600px;
     height: 600px;
-    opacity: 0.12;
+    opacity: 0.08;
 }
 
 .bb-hero-pattern img {
@@ -71,12 +71,34 @@
     text-align: center;
     width: 100%;
     max-width: 1000px;
-    padding: var(--bb-space-lg) var(--bb-space-md);
+    padding: var(--bb-space-md);
+    padding-top: 0;
 }
 
-/* Hero logo */
-.bb-hero-logo {
+/* Hero topbar (logo mobil + nav desktop + lang + hamburger) */
+.bb-hero-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--bb-space-md) 0;
+    position: relative;
+    z-index: 5;
+}
+
+/* Mobile logo in topbar */
+.bb-hero-mobile-logo {
     display: block;
+}
+
+.bb-hero-mobile-logo img {
+    height: 40px;
+    width: auto;
+}
+
+/* Hero logo (desktop, centered below topbar) */
+.bb-hero-logo {
+    display: none;
     margin-bottom: var(--bb-space-lg);
 }
 
@@ -88,10 +110,9 @@
 /* Hero naviqasiya */
 .bb-hero-nav {
     display: none;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: var(--bb-space-md);
-    margin-bottom: var(--bb-space-xl);
+    gap: var(--bb-space-lg);
 }
 
 .bb-hero-menu {
@@ -131,27 +152,18 @@
     color: var(--bb-color-accent);
 }
 
-/* Hero dil switch */
-.bb-hero-lang {
-    display: flex;
-    gap: var(--bb-space-sm);
-}
-
 /* Hero hamburger (mobil) */
 .bb-hero-header .bb-hamburger {
-    position: absolute;
-    top: var(--bb-space-lg);
-    right: var(--bb-space-lg);
     z-index: 5;
 }
 
 /* Hero başlıq */
 .bb-hero-title {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--bb-color-muted);
     letter-spacing: 0.08em;
-    margin-bottom: var(--bb-space-xl);
+    margin-bottom: var(--bb-space-lg);
     text-transform: uppercase;
 }
 
@@ -165,7 +177,7 @@
 .bb-hero-mosque img {
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.4));
 }
 
 /* ============================================
@@ -176,7 +188,7 @@
     top: 0;
     z-index: var(--bb-z-header);
     background-color: var(--bb-bg-primary);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     transition: background-color var(--bb-transition), box-shadow var(--bb-transition);
 }
 
@@ -201,6 +213,8 @@
 /* Kompakt desktop nav */
 .bb-header-nav {
     display: none;
+    align-items: center;
+    gap: var(--bb-space-lg);
 }
 
 .bb-header-menu {
@@ -245,30 +259,80 @@
 }
 
 /* ============================================
-   DİL SWİTCH (ortaq)
+   DİL DROPDOWN (ortaq)
    ============================================ */
-.bb-lang-switch,
-.bb-hero-lang {
-    display: flex;
-    align-items: center;
-    gap: 2px;
+.bb-lang-dropdown {
+    position: relative;
 }
 
-.bb-lang-item {
-    font-size: 0.75rem;
+.bb-lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
     font-weight: 600;
-    padding: 4px 8px;
     color: var(--bb-color-muted);
-    transition: color var(--bb-transition);
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--bb-radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all var(--bb-transition);
     letter-spacing: 0.05em;
 }
 
-.bb-lang-item:hover {
+.bb-lang-toggle:hover {
     color: var(--bb-color-ton2);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-.bb-lang-item.bb-lang-active {
+.bb-lang-toggle svg {
+    transition: transform var(--bb-transition);
+}
+
+.bb-lang-dropdown.bb-open .bb-lang-toggle svg {
+    transform: rotate(180deg);
+}
+
+.bb-lang-dropdown-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 100%;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--bb-radius-sm);
+    box-shadow: var(--bb-shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 10;
+    list-style: none;
+    padding: 4px 0;
+    margin: 0;
+}
+
+.bb-lang-dropdown.bb-open .bb-lang-dropdown-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.bb-lang-dropdown-item {
+    display: block;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--bb-color-muted);
+    letter-spacing: 0.05em;
+    transition: all var(--bb-transition-fast);
+    white-space: nowrap;
+}
+
+.bb-lang-dropdown-item:hover {
     color: var(--bb-color-accent);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* ============================================
@@ -310,31 +374,36 @@
 }
 
 /* ============================================
-   MOBİL MENYU PANELİ
+   MOBİL MENYU PANELİ (FULLSCREEN)
    ============================================ */
 .bb-mobile-menu {
     position: fixed;
     top: 0;
-    right: 0;
-    width: 85%;
-    max-width: 360px;
+    left: 0;
+    width: 100%;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--bb-bg-primary);
     z-index: var(--bb-z-menu);
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
     overflow-y: auto;
 }
 
 .bb-mobile-menu.bb-open {
-    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
 }
 
 .bb-mobile-menu-inner {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: 100%;
     padding: var(--bb-space-xl) var(--bb-space-lg);
+    text-align: center;
 }
 
 /* Bağlama düyməsi */
@@ -342,7 +411,7 @@
     position: absolute;
     top: var(--bb-space-md);
     right: var(--bb-space-md);
-    font-size: 1.8rem;
+    font-size: 2rem;
     line-height: 1;
     color: var(--bb-color-muted);
     transition: color var(--bb-transition);
@@ -350,6 +419,7 @@
     border: none;
     cursor: pointer;
     padding: var(--bb-space-xs);
+    z-index: 5;
 }
 
 .bb-mobile-menu-close:hover {
@@ -358,20 +428,21 @@
 
 /* Menyu elementləri */
 .bb-mobile-menu-list {
-    margin-top: var(--bb-space-xl);
+    margin-bottom: var(--bb-space-xl);
 }
 
 .bb-mobile-menu-item {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: none;
 }
 
 .bb-mobile-menu-item a {
     display: block;
-    padding: var(--bb-space-md) 0;
-    font-size: 1.05rem;
+    padding: var(--bb-space-sm) 0;
+    font-size: 1.4rem;
     font-weight: 500;
     color: var(--bb-color-ton2);
     transition: color var(--bb-transition);
+    letter-spacing: 0.02em;
 }
 
 .bb-mobile-menu-item a:hover,
@@ -379,20 +450,48 @@
     color: var(--bb-color-accent);
 }
 
+/* Dil seçimi (mobil menyu) */
+.bb-mobile-lang {
+    display: flex;
+    align-items: center;
+    gap: var(--bb-space-sm);
+    margin-bottom: var(--bb-space-xl);
+}
+
+.bb-mobile-lang-item {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    color: var(--bb-color-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--bb-radius-sm);
+    transition: all var(--bb-transition);
+    letter-spacing: 0.05em;
+}
+
+.bb-mobile-lang-item:hover {
+    color: var(--bb-color-ton2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.bb-mobile-lang-item.bb-mobile-lang-active {
+    color: var(--bb-color-accent);
+    border-color: var(--bb-color-accent);
+}
+
 /* Sosial ikonlar (mobil menyu) */
 .bb-mobile-social {
     display: flex;
     gap: var(--bb-space-md);
-    margin-top: auto;
-    padding-top: var(--bb-space-xl);
+    padding-top: var(--bb-space-md);
 }
 
 .bb-mobile-social a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background-color: var(--bb-bg-secondary);
     color: var(--bb-color-ton2);
@@ -402,22 +501,6 @@
 .bb-mobile-social a:hover {
     background-color: var(--bb-color-accent);
     color: #fff;
-}
-
-/* Overlay */
-.bb-mobile-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: var(--bb-z-overlay);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.bb-mobile-overlay.bb-open {
-    opacity: 1;
-    visibility: visible;
 }
 
 /* ============================================
@@ -436,21 +519,29 @@
     }
 
     .bb-hero-title {
-        font-size: 1.2rem;
+        font-size: 1rem;
         letter-spacing: 0.1em;
-    }
-
-    .bb-mobile-menu {
-        width: 50%;
-        max-width: 400px;
     }
 }
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    /* Hero nav göstər */
+    /* Topbar-da mobil logo gizlə, nav göstər */
+    .bb-hero-mobile-logo {
+        display: none;
+    }
+
     .bb-hero-nav {
         display: flex;
+    }
+
+    .bb-hero-topbar {
+        justify-content: center;
+    }
+
+    /* Hero logo göstər (mərkəzləşdirilmiş) */
+    .bb-hero-logo {
+        display: block;
     }
 
     .bb-hero-header .bb-hamburger {
@@ -460,7 +551,7 @@
     .bb-hero-pattern {
         width: 800px;
         height: 800px;
-        opacity: 0.1;
+        opacity: 0.06;
     }
 
     .bb-hero-pattern-1 {
@@ -478,23 +569,19 @@
     }
 
     .bb-hero-title {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
 
     .bb-hero-mosque {
         max-width: 850px;
     }
 
-    /* Kompakt header: desktop nav göstər */
+    /* Kompakt header: desktop nav göstər (flex row with lang) */
     .bb-header-nav {
-        display: block;
+        display: flex;
     }
 
     .bb-header .bb-hamburger {
         display: none;
-    }
-
-    .bb-mobile-menu {
-        width: 35%;
     }
 }

@@ -1,7 +1,7 @@
 /**
  * Bibiheybet.com - Header JS
  * 
- * Hamburger menyu, sticky header, dil switch.
+ * Hamburger menyu (fullscreen), sticky header, dil dropdown.
  */
 
 (function () {
@@ -10,14 +10,13 @@
     document.addEventListener('DOMContentLoaded', function () {
         initHamburgerMenu();
         initStickyHeader();
-        initLangSwitch();
+        initLangDropdown();
     });
 
-    /** Hamburger menyu açma/bağlama */
+    /** Hamburger menyu açma/bağlama (fullscreen) */
     function initHamburgerMenu() {
         var hamburger = document.getElementById('bbHamburger');
         var menu = document.getElementById('bbMobileMenu');
-        var overlay = document.getElementById('bbMobileOverlay');
         var closeBtn = document.getElementById('bbMobileMenuClose');
 
         if (!hamburger || !menu) return;
@@ -26,7 +25,6 @@
             var isOpen = typeof open === 'boolean' ? open : !menu.classList.contains('bb-open');
 
             menu.classList.toggle('bb-open', isOpen);
-            if (overlay) overlay.classList.toggle('bb-open', isOpen);
             hamburger.classList.toggle('bb-active', isOpen);
             hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
@@ -37,10 +35,6 @@
 
         if (closeBtn) {
             closeBtn.addEventListener('click', function () { toggleMenu(false); });
-        }
-
-        if (overlay) {
-            overlay.addEventListener('click', function () { toggleMenu(false); });
         }
 
         document.addEventListener('keydown', function (e) {
@@ -68,10 +62,38 @@
         }, { passive: true });
     }
 
-    /** Dil switch cookie sync */
-    function initLangSwitch() {
-        var langItems = document.querySelectorAll('.bb-lang-item:not(.bb-lang-active)');
+    /** Dil dropdown */
+    function initLangDropdown() {
+        var dropdown = document.querySelector('.bb-lang-dropdown');
+        var toggle = document.getElementById('bbLangToggle');
 
+        if (!dropdown || !toggle) return;
+
+        toggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = dropdown.classList.contains('bb-open');
+            dropdown.classList.toggle('bb-open', !isOpen);
+            toggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+        });
+
+        // Xaricə click ilə bağla
+        document.addEventListener('click', function (e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('bb-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Escape ilə bağla
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && dropdown.classList.contains('bb-open')) {
+                dropdown.classList.remove('bb-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Dil seçimi cookie sync
+        var langItems = dropdown.querySelectorAll('.bb-lang-dropdown-item');
         langItems.forEach(function (item) {
             item.addEventListener('click', function () {
                 var href = this.getAttribute('href');

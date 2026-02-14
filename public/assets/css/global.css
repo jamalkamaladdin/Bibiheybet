@@ -68,72 +68,23 @@ table {
 }
 
 /* ============================================
-   @font-face - Space Grotesk (Self-hosted)
+   Fontlar - Google Fonts (Space Grotesk + Amiri)
    ============================================ */
-
-/* Variable font (müasir brauzerlər) */
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('/public/assets/fonts/SpaceGrotesk-VariableFont_wght.woff2') format('woff2-variations');
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* Statik fallback-lar */
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('/public/assets/fonts/SpaceGrotesk-Light.woff2') format('woff2');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('/public/assets/fonts/SpaceGrotesk-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('/public/assets/fonts/SpaceGrotesk-Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('/public/assets/fonts/SpaceGrotesk-SemiBold.woff2') format('woff2');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('/public/assets/fonts/SpaceGrotesk-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
+/* Fontlar <head> içindəki Google Fonts link ilə yüklənir */
 
 /* ============================================
    CSS Custom Properties
    ============================================ */
 :root {
-    /* Rənglər (açıq tema - #e2ddcc fon) */
-    --bb-bg-primary: #e2ddcc;
-    --bb-bg-secondary: #d9d3bf;
-    --bb-bg-section: #cfc8b3;
-    --bb-color-ton1: #23405e;
-    --bb-color-ton2: #2a2a2a;
+    /* Rənglər (tünd tema) */
+    --bb-bg-primary: #1a1a1a;
+    --bb-bg-secondary: #232323;
+    --bb-bg-section: #2a2a2a;
+    --bb-color-ton1: #8bacc8;
+    --bb-color-ton2: #d9d3bf;
     --bb-color-accent: #c9a84c;
-    --bb-color-heading: #1a1a2e;
-    --bb-color-muted: #5a5a5a;
+    --bb-color-heading: #e2ddcc;
+    --bb-color-muted: #9a9a8a;
 
     /* Fontlar */
     --bb-font-primary: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -157,10 +108,10 @@ table {
     --bb-transition: 0.3s ease;
     --bb-transition-fast: 0.15s ease;
 
-    /* Kölgələr (açıq tema üçün yumşaq) */
-    --bb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --bb-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
-    --bb-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+    /* Kölgələr (tünd tema) */
+    --bb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --bb-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --bb-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 
     /* Border radius */
     --bb-radius-sm: 4px;
@@ -277,11 +228,11 @@ strong, b {
 
 .bb-btn-primary {
     background-color: var(--bb-color-ton1);
-    color: #ffffff;
+    color: #1a1a1a;
 }
 
 .bb-btn-primary:hover {
-    background-color: #2d5278;
+    background-color: #a0c4e0;
 }
 
 .bb-btn-accent {
@@ -296,11 +247,11 @@ strong, b {
 .bb-btn-outline {
     background-color: transparent;
     color: var(--bb-color-ton2);
-    border: 1px solid var(--bb-color-ton1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .bb-btn-outline:hover {
-    background-color: var(--bb-color-ton1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
 
