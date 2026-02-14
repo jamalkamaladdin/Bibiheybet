@@ -183,7 +183,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
 
             <!-- Məscid illustrasiyası -->
             <div class="bb-hero-mosque">
-                <img src="/public/assets/img/bibiheybet-ziyaretgah.png" alt="Bibiheybət Məscidi">
+                <img src="/public/assets/img/bibiheybet-ziyaretgah.png?v=2" alt="Bibiheybət Məscidi">
             </div>
         </div>
     </header>
