@@ -1,0 +1,500 @@
+/**
+ * Bibiheybet.com - Header Stilləri
+ * 
+ * Hero header (ana səhifə), kompakt header (digər səhifələr),
+ * hamburger menyu, mobil menyu, sticky davranış.
+ */
+
+/* ============================================
+   HERO HEADER (Ana səhifə)
+   ============================================ */
+.bb-hero-header {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--bb-bg-primary);
+}
+
+/* Fon naxışları */
+.bb-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bb-hero-pattern {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    opacity: 0.12;
+}
+
+.bb-hero-pattern img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bb-hero-pattern-1 {
+    top: -100px;
+    right: -150px;
+    animation: bb-spin-cw 90s linear infinite;
+}
+
+.bb-hero-pattern-2 {
+    bottom: -100px;
+    left: -150px;
+    animation: bb-spin-ccw 80s linear infinite;
+}
+
+@keyframes bb-spin-cw {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes bb-spin-ccw {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+}
+
+/* Hero kontent */
+.bb-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: var(--bb-space-lg) var(--bb-space-md);
+}
+
+/* Hero logo */
+.bb-hero-logo {
+    display: block;
+    margin-bottom: var(--bb-space-lg);
+}
+
+.bb-hero-logo img {
+    max-width: 320px;
+    height: auto;
+}
+
+/* Hero naviqasiya */
+.bb-hero-nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--bb-space-md);
+    margin-bottom: var(--bb-space-xl);
+}
+
+.bb-hero-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--bb-space-sm) var(--bb-space-lg);
+}
+
+.bb-hero-menu-item a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--bb-color-ton2);
+    letter-spacing: 0.03em;
+    padding: var(--bb-space-xs) 0;
+    position: relative;
+    transition: color var(--bb-transition);
+}
+
+.bb-hero-menu-item a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: var(--bb-color-accent);
+    transition: width var(--bb-transition);
+}
+
+.bb-hero-menu-item a:hover::after,
+.bb-hero-menu-item.active a::after {
+    width: 100%;
+}
+
+.bb-hero-menu-item.active a {
+    color: var(--bb-color-accent);
+}
+
+/* Hero dil switch */
+.bb-hero-lang {
+    display: flex;
+    gap: var(--bb-space-sm);
+}
+
+/* Hero hamburger (mobil) */
+.bb-hero-header .bb-hamburger {
+    position: absolute;
+    top: var(--bb-space-lg);
+    right: var(--bb-space-lg);
+    z-index: 5;
+}
+
+/* Hero başlıq */
+.bb-hero-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--bb-color-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: var(--bb-space-xl);
+    text-transform: uppercase;
+}
+
+/* Hero məscid */
+.bb-hero-mosque {
+    width: 100%;
+    max-width: 750px;
+    margin-top: auto;
+}
+
+.bb-hero-mosque img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.15));
+}
+
+/* ============================================
+   KOMPAKT HEADER (Digər səhifələr)
+   ============================================ */
+.bb-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--bb-z-header);
+    background-color: var(--bb-bg-primary);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: background-color var(--bb-transition), box-shadow var(--bb-transition);
+}
+
+.bb-header.bb-header-sticky {
+    background-color: var(--bb-bg-secondary);
+    box-shadow: var(--bb-shadow-sm);
+}
+
+.bb-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--bb-header-height);
+}
+
+/* Kompakt logo */
+.bb-header-logo img {
+    height: 40px;
+    width: auto;
+}
+
+/* Kompakt desktop nav */
+.bb-header-nav {
+    display: none;
+}
+
+.bb-header-menu {
+    display: flex;
+    gap: var(--bb-space-lg);
+}
+
+.bb-header-menu-item a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--bb-color-ton2);
+    padding: var(--bb-space-xs) 0;
+    position: relative;
+    transition: color var(--bb-transition);
+}
+
+.bb-header-menu-item a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--bb-color-accent);
+    transition: width var(--bb-transition);
+}
+
+.bb-header-menu-item a:hover::after,
+.bb-header-menu-item.active a::after {
+    width: 100%;
+}
+
+.bb-header-menu-item.active a {
+    color: var(--bb-color-accent);
+}
+
+/* Header sağ tərəf */
+.bb-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--bb-space-md);
+}
+
+/* ============================================
+   DİL SWİTCH (ortaq)
+   ============================================ */
+.bb-lang-switch,
+.bb-hero-lang {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.bb-lang-item {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    color: var(--bb-color-muted);
+    transition: color var(--bb-transition);
+    letter-spacing: 0.05em;
+}
+
+.bb-lang-item:hover {
+    color: var(--bb-color-ton2);
+}
+
+.bb-lang-item.bb-lang-active {
+    color: var(--bb-color-accent);
+}
+
+/* ============================================
+   HAMBURGER DÜYMƏ (ortaq)
+   ============================================ */
+.bb-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.bb-hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--bb-color-ton2);
+    border-radius: 2px;
+    transition: all var(--bb-transition);
+    transform-origin: center;
+}
+
+/* Hamburger X animasiyası */
+.bb-hamburger.bb-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.bb-hamburger.bb-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.bb-hamburger.bb-active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================
+   MOBİL MENYU PANELİ
+   ============================================ */
+.bb-mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85%;
+    max-width: 360px;
+    height: 100vh;
+    background-color: var(--bb-bg-primary);
+    z-index: var(--bb-z-menu);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+.bb-mobile-menu.bb-open {
+    transform: translateX(0);
+}
+
+.bb-mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: var(--bb-space-xl) var(--bb-space-lg);
+}
+
+/* Bağlama düyməsi */
+.bb-mobile-menu-close {
+    position: absolute;
+    top: var(--bb-space-md);
+    right: var(--bb-space-md);
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--bb-color-muted);
+    transition: color var(--bb-transition);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--bb-space-xs);
+}
+
+.bb-mobile-menu-close:hover {
+    color: var(--bb-color-ton2);
+}
+
+/* Menyu elementləri */
+.bb-mobile-menu-list {
+    margin-top: var(--bb-space-xl);
+}
+
+.bb-mobile-menu-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.bb-mobile-menu-item a {
+    display: block;
+    padding: var(--bb-space-md) 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--bb-color-ton2);
+    transition: color var(--bb-transition);
+}
+
+.bb-mobile-menu-item a:hover,
+.bb-mobile-menu-item.active a {
+    color: var(--bb-color-accent);
+}
+
+/* Sosial ikonlar (mobil menyu) */
+.bb-mobile-social {
+    display: flex;
+    gap: var(--bb-space-md);
+    margin-top: auto;
+    padding-top: var(--bb-space-xl);
+}
+
+.bb-mobile-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bb-bg-secondary);
+    color: var(--bb-color-ton2);
+    transition: all var(--bb-transition);
+}
+
+.bb-mobile-social a:hover {
+    background-color: var(--bb-color-accent);
+    color: #fff;
+}
+
+/* Overlay */
+.bb-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: var(--bb-z-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.bb-mobile-overlay.bb-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+    .bb-hero-pattern {
+        width: 700px;
+        height: 700px;
+    }
+
+    .bb-hero-logo img {
+        max-width: 380px;
+    }
+
+    .bb-hero-title {
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+    }
+
+    .bb-mobile-menu {
+        width: 50%;
+        max-width: 400px;
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    /* Hero nav göstər */
+    .bb-hero-nav {
+        display: flex;
+    }
+
+    .bb-hero-header .bb-hamburger {
+        display: none;
+    }
+
+    .bb-hero-pattern {
+        width: 800px;
+        height: 800px;
+        opacity: 0.1;
+    }
+
+    .bb-hero-pattern-1 {
+        top: -200px;
+        right: -200px;
+    }
+
+    .bb-hero-pattern-2 {
+        bottom: -200px;
+        left: -200px;
+    }
+
+    .bb-hero-logo img {
+        max-width: 420px;
+    }
+
+    .bb-hero-title {
+        font-size: 1.3rem;
+    }
+
+    .bb-hero-mosque {
+        max-width: 850px;
+    }
+
+    /* Kompakt header: desktop nav göstər */
+    .bb-header-nav {
+        display: block;
+    }
+
+    .bb-header .bb-hamburger {
+        display: none;
+    }
+
+    .bb-mobile-menu {
+        width: 35%;
+    }
+}

@@ -2,8 +2,7 @@
 /**
  * Bibiheybet.com - Ana Səhifə
  * 
- * FAZA 7-də tam dizaynla tamamlanacaq.
- * Hazırda skelet: header + placeholder kontent + footer.
+ * Hero header ilə ana səhifə. FAZA 7-də tam bölmələr əlavə olunacaq.
  */
 
 require_once __DIR__ . '/header.php';
@@ -39,13 +38,13 @@ $seoData = [
 bb_frontend_header([
     'seo_data'   => $seoData,
     'body_class' => 'bb-page-home',
+    'is_home'    => true,
 ]);
 ?>
 
-    <!-- Hero placeholder (FAZA 7) -->
-    <section class="bb-section bb-hero-placeholder">
-        <div class="bb-container bb-text-center">
-            <h1><?= bb_sanitize($homeTitle[$lang] ?? $homeTitle['az']) ?></h1>
+    <!-- Placeholder bölmələr (FAZA 7-də dolacaq) -->
+    <section class="bb-section bb-text-center">
+        <div class="bb-container">
             <div class="bb-separator" style="margin: 1rem auto;"></div>
             <p class="bb-text-muted"><?= bb_sanitize($homeDesc[$lang] ?? $homeDesc['az']) ?></p>
         </div>

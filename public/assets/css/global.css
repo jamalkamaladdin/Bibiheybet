@@ -125,15 +125,15 @@ table {
    CSS Custom Properties
    ============================================ */
 :root {
-    /* Rənglər */
-    --bb-bg-primary: #0a0a0a;
-    --bb-bg-secondary: #111111;
-    --bb-bg-section: #1a1a2e;
+    /* Rənglər (açıq tema - #e2ddcc fon) */
+    --bb-bg-primary: #e2ddcc;
+    --bb-bg-secondary: #d9d3bf;
+    --bb-bg-section: #cfc8b3;
     --bb-color-ton1: #23405e;
-    --bb-color-ton2: #e2ddcc;
+    --bb-color-ton2: #2a2a2a;
     --bb-color-accent: #c9a84c;
-    --bb-color-white: #ffffff;
-    --bb-color-ton2-muted: #e2ddcc99;
+    --bb-color-heading: #1a1a2e;
+    --bb-color-muted: #5a5a5a;
 
     /* Fontlar */
     --bb-font-primary: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -157,10 +157,10 @@ table {
     --bb-transition: 0.3s ease;
     --bb-transition-fast: 0.15s ease;
 
-    /* Kölgələr */
-    --bb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-    --bb-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --bb-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    /* Kölgələr (açıq tema üçün yumşaq) */
+    --bb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --bb-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --bb-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
 
     /* Border radius */
     --bb-radius-sm: 4px;
@@ -188,7 +188,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--bb-font-primary);
     font-weight: 600;
-    color: var(--bb-color-white);
+    color: var(--bb-color-heading);
 }
 
 h1 { font-size: 2.5rem; }
@@ -217,7 +217,7 @@ strong, b {
 
 /* İkinci dərəcəli yazılar */
 .bb-text-muted {
-    color: var(--bb-color-ton2-muted);
+    color: var(--bb-color-muted);
 }
 
 /* ============================================
@@ -277,7 +277,7 @@ strong, b {
 
 .bb-btn-primary {
     background-color: var(--bb-color-ton1);
-    color: var(--bb-color-white);
+    color: #ffffff;
 }
 
 .bb-btn-primary:hover {
@@ -286,7 +286,7 @@ strong, b {
 
 .bb-btn-accent {
     background-color: var(--bb-color-accent);
-    color: var(--bb-bg-primary);
+    color: #ffffff;
 }
 
 .bb-btn-accent:hover {
@@ -301,7 +301,7 @@ strong, b {
 
 .bb-btn-outline:hover {
     background-color: var(--bb-color-ton1);
-    color: var(--bb-color-white);
+    color: #ffffff;
 }
 
 /* ============================================

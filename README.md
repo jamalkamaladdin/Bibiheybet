@@ -517,25 +517,25 @@ bibiheybet/
 
 | Ad | HEX | İstifadə sahəsi |
 |----|-----|-----------------|
-| **Əsas fon** | `#0a0a0a` | Saytın ümumi arxa fonu |
-| **Alternativ fon** | `#111111` | Header sticky fon, kart fonları |
-| **Bölmə fon** | `#1a1a2e` | Alternativ bölmə fonları |
+| **Əsas fon** | `#e2ddcc` | Saytın ümumi arxa fonu (açıq krem/bej) |
+| **Alternativ fon** | `#d9d3bf` | Header sticky fon, kart fonları |
+| **Bölmə fon** | `#cfc8b3` | Alternativ bölmə fonları |
 | **Ton 1 (Tünd göy)** | `#23405e` | Düymələr, aktiv elementlər, separator xətlər |
-| **Ton 2 (Krem/bej)** | `#e2ddcc` | Əsas body yazı rəngi, ikonlar |
+| **Ton 2 (Tünd mətn)** | `#2a2a2a` | Əsas body yazı rəngi |
 | **Aksent (Qızılı)** | `#c9a84c` | Dekorativ xətlər, vurğular |
-| **Ağ** | `#ffffff` | Başlıqlar, CTA düymə yazıları |
-| **Solğun krem** | `#e2ddcc99` | İkinci dərəcəli yazılar |
+| **Başlıq rəngi** | `#1a1a2e` | Başlıqlar, əsas heading-lər |
+| **Solğun mətn** | `#5a5a5a` | İkinci dərəcəli yazılar |
 
 ```css
 :root {
-  --bb-bg-primary: #0a0a0a;
-  --bb-bg-secondary: #111111;
-  --bb-bg-section: #1a1a2e;
+  --bb-bg-primary: #e2ddcc;
+  --bb-bg-secondary: #d9d3bf;
+  --bb-bg-section: #cfc8b3;
   --bb-color-ton1: #23405e;
-  --bb-color-ton2: #e2ddcc;
+  --bb-color-ton2: #2a2a2a;
   --bb-color-accent: #c9a84c;
-  --bb-color-white: #ffffff;
-  --bb-color-ton2-muted: #e2ddcc99;
+  --bb-color-heading: #1a1a2e;
+  --bb-color-muted: #5a5a5a;
 }
 ```
 
@@ -625,7 +625,7 @@ h1, h2, h3 {
 }
 ```
 
-- Başlıqlarda `#ffffff` (ağ), body mətnlərdə `#e2ddcc` (krem)
+- Başlıqlarda `#1a1a2e` (tünd), body mətnlərdə `#2a2a2a` (tünd boz)
 - Ərəb mətnlər RTL (sağdan-sola) göstərilməlidir
 - `font-display: swap` - font yüklənənə qədər sistem fontu göstərilir (performans)
 
@@ -690,8 +690,12 @@ h1, h2, h3 {
 
 | Fayl | Təsvir |
 |------|--------|
-| `logo.png` | Açıq rəngli logo (krem/qızılı) - tünd fon üçün |
-| `icon.png` | Tünd yaşıl ikon (tac + lent) - Favicon |
+| `logo-esas.png` | Əsas sayt logosu (gradient mavi-bənövşəyi) - header üçün |
+| `logo.png` | Alternativ logo (krem/qızılı) - tünd fon üçün |
+| `icon.png` | İkon (tac + lent) - Favicon |
+| `naxis.png` | Qızılı ornamental dairəvi naxış (hero fon - arxa layer) |
+| `naxis2.png` | Qızılı çiçək naxışı (hero fon - üst layer) |
+| `bibiheybet3d.png` | Bibiheybət məscidinin 3D illustrasiyası (hero bölmə) |
 | `ton1.png` | Logo `#23405e` rəngində |
 | `ton2.png` | İkon `#e2ddcc` rəngində |
 | `vector1.png` | Bibiheybət məscidinin vektor illustrasiyası |
@@ -887,22 +891,24 @@ RewriteRule ^(?!admin|public|uploads|includes)(.*)$ public/index.php?lang=az&rou
 - [x] Tək element template-ləri (article-single, pilgrimage-single) DB-dən data çəkir, SEO + hreflang işləyir
 - [x] Statik səhifə template (page.php) - 3 statik səhifə üçün ortaq template, çoxdilli dəstək
 
-### FAZA 6: Frontend - Header, Footer & Naviqasiya
-> **Agent 6 - Header/Footer Dizayn & Funksionallıq**
->
-> Dizayn istifadəçi tərəfindən veriləcək. Bu faza header, footer, hamburger menyu və audio mini-player-i əhatə edir.
+### FAZA 6: Frontend - Header, Footer & Naviqasiya ✅
+> **Agent 6 - Header/Footer Dizayn & Funksionallıq** — *Tamamlandı: 14 Fevral 2026*
 
-- [ ] `public/assets/css/header.css` - Header stilləri (desktop, tablet, mobil)
-- [ ] `public/assets/css/footer.css` - Footer stilləri
-- [ ] `public/assets/js/header.js` - Hamburger menyu açma/bağlama, sticky header
-- [ ] `public/assets/js/mini-player.js` - Audio mini-player (fixed bottom, play/pause, progress, close)
-- [ ] `public/assets/css/mini-player.css` - Mini-player stilləri
-- [ ] Desktop header: Logo + axtarış + sosial ikonlar + hamburger menyu
-- [ ] Sticky header: scroll-da logo + inline menyu linkləri (slide-down animasiya)
-- [ ] Mobil header: Logo + hamburger (sticky yoxdur)
-- [ ] Hamburger menyu: sağdan sola slide, overlay, menyu itemləri, sosial ikonlar
-- [ ] Footer: separator xətt + copyright
-- [ ] Responsive davranışlar (desktop/tablet/mobil ölçüləri)
+- [x] `public/templates/header.php` — İki rejimli header: Hero (ana səhifə) + Kompakt (digər səhifələr)
+- [x] `public/assets/css/header.css` — Header stilləri (hero bg naxışlar, kompakt sticky, hamburger, mobil menyu, responsive)
+- [x] `public/assets/js/header.js` — Hamburger menyu (açma/bağlama, ESC, overlay), sticky header, dil switch
+- [x] `public/templates/footer.php` — Footer + audio mini-player HTML
+- [x] `public/assets/css/footer.css` — Footer separator + copyright stilləri
+- [x] `public/assets/css/mini-player.css` — Fixed bottom player (tünd fon, progress bar, volume slider)
+- [x] `public/assets/js/mini-player.js` — Audio autoplay (aşağı səslə), play/pause, progress seek, volume, mute toggle
+- [x] `public/templates/home.php` — Hero header ilə ana səhifə (`is_home: true`)
+- [x] `public/assets/js/app.js` — Refaktor: header/menyu kodu header.js-ə köçürüldü, yalnız lazy load + cookie utility qaldı
+- [x] Hero header: ortada logo, naviqasiya + dil switch, "Bibiheybət məscid-ziyarətgah kompleksi" başlığı, 3D məscid
+- [x] Fon naxışları: naxis.png (sağdan sola) + naxis2.png (soldan sağa) — dairəvi CSS animasiya
+- [x] Kompakt header: logo sol, desktop nav orta, dil + hamburger sağ, sticky scroll davranışı
+- [x] Hamburger menyu: sağdan slide, overlay, sosial ikonlar (Instagram, Facebook SVG)
+- [x] Audio player: fixed bottom bar, autoplay loop, volume 8% default, progress bar, mute toggle
+- [x] Responsive: mobil (hamburger), tablet, desktop (inline nav)
 
 ### FAZA 7: Frontend - Ana Səhifə
 > **Agent 7 - Homepage**
@@ -1005,4 +1011,4 @@ FAZA 1 (Foundation)
 
 ---
 
-*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 13 Fevral 2026 (FAZA 5 tamamlandı)*
+*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 14 Fevral 2026 (FAZA 6 tamamlandı)*

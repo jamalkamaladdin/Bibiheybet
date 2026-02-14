@@ -1,0 +1,166 @@
+/**
+ * Bibiheybet.com - Audio Mini Player Stilləri
+ */
+
+.bb-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--bb-z-player);
+    background-color: #1a1a2e;
+    color: #e2ddcc;
+    height: 56px;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.bb-player-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+    max-width: var(--bb-container-max);
+    margin: 0 auto;
+    padding: 0 var(--bb-space-md);
+}
+
+/* Play/Pause düyməsi */
+.bb-player-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    color: #e2ddcc;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color var(--bb-transition-fast), background-color var(--bb-transition-fast);
+}
+
+.bb-player-btn:hover {
+    color: var(--bb-color-accent);
+}
+
+.bb-player-play {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bb-player-play:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Playing state */
+.bb-player.bb-playing .bb-player-icon-play { display: none !important; }
+.bb-player.bb-playing .bb-player-icon-pause { display: block !important; }
+.bb-player:not(.bb-playing) .bb-player-icon-play { display: block !important; }
+.bb-player:not(.bb-playing) .bb-player-icon-pause { display: none !important; }
+
+/* Track info */
+.bb-player-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bb-player-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(226, 221, 204, 0.85);
+    letter-spacing: 0.02em;
+}
+
+/* Progress bar */
+.bb-player-progress {
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.bb-player-progress-bar {
+    height: 100%;
+    background-color: var(--bb-color-accent);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.bb-player-progress:hover .bb-player-progress-bar {
+    background-color: #d4b45c;
+}
+
+/* Volume */
+.bb-player-volume-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.bb-player-vol-btn {
+    width: 28px;
+    height: 28px;
+}
+
+.bb-player-volume {
+    width: 70px;
+    height: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.bb-player-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bb-color-accent);
+    cursor: pointer;
+}
+
+.bb-player-volume::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bb-color-accent);
+    border: none;
+    cursor: pointer;
+}
+
+/* Muted state */
+.bb-player.bb-muted .bb-player-vol-btn {
+    opacity: 0.5;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .bb-player-volume-wrap {
+        display: none;
+    }
+
+    .bb-player-volume-wrap.bb-vol-open {
+        display: flex;
+    }
+}
+
+@media (min-width: 481px) {
+    .bb-player-volume {
+        width: 90px;
+    }
+}

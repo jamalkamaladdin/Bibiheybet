@@ -1,0 +1,27 @@
+/**
+ * Bibiheybet.com - Footer Stilləri
+ */
+
+.bb-footer {
+    padding: var(--bb-space-xl) 0 var(--bb-space-lg);
+    /* Player üçün alt padding */
+    padding-bottom: calc(var(--bb-space-lg) + 64px);
+}
+
+.bb-footer-inner {
+    text-align: center;
+}
+
+.bb-footer-separator {
+    width: 80px;
+    height: 2px;
+    background-color: var(--bb-color-ton1);
+    margin: 0 auto var(--bb-space-md);
+}
+
+.bb-footer-copyright {
+    font-size: 0.85rem;
+    color: var(--bb-color-muted);
+    font-weight: 400;
+    margin: 0;
+}
