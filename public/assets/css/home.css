@@ -1,0 +1,501 @@
+/**
+ * Bibiheybet.com - Ana Səhifə Stilləri
+ * 
+ * Bölmələr: Həzrət haqqında, Məscid haqqında,
+ * Ziyarətgahlar, Son Məqalələr + scroll animasiyaları.
+ */
+
+/* ============================================
+   Ortaq: Qızılı düymə
+   ============================================ */
+.bb-btn-gold {
+    background: linear-gradient(135deg, #c9a84c, #d4b45c);
+    color: #1a1a1a;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.8rem 2rem;
+    border-radius: var(--bb-radius-sm);
+    transition: all var(--bb-transition);
+}
+
+.bb-btn-gold:hover {
+    background: linear-gradient(135deg, #d4b45c, #dfc06c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+}
+
+/* Ortaq bölmə başlıq */
+.bb-home-section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+/* Separator mərkəzləşdirmə */
+.bb-separator-center {
+    width: 60px;
+    height: 2px;
+    background-color: var(--bb-color-accent);
+    margin: 1rem auto 2.5rem;
+}
+
+/* Ortaq "daha çox" düymə */
+.bb-home-more-btn {
+    margin-top: 2.5rem;
+}
+
+/* ============================================
+   Bölmə: Həzrət haqqında
+   ============================================ */
+.bb-home-hazrat {
+    position: relative;
+    background-color: var(--bb-bg-primary);
+    padding: 5rem 0 4rem;
+    overflow: hidden;
+}
+
+/* Naxis ornament — yarı dairə, sağdan sola drift */
+.bb-home-hazrat-ornament {
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
+    height: 190px;
+    overflow: hidden;
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bb-home-hazrat-ornament img {
+    width: 380px;
+    height: 380px;
+    object-fit: contain;
+    animation: bb-drift-rtl 35s ease-in-out infinite;
+}
+
+@keyframes bb-drift-rtl {
+    0%, 100% { transform: translateX(40px); }
+    50%      { transform: translateX(-40px); }
+}
+
+/* Həzrət mətn bloku */
+.bb-home-hazrat-body {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.bb-home-hazrat-text {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--bb-color-ton2);
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   Bölmə: Məscid haqqında (açıq fon)
+   ============================================ */
+.bb-home-mosque {
+    position: relative;
+    background-color: #e2ddcc;
+    padding: 5rem 0;
+    overflow: hidden;
+}
+
+/* Arxa fon: bibiheybet.png sağ tərəfdə */
+.bb-home-mosque-bg {
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55%;
+    max-width: 700px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bb-home-mosque-bg img {
+    width: 100%;
+    height: auto;
+}
+
+/* Mətn kontenti sol tərəfdə */
+.bb-home-mosque-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.bb-home-mosque-text {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #2a2a2a;
+    margin-bottom: 1.5rem;
+}
+
+.bb-home-mosque-strong {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    font-style: italic;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-left: 3px solid var(--bb-color-accent);
+    padding-left: 1.2rem;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+}
+
+/* Açıq fonda qızılı düymə kontrastı */
+.bb-home-mosque .bb-btn-gold {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+   Bölmə: Ziyarətgahlar
+   ============================================ */
+.bb-home-pilgrimages {
+    position: relative;
+    background-color: var(--bb-bg-primary);
+    padding: 5rem 0 4rem;
+}
+
+/* 4 sütun grid */
+.bb-home-pilgrimages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 0;
+}
+
+/* Hər ziyarətgah elementi */
+.bb-home-pilgrimage-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: transform var(--bb-transition);
+}
+
+.bb-home-pilgrimage-item:hover {
+    transform: translateY(-4px);
+}
+
+/* Shape frame */
+.bb-home-pilgrimage-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 0.88;
+    margin-bottom: 0.8rem;
+}
+
+/* Foto — frame-in daxilindəki sahəyə yerləşir */
+.bb-home-pilgrimage-photo {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    object-fit: cover;
+    border-radius: 18% 18% 6% 6% / 22% 22% 6% 6%;
+    z-index: 1;
+}
+
+/* Placeholder foto olmayanda */
+.bb-home-pilgrimage-placeholder {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    border-radius: 18% 18% 6% 6% / 22% 22% 6% 6%;
+    background: linear-gradient(135deg, var(--bb-bg-secondary) 0%, var(--bb-bg-section) 100%);
+    z-index: 1;
+}
+
+/* Shape.png overlay */
+.bb-home-pilgrimage-shape {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Ziyarətgah başlığı */
+.bb-home-pilgrimage-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--bb-color-heading);
+    text-align: center;
+    line-height: 1.4;
+    transition: color var(--bb-transition);
+}
+
+.bb-home-pilgrimage-item:hover .bb-home-pilgrimage-title {
+    color: var(--bb-color-accent);
+}
+
+/* ============================================
+   Bölmə: Son Məqalələr
+   ============================================ */
+.bb-home-articles {
+    position: relative;
+    background-color: var(--bb-bg-secondary);
+    padding: 4rem 0 5rem;
+}
+
+/* top.webp dekorativ ornament */
+.bb-home-articles-ornament {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.bb-home-articles-ornament img {
+    width: 80px;
+    height: auto;
+    opacity: 0.6;
+}
+
+/* 3 sütun grid */
+.bb-home-articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* Məqalə kartı */
+.bb-home-article-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background-color: var(--bb-bg-primary);
+    border-radius: var(--bb-radius-md);
+    overflow: hidden;
+    transition: transform var(--bb-transition), box-shadow var(--bb-transition);
+}
+
+.bb-home-article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--bb-shadow-md);
+}
+
+/* Kart şəkli */
+.bb-home-article-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.bb-home-article-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.bb-home-article-card:hover .bb-home-article-img img {
+    transform: scale(1.05);
+}
+
+.bb-home-article-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bb-bg-section) 0%, var(--bb-bg-secondary) 100%);
+}
+
+/* Kart başlığı */
+.bb-home-article-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--bb-color-heading);
+    padding: 1.2rem 1rem;
+    line-height: 1.5;
+    transition: color var(--bb-transition);
+}
+
+.bb-home-article-card:hover .bb-home-article-title {
+    color: var(--bb-color-accent);
+}
+
+/* ============================================
+   Scroll Animasiyalar
+   ============================================ */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-animate].bb-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Naxis ornament-in opacity-si section visibility-dən asılı deyil */
+.bb-home-hazrat.bb-visible .bb-home-hazrat-ornament {
+    opacity: 0.10;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+/* Mobil (<576px) */
+@media (max-width: 575px) {
+    .bb-home-hazrat,
+    .bb-home-mosque,
+    .bb-home-pilgrimages,
+    .bb-home-articles {
+        padding: 3rem 0;
+    }
+
+    .bb-home-hazrat-ornament {
+        width: 260px;
+        height: 130px;
+        top: -80px;
+    }
+
+    .bb-home-hazrat-ornament img {
+        width: 260px;
+        height: 260px;
+    }
+
+    .bb-home-hazrat-text {
+        font-size: 0.95rem;
+    }
+
+    .bb-home-mosque-content {
+        max-width: 100%;
+    }
+
+    .bb-home-mosque-text {
+        font-size: 0.95rem;
+    }
+
+    .bb-home-mosque-strong {
+        font-size: 1.2rem;
+    }
+
+    .bb-home-mosque-bg {
+        width: 80%;
+        opacity: 0.08;
+    }
+
+    /* Ziyarətgahlar: 2 sütun */
+    .bb-home-pilgrimages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
+
+    .bb-home-pilgrimage-title {
+        font-size: 0.85rem;
+    }
+
+    /* Məqalələr: 1 sütun */
+    .bb-home-articles-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .bb-home-section-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* Tablet (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .bb-home-pilgrimages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .bb-home-articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bb-home-mosque-bg {
+        width: 65%;
+        opacity: 0.10;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .bb-home-pilgrimages-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .bb-home-articles-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .bb-home-mosque-content {
+        max-width: 55%;
+    }
+
+    .bb-home-section-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .bb-home-hazrat {
+        padding: 6rem 0 5rem;
+    }
+
+    .bb-home-hazrat-ornament {
+        width: 480px;
+        height: 240px;
+        top: -150px;
+    }
+
+    .bb-home-hazrat-ornament img {
+        width: 480px;
+        height: 480px;
+    }
+
+    .bb-home-hazrat-text {
+        font-size: 1.1rem;
+    }
+
+    .bb-home-mosque {
+        padding: 6rem 0;
+    }
+
+    .bb-home-mosque-content {
+        max-width: 550px;
+    }
+
+    .bb-home-mosque-strong {
+        font-size: 1.6rem;
+    }
+
+    .bb-home-pilgrimages {
+        padding: 6rem 0 5rem;
+    }
+
+    .bb-home-pilgrimages-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    .bb-home-articles {
+        padding: 5rem 0 6rem;
+    }
+
+    .bb-home-section-title {
+        font-size: 2rem;
+    }
+}

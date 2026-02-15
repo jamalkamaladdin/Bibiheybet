@@ -1,0 +1,195 @@
+/**
+ * Bibiheybet.com - Namaz Vaxtları Stilləri
+ * 
+ * Kartlar, dropdown, responsive grid.
+ */
+
+/* ============================================
+   Bölmə
+   ============================================ */
+.bb-pt-section {
+    padding-top: var(--bb-space-xl);
+    padding-bottom: var(--bb-space-2xl);
+}
+
+/* ============================================
+   Kontrol paneli (dropdown + tarix)
+   ============================================ */
+.bb-pt-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bb-space-md);
+    margin: var(--bb-space-xl) 0 var(--bb-space-lg);
+    flex-wrap: wrap;
+}
+
+.bb-pt-select-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 360px;
+}
+
+.bb-pt-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--bb-font-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--bb-color-heading);
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--bb-radius-md);
+    cursor: pointer;
+    transition: border-color var(--bb-transition);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a9a8a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.bb-pt-select:hover,
+.bb-pt-select:focus {
+    border-color: var(--bb-color-accent);
+    outline: none;
+}
+
+.bb-pt-select option {
+    background-color: var(--bb-bg-secondary);
+    color: var(--bb-color-heading);
+}
+
+.bb-pt-date {
+    font-size: 0.9rem;
+    color: var(--bb-color-muted);
+    white-space: nowrap;
+}
+
+/* ============================================
+   Namaz vaxtları grid
+   ============================================ */
+.bb-pt-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--bb-space-md);
+}
+
+/* ============================================
+   Kart stili
+   ============================================ */
+.bb-pt-card {
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--bb-radius-md);
+    padding: var(--bb-space-lg) var(--bb-space-md);
+    text-align: center;
+    transition: all var(--bb-transition);
+}
+
+.bb-pt-card:hover {
+    background-color: var(--bb-bg-section);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Aktiv namaz vaxtı — qızılı vurğu */
+.bb-pt-card-active {
+    border-color: var(--bb-color-accent);
+    background-color: rgba(201, 168, 76, 0.08);
+}
+
+.bb-pt-card-active .bb-pt-card-time {
+    color: var(--bb-color-accent);
+}
+
+/* Gecə yarısı — tam eni */
+.bb-pt-card-midnight {
+    grid-column: 1 / -1;
+    max-width: 280px;
+    justify-self: center;
+}
+
+.bb-pt-card-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--bb-color-muted);
+    margin-bottom: var(--bb-space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.bb-pt-card-time {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+}
+
+/* ============================================
+   Metod qeydi
+   ============================================ */
+.bb-pt-method {
+    margin-top: var(--bb-space-xl);
+    font-size: 0.8rem;
+    color: var(--bb-color-muted);
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+    .bb-pt-card-time {
+        font-size: 1.8rem;
+    }
+}
+
+/* Kiçik ekranlar */
+@media (max-width: 767px) {
+    .bb-pt-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bb-pt-select-wrap {
+        max-width: 100%;
+    }
+
+    .bb-pt-date {
+        text-align: center;
+    }
+
+    .bb-pt-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bb-pt-card-midnight {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+
+    .bb-pt-card {
+        padding: var(--bb-space-md);
+    }
+
+    .bb-pt-card-time {
+        font-size: 1.4rem;
+    }
+}
+
+/* Çox kiçik ekranlar */
+@media (max-width: 400px) {
+    .bb-pt-card-time {
+        font-size: 1.2rem;
+    }
+
+    .bb-pt-card-label {
+        font-size: 0.75rem;
+    }
+}

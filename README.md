@@ -405,6 +405,7 @@ bibiheybet/
 │   │   ├── pilgrimages.php       # Ziyarətgah siyahısı
 │   │   ├── pilgrimage-single.php # Tək ziyarətgah
 │   │   ├── page.php              # Statik səhifələr (Həzrət, Məscid, Dua)
+│   │   ├── prayer-times.php      # Namaz vaxtları (PrayTimes + Cəfəri)
 │   │   └── 404.php               # 404 səhifə
 │   │
 │   └── assets/
@@ -413,6 +414,7 @@ bibiheybet/
 │       │   ├── header.css
 │       │   ├── footer.css
 │       │   ├── mini-player.css
+│       │   ├── prayer-times.css  # Namaz vaxtları səhifəsi stilləri
 │       │   ├── home.css
 │       │   ├── articles.css
 │       │   ├── article-single.css
@@ -424,6 +426,7 @@ bibiheybet/
 │       │   ├── home.js           # Ana səhifə animasiyaları, audio trigger
 │       │   ├── header.js         # Hamburger, sticky header
 │       │   ├── mini-player.js    # Audio player
+│       │   ├── prayer-times.js   # Namaz vaxtları (PrayTimes Cəfəri)
 │       │   └── gallery.js        # Frontend lightbox qalereya
 │       ├── fonts/                # Self-hosted fontlar
 │       │   ├── SpaceGrotesk-VariableFont_wght.woff2
@@ -716,8 +719,9 @@ h1, h2, h3 {
 | 2 | Həzrət haqqında | About Hazrat | О Хазрат | `/hezret-haqqinda/` |
 | 3 | Məscid haqqında | About Mosque | О Мечети | `/mescid-haqqinda/` |
 | 4 | Dua və ziyarətnamə | Prayers | Молитвы | `/dua-ve-ziyaretname/` |
-| 5 | Ziyarətgahlar | Pilgrimages | Святыни | `/ziyaretgahlar/` |
-| 6 | Məqalələr | Articles | Статьи | `/meqaleler/` |
+| 5 | Namaz vaxtları | Prayer Times | Время намаза | `/namaz-vaxtlari/` |
+| 6 | Ziyarətgahlar | Pilgrimages | Святыни | `/ziyaretgahlar/` |
+| 7 | Məqalələr | Articles | Статьи | `/meqaleler/` |
 
 ---
 
@@ -910,6 +914,19 @@ RewriteRule ^(?!admin|public|uploads|includes)(.*)$ public/index.php?lang=az&rou
 - [x] Audio player: fixed bottom bar, autoplay loop, volume 8% default, progress bar, mute toggle
 - [x] Responsive: mobil (hamburger), tablet, desktop (inline nav)
 
+### Namaz Vaxtları Səhifəsi ✅
+> **Namaz Vaxtları İnteqrasiyası** — *Tamamlandı: 15 Fevral 2026*
+
+- [x] `includes/lang.php` — `prayer-times` route əlavə edildi (AZ: `namaz-vaxtlari`, EN: `prayer-times`, RU: `vremya-namaza`), menyu elementi əlavə edildi
+- [x] `public/index.php` — Router-ə `prayer-times` case əlavə edildi
+- [x] `public/templates/prayer-times.php` — Namaz vaxtları template (çoxdilli: AZ/EN/RU)
+- [x] `public/assets/js/prayer-times.js` — PrayTimes kitabxanası inteqrasiyası (CDN), Cəfəri məzhəbi, 70+ Azərbaycan şəhər/rayon koordinatları, aktiv vaxt vurğulama, cookie ilə rayon yadda saxlama
+- [x] `public/assets/css/prayer-times.css` — Responsive grid (4→2→1 sütun), tünd tema, qızılı aktiv vurğu
+- [x] Xarici kitabxana: [PrayTimes](https://github.com/praytimes/praytimes) (CDN: `cdn.jsdelivr.net/npm/praytime/praytime.js`)
+- [x] Hesablama metodu: Cəfəri / Jafari (Leva Tədqiqat İnstitutu, Qum) — `fajr: 16°`, `maghrib: 4°`, `midnight: Jafari`
+- [x] Timezone: `Asia/Baku` (UTC+4)
+- [x] 8 vaxt göstərilir: Sübh, Günəş, Zöhr, Əsr, Qürub, Məğrib, İşa, Gecə yarısı
+
 ### FAZA 7: Frontend - Ana Səhifə
 > **Agent 7 - Homepage**
 >
@@ -999,6 +1016,7 @@ FAZA 1 (Foundation)
   │
   └── FAZA 5 (Frontend Foundation)
         ├── FAZA 6 (Header/Footer) ─── dizayn lazımdır
+        ├── Namaz Vaxtları ─────────── FAZA 6-dan sonra ✅
         ├── FAZA 7 (Ana Səhifə) ────── dizayn lazımdır, FAZA 6-dan sonra
         ├── FAZA 8 (Məqalələr) ─────── FAZA 3-dən sonra (DB data lazım)
         ├── FAZA 9 (Ziyarətgahlar) ─── FAZA 4-dən sonra (DB data lazım)
@@ -1011,4 +1029,4 @@ FAZA 1 (Foundation)
 
 ---
 
-*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 14 Fevral 2026 (FAZA 6 tamamlandı)*
+*Bu sənəd layihə boyunca yenilənəcək. Son yenilənmə: 15 Fevral 2026 (Namaz vaxtları səhifəsi əlavə edildi)*

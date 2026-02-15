@@ -63,6 +63,10 @@ if (empty($firstSegment)) {
                 $pageName = 'page';
                 $pageSlug = $resolvedRoute;
                 break;
+            case 'prayer-times':
+                $pageName = 'prayer-times';
+                $pageSlug = $resolvedRoute;
+                break;
             default:
                 $pageName = '404';
                 break;

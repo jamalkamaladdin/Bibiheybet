@@ -18,6 +18,7 @@ $bb_route_map = [
         'about-hazrat' => 'hezret-haqqinda',
         'about-mosque' => 'mescid-haqqinda',
         'prayers'      => 'dua-ve-ziyaretname',
+        'prayer-times' => 'namaz-vaxtlari',
     ],
     'en' => [
         'articles'     => 'articles',
@@ -27,6 +28,7 @@ $bb_route_map = [
         'about-hazrat' => 'about-hazrat',
         'about-mosque' => 'about-mosque',
         'prayers'      => 'prayers',
+        'prayer-times' => 'prayer-times',
     ],
     'ru' => [
         'articles'     => 'stati',
@@ -36,6 +38,7 @@ $bb_route_map = [
         'about-hazrat' => 'o-hazrat',
         'about-mosque' => 'o-mecheti',
         'prayers'      => 'molitvy',
+        'prayer-times' => 'vremya-namaza',
     ],
 ];
 
@@ -325,6 +328,7 @@ $bb_menu = [
         ['label' => 'Həzrət haqqında',     'route' => 'about-hazrat'],
         ['label' => 'Məscid haqqında',     'route' => 'about-mosque'],
         ['label' => 'Dua və ziyarətnamə',  'route' => 'prayers'],
+        ['label' => 'Namaz vaxtları',      'route' => 'prayer-times'],
         ['label' => 'Ziyarətgahlar',       'route' => 'pilgrimages'],
         ['label' => 'Məqalələr',           'route' => 'articles'],
     ],
@@ -333,6 +337,7 @@ $bb_menu = [
         ['label' => 'About Hazrat',    'route' => 'about-hazrat'],
         ['label' => 'About Mosque',    'route' => 'about-mosque'],
         ['label' => 'Prayers',         'route' => 'prayers'],
+        ['label' => 'Prayer Times',    'route' => 'prayer-times'],
         ['label' => 'Pilgrimages',     'route' => 'pilgrimages'],
         ['label' => 'Articles',        'route' => 'articles'],
     ],
@@ -341,6 +346,7 @@ $bb_menu = [
         ['label' => 'О Хазрат',    'route' => 'about-hazrat'],
         ['label' => 'О Мечети',    'route' => 'about-mosque'],
         ['label' => 'Молитвы',     'route' => 'prayers'],
+        ['label' => 'Время намаза', 'route' => 'prayer-times'],
         ['label' => 'Святыни',     'route' => 'pilgrimages'],
         ['label' => 'Статьи',      'route' => 'articles'],
     ],
@@ -383,8 +389,8 @@ function bb_lang_switch_url(string $targetLang): string
         return bb_lang_url(bb_get_route($routeName, $targetLang) . '/', $targetLang);
     }
 
-    // Statik səhifələr (about-hazrat, about-mosque, prayers)
-    if (in_array($routeName, ['about-hazrat', 'about-mosque', 'prayers'])) {
+    // Statik səhifələr (about-hazrat, about-mosque, prayers, prayer-times)
+    if (in_array($routeName, ['about-hazrat', 'about-mosque', 'prayers', 'prayer-times'])) {
         return bb_lang_url(bb_get_route($routeName, $targetLang) . '/', $targetLang);
     }
 
