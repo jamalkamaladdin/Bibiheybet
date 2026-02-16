@@ -61,7 +61,7 @@ function bb_render_meta(array $data): string
     // Image (fallback: og_image -> featured_image)
     $image = $data['og_image'] ?? $data['featured_image'] ?? null;
     if ($image && !str_starts_with($image, 'http')) {
-        $image = SITE_URL . '/' . ltrim($image, '/');
+        $image = bb_get_base_url() . '/' . ltrim($image, '/');
     }
 
     // Canonical URL
@@ -125,7 +125,7 @@ function bb_render_meta(array $data): string
     }
 
     // Favicon
-    $html .= '<link rel="icon" type="image/png" href="' . SITE_URL . '/public/assets/img/icon.png">' . "\n";
+    $html .= '<link rel="icon" type="image/png" href="' . bb_get_base_url() . '/public/assets/img/icon.png">' . "\n";
 
     // JSON-LD Structured Data
     $html .= bb_render_jsonld($data, $lang);
@@ -168,7 +168,7 @@ function bb_render_jsonld(array $data, string $lang = 'az'): string
     $image = $data['og_image'] ?? $data['featured_image'] ?? null;
     if ($image) {
         if (!str_starts_with($image, 'http')) {
-            $image = SITE_URL . '/' . ltrim($image, '/');
+            $image = bb_get_base_url() . '/' . ltrim($image, '/');
         }
         $jsonLd['image'] = $image;
     }

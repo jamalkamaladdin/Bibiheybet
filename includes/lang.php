@@ -192,6 +192,8 @@ function bb_get_available_langs(): array
  * AZ dili default olduğu üçün prefix almır.
  * EN və RU dillərində /en/ və /ru/ prefix əlavə olunur.
  * 
+ * Cari request-in domenini istifadə edir (cross-domain SSL xətalarının qarşısını alır).
+ * 
  * @param string $path URL yolu (məsələn: 'meqaleler', 'meqale/slug-adi')
  * @param string|null $lang Hədəf dil (null = cari dil)
  * @return string Tam URL yolu
@@ -209,11 +211,47 @@ function bb_lang_url(string $path = '', ?string $lang = null): string
         require_once __DIR__ . '/../config.php';
     }
 
+    // Cari request-in domenini istifadə et (SITE_URL əvəzinə)
+    $baseUrl = bb_get_base_url();
+
     if ($lang === 'az' || $lang === DEFAULT_LANG) {
-        return SITE_URL . '/' . $path;
+        return $baseUrl . '/' . $path;
     }
 
-    return SITE_URL . '/' . $lang . '/' . $path;
+    return $baseUrl . '/' . $lang . '/' . $path;
+}
+
+/**
+ * Cari request-ə əsasən base URL qaytarır.
+ * Hansı domendən girirsə, həmin domeni istifadə edir.
+ * Əgər HTTP_HOST yoxdursa (CLI), SITE_URL fallback kimi istifadə olunur.
+ * 
+ * @return string Base URL (məsələn: https://bibiheybet.com)
+ */
+function bb_get_base_url(): string
+{
+    static $baseUrl = null;
+
+    if ($baseUrl !== null) {
+        return $baseUrl;
+    }
+
+    // CLI rejimdə və ya HTTP_HOST olmadıqda SITE_URL istifadə et
+    if (empty($_SERVER['HTTP_HOST'])) {
+        $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : 'https://bibiheybet.com';
+        return $baseUrl;
+    }
+
+    // Protokol: HTTPS yoxlanışı (reverse proxy/nginx daxil)
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+        || (!empty($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
+
+    $protocol = $isHttps ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];
+
+    $baseUrl = $protocol . '://' . $host;
+    return $baseUrl;
 }
 
 /**
