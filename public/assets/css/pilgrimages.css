@@ -1,0 +1,605 @@
+/**
+ * Bibiheybet.com - Ziyarətgah Səhifələri Stilləri
+ * 
+ * Siyahı (grid kartları) və tək ziyarətgah (featured, kontent, qalereya, lightbox, paylaşma).
+ */
+
+/* ============================================
+   SIYAHI SƏHIFƏSI - pilgrimages.php
+   ============================================ */
+
+/* Hero bölmə */
+.bb-pilgrimages-hero {
+    position: relative;
+    background-color: var(--bb-bg-primary);
+    padding: 4rem 0 2rem;
+    overflow: hidden;
+}
+
+.bb-pilgrimages-ornament {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    pointer-events: none;
+}
+
+.bb-pilgrimages-ornament img {
+    width: 140px;
+    height: 140px;
+    opacity: 0.3;
+    animation: bb-spin-cw 60s linear infinite;
+}
+
+.bb-pilgrimages-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.bb-pilgrimages-subtitle {
+    font-size: 1.05rem;
+    color: var(--bb-color-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Grid bölmə */
+.bb-pilgrimages-grid-section {
+    background-color: var(--bb-bg-primary);
+    padding: 2rem 0 5rem;
+}
+
+.bb-pilgrimages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+}
+
+/* Kart */
+.bb-pilgrimages-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: transform var(--bb-transition);
+}
+
+.bb-pilgrimages-card:hover {
+    transform: translateY(-6px);
+}
+
+/* Shape frame (homepageden oxşar) */
+.bb-pilgrimages-card-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 0.88;
+    margin-bottom: 1rem;
+}
+
+.bb-pilgrimages-card-photo {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    object-fit: cover;
+    z-index: 1;
+    clip-path: polygon(
+        50% 0%,
+        58% 2%, 65% 6%, 72% 12%,
+        78% 18%, 84% 26%,
+        90% 36%, 93% 46%, 94% 50%, 93% 54%, 90% 64%,
+        84% 74%, 78% 82%,
+        72% 88%, 65% 93%, 58% 97%,
+        50% 99%,
+        42% 97%, 35% 93%, 28% 88%,
+        22% 82%, 16% 74%,
+        10% 64%, 7% 54%, 6% 50%, 7% 46%, 10% 36%,
+        16% 26%, 22% 18%,
+        28% 12%, 35% 6%, 42% 2%
+    );
+}
+
+.bb-pilgrimages-card-placeholder {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    background: linear-gradient(135deg, var(--bb-bg-secondary) 0%, var(--bb-bg-section) 100%);
+    z-index: 1;
+    clip-path: polygon(
+        50% 0%,
+        58% 2%, 65% 6%, 72% 12%,
+        78% 18%, 84% 26%,
+        90% 36%, 93% 46%, 94% 50%, 93% 54%, 90% 64%,
+        84% 74%, 78% 82%,
+        72% 88%, 65% 93%, 58% 97%,
+        50% 99%,
+        42% 97%, 35% 93%, 28% 88%,
+        22% 82%, 16% 74%,
+        10% 64%, 7% 54%, 6% 50%, 7% 46%, 10% 36%,
+        16% 26%, 22% 18%,
+        28% 12%, 35% 6%, 42% 2%
+    );
+}
+
+.bb-pilgrimages-card-shape {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.bb-pilgrimages-card-info {
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.bb-pilgrimages-card-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--bb-color-heading);
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+    transition: color var(--bb-transition);
+}
+
+.bb-pilgrimages-card:hover .bb-pilgrimages-card-title {
+    color: var(--bb-color-accent);
+}
+
+.bb-pilgrimages-card-excerpt {
+    font-size: 0.85rem;
+    color: var(--bb-color-muted);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Boş siyahı */
+.bb-pilgrimages-empty {
+    padding: 4rem 0 6rem;
+}
+
+/* ============================================
+   TƏK ZİYARƏTGAH SƏHIFƏSI - pilgrimage-single.php
+   ============================================ */
+
+/* Geri düyməsi */
+.bb-ps-back-section {
+    padding: 1.5rem 0 0;
+}
+
+.bb-ps-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--bb-color-muted);
+    transition: color var(--bb-transition);
+}
+
+.bb-ps-back-link:hover {
+    color: var(--bb-color-accent);
+}
+
+html[dir="rtl"] .bb-ps-back-link svg {
+    transform: scaleX(-1);
+}
+
+/* Kontent bölməsi */
+.bb-ps-content-section {
+    padding: 2rem 0 3rem;
+}
+
+.bb-ps-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    margin-bottom: 0;
+}
+
+/* Featured image */
+.bb-ps-featured {
+    margin: 2rem 0;
+    border-radius: var(--bb-radius-md);
+    overflow: hidden;
+}
+
+.bb-ps-featured-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Kontent stilləri */
+.bb-ps-body {
+    margin-bottom: 2.5rem;
+}
+
+.bb-ps-body p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--bb-color-ton2);
+}
+
+.bb-ps-body h2, .bb-ps-body h3, .bb-ps-body h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--bb-color-heading);
+}
+
+.bb-ps-body img {
+    border-radius: var(--bb-radius-md);
+    margin: 1.5rem 0;
+}
+
+.bb-ps-body blockquote {
+    border-left: 3px solid var(--bb-color-accent);
+    padding-left: 1.2rem;
+    margin: 1.5rem 0;
+    color: var(--bb-color-muted);
+    font-style: italic;
+}
+
+html[dir="rtl"] .bb-ps-body blockquote {
+    border-left: none;
+    border-right: 3px solid var(--bb-color-accent);
+    padding-left: 0;
+    padding-right: 1.2rem;
+}
+
+/* Paylaşma düymələri */
+.bb-ps-share {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bb-ps-share-label {
+    font-size: 0.9rem;
+    color: var(--bb-color-muted);
+    font-weight: 500;
+}
+
+.bb-ps-share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--bb-bg-section);
+    color: var(--bb-color-ton2);
+    transition: all var(--bb-transition);
+}
+
+.bb-ps-share-btn:hover {
+    transform: translateY(-2px);
+}
+
+.bb-ps-share-fb:hover  { background-color: #1877f2; color: #fff; }
+.bb-ps-share-tw:hover  { background-color: #000;    color: #fff; }
+.bb-ps-share-wa:hover  { background-color: #25d366; color: #fff; }
+.bb-ps-share-tg:hover  { background-color: #0088cc; color: #fff; }
+
+/* ============================================
+   QALEREYA
+   ============================================ */
+.bb-ps-gallery-section {
+    background-color: var(--bb-bg-secondary);
+    padding: 4rem 0 5rem;
+}
+
+.bb-ps-gallery-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    letter-spacing: 0.04em;
+}
+
+.bb-ps-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.bb-ps-gallery-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: var(--bb-radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+.bb-ps-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.bb-ps-gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.bb-ps-gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--bb-transition);
+    color: #fff;
+}
+
+.bb-ps-gallery-item:hover .bb-ps-gallery-overlay {
+    opacity: 1;
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.bb-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.bb-lightbox.bb-lightbox-active {
+    display: flex;
+}
+
+.bb-lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.bb-lightbox-content {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bb-lightbox-img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--bb-radius-sm);
+}
+
+.bb-lightbox-close {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity var(--bb-transition);
+}
+
+.bb-lightbox-close:hover {
+    opacity: 1;
+}
+
+.bb-lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: background var(--bb-transition);
+    z-index: 2;
+}
+
+.bb-lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.bb-lightbox-prev { left: 1.5rem; }
+.bb-lightbox-next { right: 1.5rem; }
+
+html[dir="rtl"] .bb-lightbox-prev { left: auto; right: 1.5rem; }
+html[dir="rtl"] .bb-lightbox-next { right: auto; left: 1.5rem; }
+html[dir="rtl"] .bb-lightbox-prev svg,
+html[dir="rtl"] .bb-lightbox-next svg { transform: scaleX(-1); }
+
+.bb-lightbox-caption {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    text-align: center;
+    max-width: 600px;
+}
+
+.bb-lightbox-counter {
+    color: #888;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+/* ============================================
+   SCROLL ANİMASİYA (home.js ilə)
+   ============================================ */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-animate].bb-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSİV
+   ============================================ */
+
+/* Mobil (<576px) */
+@media (max-width: 575px) {
+    .bb-pilgrimages-hero {
+        padding: 3rem 0 1.5rem;
+    }
+
+    .bb-pilgrimages-ornament img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .bb-pilgrimages-title {
+        font-size: 1.6rem;
+    }
+
+    .bb-pilgrimages-subtitle {
+        font-size: 0.92rem;
+    }
+
+    .bb-pilgrimages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
+
+    .bb-pilgrimages-card-title {
+        font-size: 0.9rem;
+    }
+
+    .bb-pilgrimages-card-excerpt {
+        display: none;
+    }
+
+    .bb-ps-title {
+        font-size: 1.5rem;
+    }
+
+    .bb-ps-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+
+    .bb-ps-gallery-title {
+        font-size: 1.4rem;
+    }
+
+    .bb-lightbox-nav {
+        width: 36px;
+        height: 36px;
+    }
+
+    .bb-lightbox-prev { left: 0.5rem; }
+    .bb-lightbox-next { right: 0.5rem; }
+}
+
+/* Tablet (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .bb-pilgrimages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .bb-ps-gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .bb-pilgrimages-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .bb-ps-gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .bb-pilgrimages-title {
+        font-size: 2rem;
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .bb-pilgrimages-hero {
+        padding: 5rem 0 2.5rem;
+    }
+
+    .bb-pilgrimages-ornament img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .bb-pilgrimages-title {
+        font-size: 2.5rem;
+    }
+
+    .bb-pilgrimages-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+    }
+
+    .bb-ps-title {
+        font-size: 2.5rem;
+    }
+
+    .bb-ps-gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* ============================================
+   RTL DƏSTƏK
+   ============================================ */
+html[dir="rtl"] .bb-pilgrimages-card-title,
+html[dir="rtl"] .bb-pilgrimages-card-excerpt,
+html[dir="rtl"] .bb-pilgrimages-title,
+html[dir="rtl"] .bb-pilgrimages-subtitle,
+html[dir="rtl"] .bb-ps-title,
+html[dir="rtl"] .bb-ps-body,
+html[dir="rtl"] .bb-ps-gallery-title {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}
+
+html[dir="rtl"] .bb-ps-share {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bb-lightbox-close {
+    right: auto;
+    left: 1.5rem;
+}

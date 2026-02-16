@@ -1,0 +1,426 @@
+/**
+ * Bibiheybet.com - Statik Səhifələr & 404 Stilləri
+ * 
+ * FAZA 10: About, Prayers, 404.
+ */
+
+/* ============================================
+   STATİK SƏHIFƏLƏR
+   ============================================ */
+
+/* Hero bölmə */
+.bb-static-hero {
+    position: relative;
+    background-color: var(--bb-bg-primary);
+    padding: 4rem 0 2rem;
+    overflow: hidden;
+}
+
+.bb-static-ornament {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    pointer-events: none;
+}
+
+.bb-static-ornament img {
+    width: 140px;
+    height: 140px;
+    opacity: 0.3;
+    animation: bb-spin-cw 60s linear infinite;
+}
+
+.bb-static-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.bb-static-description {
+    font-size: 1.05rem;
+    color: var(--bb-color-muted);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Kontent bölməsi */
+.bb-static-content-section {
+    padding: 2rem 0 4rem;
+}
+
+.bb-static-body {
+    color: var(--bb-color-ton2);
+}
+
+.bb-static-body p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+}
+
+.bb-static-body h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bb-static-body h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+.bb-static-body ul, .bb-static-body ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.bb-static-body ul {
+    list-style: disc;
+}
+
+.bb-static-body ol {
+    list-style: decimal;
+}
+
+.bb-static-body li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 0.4rem;
+    color: var(--bb-color-ton2);
+}
+
+.bb-static-body blockquote {
+    border-left: 3px solid var(--bb-color-accent);
+    padding-left: 1.2rem;
+    margin: 1.5rem 0;
+    color: var(--bb-color-muted);
+    font-style: italic;
+}
+
+html[dir="rtl"] .bb-static-body blockquote {
+    border-left: none;
+    border-right: 3px solid var(--bb-color-accent);
+    padding-left: 0;
+    padding-right: 1.2rem;
+}
+
+html[dir="rtl"] .bb-static-body ul,
+html[dir="rtl"] .bb-static-body ol {
+    margin-left: 0;
+    margin-right: 1.5rem;
+}
+
+.bb-static-body img {
+    border-radius: var(--bb-radius-md);
+    margin: 1.5rem 0;
+}
+
+/* Dua / Ərəb mətn bloku */
+.bb-prayer-text {
+    background-color: var(--bb-bg-section);
+    border-radius: var(--bb-radius-md);
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.bb-prayer-text p {
+    font-size: 1.6rem;
+    line-height: 2.2;
+    color: var(--bb-color-heading);
+    margin-bottom: 0.5rem;
+}
+
+.bb-prayer-transliteration {
+    font-size: 1rem;
+    color: var(--bb-color-muted);
+    line-height: 2;
+    margin-bottom: 1.5rem;
+}
+
+/* Əlaqəli linklər */
+.bb-static-related {
+    background-color: var(--bb-bg-secondary);
+    padding: 4rem 0;
+}
+
+.bb-static-related-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    letter-spacing: 0.04em;
+}
+
+.bb-static-related-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.bb-static-related-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--bb-bg-primary);
+    border-radius: var(--bb-radius-md);
+    color: var(--bb-color-ton2);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all var(--bb-transition);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bb-static-related-card:hover {
+    border-color: var(--bb-color-accent);
+    color: var(--bb-color-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--bb-shadow-sm);
+}
+
+html[dir="rtl"] .bb-static-related-card svg {
+    transform: scaleX(-1);
+}
+
+/* ============================================
+   404 SƏHIFƏ
+   ============================================ */
+.bb-404-section {
+    padding: 4rem 0 5rem;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.bb-404-ornament {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    pointer-events: none;
+}
+
+.bb-404-ornament img {
+    width: 120px;
+    height: 120px;
+    opacity: 0.2;
+    animation: bb-spin-cw 60s linear infinite;
+}
+
+.bb-404-code {
+    font-size: 6rem;
+    font-weight: 700;
+    color: var(--bb-color-accent);
+    line-height: 1;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+    margin-bottom: 1rem;
+}
+
+.bb-404-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    margin-bottom: 0;
+}
+
+.bb-404-message {
+    font-size: 1.05rem;
+    color: var(--bb-color-muted);
+    max-width: 500px;
+    margin: 1rem auto 0;
+    line-height: 1.7;
+}
+
+.bb-404-home-btn {
+    margin-top: 2.5rem;
+}
+
+/* Faydalı linklər */
+.bb-404-links {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bb-404-links-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--bb-color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+}
+
+.bb-404-links-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.bb-404-link-item {
+    padding: 0.6rem 1.2rem;
+    background-color: var(--bb-bg-section);
+    border-radius: var(--bb-radius-sm);
+    color: var(--bb-color-ton2);
+    font-size: 0.9rem;
+    transition: all var(--bb-transition);
+    text-decoration: none;
+}
+
+.bb-404-link-item:hover {
+    background-color: var(--bb-color-accent);
+    color: #1a1a1a;
+}
+
+/* ============================================
+   SCROLL ANİMASİYA
+   ============================================ */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-animate].bb-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* bb-separator-center (home.css-dən copy) */
+.bb-separator-center {
+    width: 60px;
+    height: 2px;
+    background-color: var(--bb-color-accent);
+    margin: 1rem auto 2.5rem;
+}
+
+/* ============================================
+   RESPONSİV
+   ============================================ */
+
+@media (max-width: 575px) {
+    .bb-static-hero {
+        padding: 3rem 0 1.5rem;
+    }
+
+    .bb-static-ornament img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .bb-static-title {
+        font-size: 1.6rem;
+    }
+
+    .bb-static-description {
+        font-size: 0.92rem;
+    }
+
+    .bb-static-body p {
+        font-size: 0.95rem;
+    }
+
+    .bb-static-body h2 {
+        font-size: 1.35rem;
+    }
+
+    .bb-static-body h3 {
+        font-size: 1.15rem;
+    }
+
+    .bb-prayer-text p {
+        font-size: 1.2rem;
+    }
+
+    .bb-static-related-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bb-static-related-card {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .bb-404-code {
+        font-size: 4rem;
+    }
+
+    .bb-404-title {
+        font-size: 1.4rem;
+    }
+
+    .bb-404-ornament img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .bb-404-links-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bb-404-link-item {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .bb-static-hero {
+        padding: 4.5rem 0 2rem;
+    }
+
+    .bb-static-body h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .bb-static-hero {
+        padding: 5rem 0 2.5rem;
+    }
+
+    .bb-static-ornament img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .bb-static-title {
+        font-size: 2.5rem;
+    }
+
+    .bb-404-code {
+        font-size: 8rem;
+    }
+
+    .bb-404-title {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================
+   RTL DƏSTƏK
+   ============================================ */
+html[dir="rtl"] .bb-static-title,
+html[dir="rtl"] .bb-static-description,
+html[dir="rtl"] .bb-static-body,
+html[dir="rtl"] .bb-static-related-title,
+html[dir="rtl"] .bb-static-related-card,
+html[dir="rtl"] .bb-404-title,
+html[dir="rtl"] .bb-404-message,
+html[dir="rtl"] .bb-404-links-title {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}

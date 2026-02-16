@@ -1,0 +1,21 @@
+# ============================================
+# Bibiheybet.com - Robots.txt
+# ============================================
+
+User-agent: *
+
+# Icaze verilen sehifeler
+Allow: /
+
+# Admin panel
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /database/
+Disallow: /config.php
+Disallow: /config.example.php
+
+# Uploads qovluqlarinin indeksasiyasi
+Allow: /uploads/
+
+# Sitemap
+Sitemap: https://bibiheybet.com/sitemap.xml

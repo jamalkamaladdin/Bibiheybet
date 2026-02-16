@@ -20,9 +20,14 @@ RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|tt
 RewriteRule ^ - [L]
 
 # ============================================
-# Root-level fayllar (robots.txt, sitemap.xml)
+# Root-level fayllar (robots.txt, favicon.ico)
 # ============================================
-RewriteRule ^(robots\.txt|sitemap\.xml|favicon\.ico)$ - [L]
+RewriteRule ^(robots\.txt|favicon\.ico)$ - [L]
+
+# ============================================
+# Dinamik Sitemap.xml
+# ============================================
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
 # ============================================
 # Uploads qovluğu - birbaşa giriş
