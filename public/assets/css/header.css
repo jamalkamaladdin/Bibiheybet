@@ -541,43 +541,85 @@
 }
 
 /* ============================================
-   MOBİL MENYU PANELİ (FULLSCREEN)
+   OVERLAY (arxa fon)
+   ============================================ */
+.bb-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: calc(var(--bb-z-menu) - 1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.bb-menu-overlay.bb-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   MENYU PANELİ (HALF-SCREEN SLIDE-IN)
    ============================================ */
 .bb-mobile-menu {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100vh;
     height: 100dvh;
     background-color: var(--bb-bg-primary);
     z-index: var(--bb-z-menu);
-    opacity: 0;
+    transform: translateX(100%);
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.45s ease;
     overflow-y: auto;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 768px) {
+    .bb-mobile-menu {
+        width: 50%;
+        max-width: 560px;
+    }
 }
 
 .bb-mobile-menu.bb-open {
-    opacity: 1;
+    transform: translateX(0);
     visibility: visible;
 }
 
 .bb-mobile-menu-inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     min-height: 100%;
-    padding: var(--bb-space-xl) var(--bb-space-lg);
-    text-align: center;
+    padding: var(--bb-space-lg) var(--bb-space-lg);
+    padding-bottom: var(--bb-space-xl);
+}
+
+/* Üst hissə: logo + bağla düyməsi */
+.bb-mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--bb-space-lg);
+    padding-bottom: var(--bb-space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bb-mobile-menu-logo img {
+    height: 44px;
+    width: auto;
 }
 
 /* Bağlama düyməsi */
 .bb-mobile-menu-close {
-    position: absolute;
-    top: var(--bb-space-md);
-    right: var(--bb-space-md);
     font-size: 2rem;
     line-height: 1;
     color: var(--bb-color-muted);
@@ -586,16 +628,61 @@
     border: none;
     cursor: pointer;
     padding: var(--bb-space-xs);
-    z-index: 5;
+    flex-shrink: 0;
 }
 
 .bb-mobile-menu-close:hover {
     color: var(--bb-color-ton2);
 }
 
+/* Axtarış paneli */
+.bb-mobile-search {
+    margin-bottom: var(--bb-space-lg);
+}
+
+.bb-mobile-search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--bb-radius-md);
+    transition: border-color var(--bb-transition);
+}
+
+.bb-mobile-search-form:focus-within {
+    border-color: var(--bb-color-accent);
+}
+
+.bb-mobile-search-icon {
+    flex-shrink: 0;
+    color: var(--bb-color-muted);
+    transition: color var(--bb-transition);
+}
+
+.bb-mobile-search-form:focus-within .bb-mobile-search-icon {
+    color: var(--bb-color-accent);
+}
+
+.bb-mobile-search-input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--bb-color-ton2);
+    font-family: var(--bb-font-primary);
+}
+
+.bb-mobile-search-input::placeholder {
+    color: var(--bb-color-muted);
+    opacity: 0.7;
+}
+
 /* Menyu elementləri */
 .bb-mobile-menu-list {
-    margin-bottom: var(--bb-space-xl);
+    margin-bottom: var(--bb-space-lg);
 }
 
 .bb-mobile-menu-item {
@@ -605,7 +692,7 @@
 .bb-mobile-menu-item a {
     display: block;
     padding: var(--bb-space-sm) 0;
-    font-size: 1.4rem;
+    font-size: 1.15rem;
     font-weight: 500;
     color: var(--bb-color-ton2);
     transition: color var(--bb-transition);
@@ -617,18 +704,58 @@
     color: var(--bb-color-accent);
 }
 
-/* Dil seçimi (mobil menyu) */
+/* Extra menyu (Namaz, Quran) ayırıcı xətt */
+.bb-mobile-menu-extra:first-of-type {
+    margin-top: var(--bb-space-sm);
+    padding-top: var(--bb-space-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Alt hissə (footer): sosial + dil */
+.bb-mobile-menu-footer {
+    margin-top: auto;
+    padding-top: var(--bb-space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: var(--bb-space-lg);
+}
+
+/* Sosial ikonlar */
+.bb-mobile-social {
+    display: flex;
+    gap: var(--bb-space-sm);
+}
+
+.bb-mobile-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--bb-bg-secondary);
+    color: var(--bb-color-ton2);
+    transition: all var(--bb-transition);
+}
+
+.bb-mobile-social a:hover {
+    background-color: var(--bb-color-accent);
+    color: #fff;
+}
+
+/* Dil seçimi */
 .bb-mobile-lang {
     display: flex;
     align-items: center;
     gap: var(--bb-space-sm);
-    margin-bottom: var(--bb-space-xl);
+    flex-wrap: wrap;
 }
 
 .bb-mobile-lang-item {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    padding: 6px 14px;
+    padding: 5px 12px;
     color: var(--bb-color-muted);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--bb-radius-sm);
@@ -644,30 +771,6 @@
 .bb-mobile-lang-item.bb-mobile-lang-active {
     color: var(--bb-color-accent);
     border-color: var(--bb-color-accent);
-}
-
-/* Sosial ikonlar (mobil menyu) */
-.bb-mobile-social {
-    display: flex;
-    gap: var(--bb-space-md);
-    padding-top: var(--bb-space-md);
-}
-
-.bb-mobile-social a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: var(--bb-bg-secondary);
-    color: var(--bb-color-ton2);
-    transition: all var(--bb-transition);
-}
-
-.bb-mobile-social a:hover {
-    background-color: var(--bb-color-accent);
-    color: #fff;
 }
 
 /* ============================================
@@ -729,7 +832,11 @@
     }
 
     .bb-hero-header .bb-hamburger {
-        display: none;
+        display: flex;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .bb-hero-pattern {
@@ -779,7 +886,7 @@
     }
 
     .bb-header .bb-hamburger {
-        display: none;
+        display: flex;
     }
 
     /* Desktop: əlavə menyu dropdown göstər */
@@ -820,4 +927,25 @@ html[dir="rtl"] .bb-hero-menu-item a::after,
 html[dir="rtl"] .bb-header-menu-item a::after {
     left: auto;
     right: 0;
+}
+
+html[dir="rtl"] .bb-mobile-menu {
+    right: auto;
+    left: 0;
+    transform: translateX(-100%);
+    border-left: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.4);
+}
+
+html[dir="rtl"] .bb-mobile-menu.bb-open {
+    transform: translateX(0);
+}
+
+html[dir="rtl"] .bb-mobile-search-form {
+    direction: rtl;
+}
+
+html[dir="rtl"] .bb-mobile-search-input {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
 }

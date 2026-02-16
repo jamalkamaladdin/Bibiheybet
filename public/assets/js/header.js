@@ -1,7 +1,7 @@
 /**
  * Bibiheybet.com - Header JS
  * 
- * Hamburger menyu (fullscreen), sticky header, dil dropdown.
+ * Hamburger menyu (half-screen slide-in), sticky header, dil dropdown.
  */
 
 (function () {
@@ -14,11 +14,12 @@
         initMoreDropdown();
     });
 
-    /** Hamburger menyu açma/bağlama (fullscreen) */
+    /** Hamburger menyu açma/bağlama (half-screen slide-in) */
     function initHamburgerMenu() {
         var hamburger = document.getElementById('bbHamburger');
         var menu = document.getElementById('bbMobileMenu');
         var closeBtn = document.getElementById('bbMobileMenuClose');
+        var overlay = document.getElementById('bbMenuOverlay');
 
         if (!hamburger || !menu) return;
 
@@ -30,12 +31,20 @@
             hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
             document.body.style.overflow = isOpen ? 'hidden' : '';
+
+            if (overlay) {
+                overlay.classList.toggle('bb-open', isOpen);
+            }
         }
 
         hamburger.addEventListener('click', function () { toggleMenu(); });
 
         if (closeBtn) {
             closeBtn.addEventListener('click', function () { toggleMenu(false); });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', function () { toggleMenu(false); });
         }
 
         document.addEventListener('keydown', function (e) {
