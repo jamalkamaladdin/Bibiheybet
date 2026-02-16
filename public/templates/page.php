@@ -163,98 +163,11 @@ $staticPages = [
         ],
         'icon' => 'prayer',
         'content' => [
-            'az' => '<h2>Ziyarətnamə</h2>
-<p>Bu ziyarətnamə, Hz. Həkimə Xanımın (s) müqəddəs türbəsini ziyarət edərkən oxunur:</p>
+            'az' => file_get_contents(__DIR__ . '/partials/prayer-az.html'),
 
-<div class="bb-arabic-text bb-prayer-text">
-<p>اَلسَّلامُ عَلَيْکِ يا بِنْتَ مُوسَى بْنِ جَعْفَرٍ</p>
-<p>اَلسَّلامُ عَلَيْکِ يا اُخْتَ عَلِيِّ بْنِ مُوسَى الرِّضا</p>
-<p>اَلسَّلامُ عَلَيْکِ يا حَكيمَةَ خاتون</p>
-<p>اَلسَّلامُ عَلَيْکِ وَ رَحْمَةُ اللهِ وَ بَرَكاتُهُ</p>
-</div>
+            'en' => file_get_contents(__DIR__ . '/partials/prayer-en.html'),
 
-<p class="bb-prayer-transliteration"><em>Əssəlamu əleyki ya bintə Musa ibni Cəfər.<br>
-Əssəlamu əleyki ya uxtə Əliyyi ibni Musar-Rza.<br>
-Əssəlamu əleyki ya Həkimətu Xatun.<br>
-Əssəlamu əleyki və rəhmətullahi və bərəkatuh.</em></p>
-
-<h3>Tərcümə</h3>
-<p>Salam olsun sənə, ey Musa ibn Cəfərin qızı!<br>
-Salam olsun sənə, ey Əli ibn Musa Rzanın bacısı!<br>
-Salam olsun sənə, ey Həkimə Xatun!<br>
-Salam olsun sənə, Allahın rəhməti və bərəkəti olsun!</p>
-
-<h2>Ziyarət qaydaları</h2>
-<p>Ziyarətgaha daxil olarkən aşağıdakı qaydalara riayət etmək tövsiyə olunur:</p>
-<ul>
-<li>Dəstəmaz almaq</li>
-<li>Təmiz və münasib geyim geymək</li>
-<li>Sakitliyi qorumaq</li>
-<li>İki rəkət ziyarət namazı qılmaq</li>
-<li>Dua və ziyarətnamə oxumaq</li>
-</ul>',
-
-            'en' => '<h2>Ziyarat text</h2>
-<p>This ziyarat text is recited when visiting the holy mausoleum of Hz. Hakimah Khatun (s):</p>
-
-<div class="bb-arabic-text bb-prayer-text">
-<p>اَلسَّلامُ عَلَيْکِ يا بِنْتَ مُوسَى بْنِ جَعْفَرٍ</p>
-<p>اَلسَّلامُ عَلَيْکِ يا اُخْتَ عَلِيِّ بْنِ مُوسَى الرِّضا</p>
-<p>اَلسَّلامُ عَلَيْکِ يا حَكيمَةَ خاتون</p>
-<p>اَلسَّلامُ عَلَيْکِ وَ رَحْمَةُ اللهِ وَ بَرَكاتُهُ</p>
-</div>
-
-<p class="bb-prayer-transliteration"><em>Assalamu alayki ya binta Musa ibni Ja\'far.<br>
-Assalamu alayki ya ukhta Aliyyi ibni Musa ar-Ridha.<br>
-Assalamu alayki ya Hakimatu Khatun.<br>
-Assalamu alayki wa rahmatullahi wa barakatuh.</em></p>
-
-<h3>Translation</h3>
-<p>Peace be upon you, O daughter of Musa ibn Ja\'far!<br>
-Peace be upon you, O sister of Ali ibn Musa al-Ridha!<br>
-Peace be upon you, O Hakimah Khatun!<br>
-Peace be upon you, and may the mercy and blessings of God be upon you!</p>
-
-<h2>Visiting guidelines</h2>
-<p>When entering the shrine, it is recommended to observe the following guidelines:</p>
-<ul>
-<li>Perform ablution (wudu)</li>
-<li>Wear clean and appropriate clothing</li>
-<li>Maintain silence</li>
-<li>Perform two units of visitation prayer</li>
-<li>Recite supplications and ziyarat text</li>
-</ul>',
-
-            'ru' => '<h2>Текст зиярата</h2>
-<p>Этот текст зиярата читается при посещении священного мавзолея Хз. Хакимы Хатун (с):</p>
-
-<div class="bb-arabic-text bb-prayer-text">
-<p>اَلسَّلامُ عَلَيْکِ يا بِنْتَ مُوسَى بْنِ جَعْفَرٍ</p>
-<p>اَلسَّلامُ عَلَيْکِ يا اُخْتَ عَلِيِّ بْنِ مُوسَى الرِّضا</p>
-<p>اَلسَّلامُ عَلَيْکِ يا حَكيمَةَ خاتون</p>
-<p>اَلسَّلامُ عَلَيْکِ وَ رَحْمَةُ اللهِ وَ بَرَكاتُهُ</p>
-</div>
-
-<p class="bb-prayer-transliteration"><em>Ассаламу алейки я бинта Муса ибни Джафар.<br>
-Ассаламу алейки я ухта Алийи ибни Муса ар-Рида.<br>
-Ассаламу алейки я Хакимату Хатун.<br>
-Ассаламу алейки ва рахматуллахи ва баракатух.</em></p>
-
-<h3>Перевод</h3>
-<p>Мир тебе, о дочь Мусы ибн Джафара!<br>
-Мир тебе, о сестра Али ибн Мусы ар-Ризы!<br>
-Мир тебе, о Хакима Хатун!<br>
-Мир тебе, милость Аллаха и Его благословения!</p>
-
-<h2>Правила посещения</h2>
-<p>При входе в святыню рекомендуется соблюдать следующие правила:</p>
-<ul>
-<li>Совершить омовение (вуду)</li>
-<li>Быть в чистой и подобающей одежде</li>
-<li>Сохранять тишину</li>
-<li>Совершить два раката молитвы посещения</li>
-<li>Прочитать мольбы и текст зиярата</li>
-</ul>',
+            'ru' => file_get_contents(__DIR__ . '/partials/prayer-ru.html'),
         ],
     ],
 ];
