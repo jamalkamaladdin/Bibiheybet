@@ -51,8 +51,8 @@ define('AVAILABLE_LANGS', ['az', 'en', 'ru', 'ar', 'fa']);
 // ============================================
 // Session & Security
 // ============================================
-define('SESSION_LIFETIME', 3600);           // 1 saat (saniyə)
-define('CSRF_TOKEN_LIFETIME', 3600);        // 1 saat
+define('SESSION_LIFETIME', 86400);          // 24 saat (saniyə)
+define('CSRF_TOKEN_LIFETIME', 86400);       // 24 saat
 define('SESSION_NAME', 'bb_session');
 
 // ============================================

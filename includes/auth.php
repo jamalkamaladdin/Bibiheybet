@@ -103,13 +103,17 @@ function bb_is_logged_in(): bool
         return false;
     }
 
-    // Session müddəti yoxla
-    if (defined('SESSION_LIFETIME') && isset($_SESSION['login_time'])) {
-        if (time() - $_SESSION['login_time'] > SESSION_LIFETIME) {
+    // Session müddəti yoxla (son aktivliyə əsasən)
+    $lastActivity = $_SESSION['last_activity'] ?? $_SESSION['login_time'] ?? 0;
+    if (defined('SESSION_LIFETIME') && $lastActivity > 0) {
+        if (time() - $lastActivity > SESSION_LIFETIME) {
             bb_logout();
             return false;
         }
     }
+
+    // Hər yoxlamada son aktivlik vaxtını yenilə
+    $_SESSION['last_activity'] = time();
 
     return true;
 }
