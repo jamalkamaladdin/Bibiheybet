@@ -30,6 +30,11 @@ RewriteRule ^(robots\.txt|favicon\.ico)$ - [L]
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
 # ============================================
+# Storage qovluğu - girişi tam bağla
+# ============================================
+RewriteRule ^storage/ - [F,L]
+
+# ============================================
 # Uploads qovluğu - birbaşa giriş
 # ============================================
 RewriteRule ^uploads/ - [L]
@@ -56,4 +61,5 @@ RewriteCond %{REQUEST_URI} !^/public [NC]
 RewriteCond %{REQUEST_URI} !^/uploads [NC]
 RewriteCond %{REQUEST_URI} !^/includes [NC]
 RewriteCond %{REQUEST_URI} !^/database [NC]
+RewriteCond %{REQUEST_URI} !^/storage [NC]
 RewriteRule ^(.*)$ public/index.php?lang=az&route=$1 [L,QSA]

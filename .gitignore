@@ -36,6 +36,10 @@ Thumbs.db
 *.swp
 *.swo
 
+# Session faylları (serverdə yaranır)
+storage/sessions/*
+!storage/sessions/.htaccess
+
 # Logs
 *.log
 

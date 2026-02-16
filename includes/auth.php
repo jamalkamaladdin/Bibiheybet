@@ -9,22 +9,40 @@ require_once __DIR__ . '/db.php';
 
 /**
  * Session-u başladır (təkrar start-ın qarşısını alır).
+ *
+ * Shared hosting-də digər app-ların GC-si session fayllarını silməsin deyə:
+ *   1. session.gc_maxlifetime SESSION_LIFETIME ilə uyğunlaşdırılır
+ *   2. Xüsusi session save path istifadə olunur (storage/sessions)
  */
 function bb_start_session(): void
 {
     if (session_status() === PHP_SESSION_NONE) {
-        // config.php yüklənib yoxla
         if (!defined('SESSION_NAME')) {
             require_once __DIR__ . '/../config.php';
         }
 
+        // GC timeout-u SESSION_LIFETIME ilə uyğunlaşdır
+        ini_set('session.gc_maxlifetime', (string)SESSION_LIFETIME);
+
+        // Xüsusi session qovluğu (shared hosting / cron job qoruması)
+        if (defined('BASE_PATH')) {
+            $sessionPath = BASE_PATH . '/storage/sessions';
+            if (!is_dir($sessionPath)) {
+                @mkdir($sessionPath, 0700, true);
+            }
+            if (is_dir($sessionPath) && is_writable($sessionPath)) {
+                session_save_path($sessionPath);
+            }
+        }
+
         session_name(SESSION_NAME);
-        $isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+        $isSecure = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
             || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
         session_set_cookie_params([
             'lifetime' => SESSION_LIFETIME,
             'path'     => '/',
+            'domain'   => '',
             'secure'   => $isSecure,
             'httponly'  => true,
             'samesite'  => 'Lax',
