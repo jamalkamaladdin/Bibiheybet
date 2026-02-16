@@ -170,6 +170,9 @@ bb_frontend_header([
          ========================================== -->
     <?php if (!empty($pilgrimagesList)): ?>
     <section class="bb-home-pilgrimages" data-animate>
+        <div class="bb-home-pilgrimages-bg" aria-hidden="true">
+            <img src="/public/assets/img/bg.png" alt="">
+        </div>
         <div class="bb-container bb-text-center">
             <h2 class="bb-home-section-title"><?= bb_sanitize($t('pilgrimages_title')) ?></h2>
             <div class="bb-separator bb-separator-center"></div>
@@ -213,7 +216,7 @@ bb_frontend_header([
     <section class="bb-home-articles" data-animate>
         <div class="bb-container bb-text-center">
             <div class="bb-home-articles-ornament" aria-hidden="true">
-                <img src="/public/assets/img/top.webp" alt="">
+                <img src="/public/assets/img/naxis.png" alt="">
             </div>
 
             <h2 class="bb-home-section-title"><?= bb_sanitize($t('articles_title')) ?></h2>

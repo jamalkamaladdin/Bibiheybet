@@ -171,6 +171,31 @@
     position: relative;
     background-color: var(--bb-bg-primary);
     padding: 5rem 0 4rem;
+    overflow: hidden;
+}
+
+/* Arxa fon: bg.png dekorativ naxış */
+.bb-home-pilgrimages-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bb-home-pilgrimages-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bb-home-pilgrimages > .bb-container {
+    position: relative;
+    z-index: 1;
 }
 
 /* 4 sütun grid */
@@ -246,17 +271,19 @@
     padding: 4rem 0 5rem;
 }
 
-/* top.webp dekorativ ornament */
+/* naxis.png dekorativ ornament — dairəvi fırlanma */
 .bb-home-articles-ornament {
     display: flex;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    pointer-events: none;
 }
 
 .bb-home-articles-ornament img {
-    width: 80px;
-    height: auto;
-    opacity: 0.6;
+    width: 140px;
+    height: 140px;
+    opacity: 0.3;
+    animation: bb-spin-cw 60s linear infinite;
 }
 
 /* 3 sütun grid */
@@ -384,6 +411,17 @@
         height: 180px;
         top: -50px;
         left: -50px;
+    }
+
+    .bb-home-pilgrimages-bg {
+        width: 350px;
+        height: 350px;
+        opacity: 0.04;
+    }
+
+    .bb-home-articles-ornament img {
+        width: 100px;
+        height: 100px;
     }
 
     /* Ziyarətgahlar: 2 sütun */
