@@ -164,7 +164,7 @@ $l = $labels[$lang] ?? $labels['az'];
                         <div class="bb-pt-card-label"><?= bb_sanitize($l['isha']) ?></div>
                         <div class="bb-pt-card-time" id="bbTimeIsha">--:--</div>
                     </div>
-                    <div class="bb-pt-card bb-pt-card-midnight" data-prayer="midnight">
+                    <div class="bb-pt-card" data-prayer="midnight">
                         <div class="bb-pt-card-label"><?= bb_sanitize($l['midnight']) ?></div>
                         <div class="bb-pt-card-time" id="bbTimeMidnight">--:--</div>
                     </div>

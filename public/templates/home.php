@@ -119,10 +119,35 @@ bb_frontend_header([
     'seo_data'   => $seoData,
     'body_class' => 'bb-page-home',
     'is_home'    => true,
-    'extra_css'  => ['/public/assets/css/home.css'],
+    'extra_css'  => ['/public/assets/css/home.css', '/public/assets/css/prayer-times.css'],
     'hero_subtitle' => $_strings['hero_subtitle'][$lang] ?? $_strings['hero_subtitle']['az'] ?? '',
 ]);
+
+$ptLabels = [
+    'az' => ['fajr'=>'Sübh','sunrise'=>'Günəş','dhuhr'=>'Zöhr','asr'=>'Əsr','sunset'=>'Qürub','maghrib'=>'Məğrib','isha'=>'İşa','midnight'=>'Gecə yarısı'],
+    'en' => ['fajr'=>'Fajr','sunrise'=>'Sunrise','dhuhr'=>'Dhuhr','asr'=>'Asr','sunset'=>'Sunset','maghrib'=>'Maghrib','isha'=>'Isha','midnight'=>'Midnight'],
+    'ru' => ['fajr'=>'Фаджр','sunrise'=>'Восход','dhuhr'=>'Зухр','asr'=>'Аср','sunset'=>'Закат','maghrib'=>'Магриб','isha'=>'Иша','midnight'=>'Полночь'],
+];
+$ptL = $ptLabels[$lang] ?? $ptLabels['az'];
+$ptUrl = bb_lang_url(bb_get_route('prayer-times', $lang) . '/', $lang);
+$ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
 ?>
+
+    <!-- ==========================================
+         Namaz vaxtları strip
+         ========================================== -->
+    <section class="bb-home-prayer-strip">
+        <a href="<?= bb_sanitize($ptUrl) ?>" class="bb-container bb-home-prayer-link" id="bbHomePrayerStrip">
+            <div class="bb-pt-strip">
+                <?php foreach ($ptKeys as $key): ?>
+                <div class="bb-pt-strip-item" data-prayer="<?= $key ?>">
+                    <span class="bb-pt-strip-label"><?= bb_sanitize($ptL[$key]) ?></span>
+                    <span class="bb-pt-strip-time" id="bbHomeTime_<?= $key ?>">--:--</span>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </a>
+    </section>
 
     <!-- ==========================================
          Bölmə: Həzrət haqqında
@@ -254,4 +279,10 @@ bb_frontend_header([
     <?php endif; ?>
 
 <?php
-bb_frontend_footer(['extra_js' => ['/public/assets/js/home.js'], 'is_home' => true]);
+bb_frontend_footer([
+    'extra_js' => [
+        'https://cdn.jsdelivr.net/npm/praytime/src/praytime.js',
+        '/public/assets/js/home.js',
+    ],
+    'is_home' => true,
+]);

@@ -2,8 +2,7 @@
  * Bibiheybet.com - Namaz Vaxtları
  * 
  * PrayTimes kitabxanası ilə Cəfəri məzhəbinə uyğun hesablama.
- * Azərbaycanın bütün şəhər və rayonları üçün.
- * Bu gün + aylıq cədvəl.
+ * Bu gün + aylıq cədvəl + Hicri təqvim.
  */
 (function () {
     'use strict';
@@ -12,7 +11,7 @@
     var TZ = 'Asia/Baku';
 
     /* =============================================
-       Ay adları (çoxdilli)
+       Çoxdilli adlar
        ============================================= */
     var MONTH_NAMES = {
         az: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'],
@@ -20,13 +19,26 @@
         ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
     };
 
+    var WEEKDAY_NAMES = {
+        az: ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'],
+        en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        ru: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
+    };
+
+    var HIJRI_MONTHS = {
+        az: ['Məhərrəm', 'Səfər', 'Rəbiüləvvəl', 'Rəbiülaxir', 'Cəmadiyüləvvəl', 'Cəmadiyülaxir', 'Rəcəb', 'Şaban', 'Ramazan', 'Şəvval', 'Zilqədə', 'Zilhiccə'],
+        en: ['Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 'Jumada al-Ula', 'Jumada al-Thani', 'Rajab', 'Shaban', 'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'],
+        ru: ['Мухаррам', 'Сафар', 'Раби уль-авваль', 'Раби уль-ахир', 'Джумада уль-уля', 'Джумада уль-ахира', 'Раджаб', 'Шаабан', 'Рамадан', 'Шавваль', 'Зуль-каада', 'Зуль-хиджа']
+    };
+
     var months = MONTH_NAMES[LANG] || MONTH_NAMES.az;
+    var weekdays = WEEKDAY_NAMES[LANG] || WEEKDAY_NAMES.az;
+    var hijriMonths = HIJRI_MONTHS[LANG] || HIJRI_MONTHS.az;
 
     /* =============================================
-       Azərbaycan şəhər və rayonları — [enlik, uzunluq]
+       Azərbaycan şəhər və rayonları
        ============================================= */
     var REGIONS = {
-        /* ---- Şəhərlər ---- */
         baki:        { az: 'Bakı',        en: 'Baku',        ru: 'Баку',        c: [40.4093, 49.8671] },
         gence:       { az: 'Gəncə',       en: 'Ganja',       ru: 'Гянджа',      c: [40.6828, 46.3606] },
         sumqayit:    { az: 'Sumqayıt',     en: 'Sumgait',     ru: 'Сумгаит',     c: [40.5855, 49.6317] },
@@ -37,8 +49,6 @@
         seki:        { az: 'Şəki',         en: 'Sheki',       ru: 'Шеки',        c: [41.1975, 47.1706] },
         yevlax:      { az: 'Yevlax',       en: 'Yevlakh',     ru: 'Евлах',       c: [40.6197, 47.1500] },
         xankendi:    { az: 'Xankəndi',     en: 'Khankendi',   ru: 'Ханкенди',    c: [39.8153, 46.7519] },
-
-        /* ---- Rayonlar (əlifba sırası) ---- */
         absheron:    { az: 'Abşeron',      en: 'Absheron',    ru: 'Абшерон',     c: [40.4200, 50.0000] },
         agcabedi:    { az: 'Ağcabədi',     en: 'Aghjabadi',   ru: 'Агджабеди',   c: [40.0500, 47.4600] },
         agdam:       { az: 'Ağdam',        en: 'Aghdam',      ru: 'Агдам',       c: [39.9900, 46.9300] },
@@ -104,7 +114,7 @@
     };
 
     /* =============================================
-       DOM elementləri
+       DOM
        ============================================= */
     var regionSelect   = document.getElementById('bbRegionSelect');
     var prayerGrid     = document.getElementById('bbPrayerGrid');
@@ -119,16 +129,43 @@
 
     if (!regionSelect) return;
 
-    /* =============================================
-       Vəziyyət
-       ============================================= */
     var currentRegion = null;
     var todayDate     = new Date();
     var currentYear   = todayDate.getFullYear();
     var currentMonth  = todayDate.getMonth();
 
     /* =============================================
-       Dropdown-u doldur (ada görə sıralı)
+       Tarix formatlama
+       ============================================= */
+    function formatGregorianDate(date) {
+        var wd = weekdays[date.getDay()];
+        var d = date.getDate();
+        var m = (MONTH_NAMES[LANG] || MONTH_NAMES.az)[date.getMonth()].toLowerCase();
+        var y = date.getFullYear();
+        return wd + ', ' + d + ' ' + m + ' ' + y;
+    }
+
+    function formatHijriDate(date) {
+        try {
+            var fmt = new Intl.DateTimeFormat('en-u-ca-islamic', {
+                day: 'numeric', month: 'numeric', year: 'numeric'
+            });
+            var parts = fmt.formatToParts(date);
+            var day = '', monthNum = 0, year = '';
+            for (var i = 0; i < parts.length; i++) {
+                if (parts[i].type === 'day') day = parts[i].value;
+                if (parts[i].type === 'month') monthNum = parseInt(parts[i].value);
+                if (parts[i].type === 'year') year = parts[i].value;
+            }
+            if (!day || !monthNum || !year) return '';
+            return day + ' ' + hijriMonths[monthNum - 1] + ' ' + year;
+        } catch (e) {
+            return '';
+        }
+    }
+
+    /* =============================================
+       Dropdown doldur
        ============================================= */
     function populateRegions() {
         var entries = [];
@@ -184,7 +221,7 @@
     }
 
     /* =============================================
-       Bu günün namaz vaxtlarını hesabla
+       Bu gün
        ============================================= */
     function calculateToday(region) {
         var pt = new PrayTime('Jafari');
@@ -201,17 +238,14 @@
 
         highlightCurrent(times);
 
-        var locale = LANG === 'az' ? 'az-AZ' : LANG === 'ru' ? 'ru-RU' : 'en-US';
-        dateEl.textContent = new Date().toLocaleDateString(locale, {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        var now = new Date();
+        var dateStr = formatGregorianDate(now);
+        var hijriStr = formatHijriDate(now);
+        dateEl.innerHTML = dateStr + (hijriStr ? '<br>' + hijriStr : '');
     }
 
     /* =============================================
-       Aylıq cədvəli hesabla və render et
+       Aylıq cədvəl
        ============================================= */
     function calculateMonthly(region) {
         monthLabel.textContent = months[currentMonth] + ' ' + currentYear;
@@ -243,19 +277,10 @@
         }
 
         monthlyBody.innerHTML = html;
-
-        if (isCurrentMonth) {
-            var todayRow = monthlyBody.querySelector('.bb-pt-row-today');
-            if (todayRow) {
-                setTimeout(function () {
-                    todayRow.scrollIntoView({ block: 'center', behavior: 'smooth' });
-                }, 100);
-            }
-        }
     }
 
     /* =============================================
-       Hazırda hansı namaz vaxtıdırsa, onu vurğula
+       Aktiv vaxtı vurğula
        ============================================= */
     function highlightCurrent(times) {
         var now = new Date();
@@ -290,13 +315,8 @@
        ============================================= */
     function changeMonth(delta) {
         currentMonth += delta;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear++;
-        } else if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear--;
-        }
+        if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+        else if (currentMonth < 0) { currentMonth = 11; currentYear--; }
 
         if (currentRegion && REGIONS[currentRegion]) {
             calculateMonthly(REGIONS[currentRegion]);
@@ -304,7 +324,7 @@
     }
 
     /* =============================================
-       Cookie helpers
+       Cookie
        ============================================= */
     function setCookie(name, value, days) {
         var d = new Date();
@@ -319,19 +339,14 @@
     }
 
     /* =============================================
-       Event listener + init
+       Init
        ============================================= */
     regionSelect.addEventListener('change', function () {
         onRegionChange(this.value);
     });
 
-    monthPrev.addEventListener('click', function () {
-        changeMonth(-1);
-    });
-
-    monthNext.addEventListener('click', function () {
-        changeMonth(1);
-    });
+    monthPrev.addEventListener('click', function () { changeMonth(-1); });
+    monthNext.addEventListener('click', function () { changeMonth(1); });
 
     populateRegions();
 })();

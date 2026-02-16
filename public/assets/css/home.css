@@ -47,6 +47,25 @@
 }
 
 /* ============================================
+   Ana səhifə: Namaz vaxtları strip
+   ============================================ */
+.bb-home-prayer-strip {
+    background-color: var(--bb-bg-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.bb-home-prayer-link {
+    display: block;
+    text-decoration: none;
+    padding: 0;
+    transition: opacity var(--bb-transition-fast);
+}
+
+.bb-home-prayer-link:hover {
+    opacity: 0.9;
+}
+
+/* ============================================
    Bölmə: Həzrət haqqında
    ============================================ */
 .bb-home-hazrat {
