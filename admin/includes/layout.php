@@ -27,6 +27,12 @@ function bb_admin_header(string $pageTitle = 'Dashboard', array $options = []): 
     $currentUri = $_SERVER['REQUEST_URI'] ?? '';
     $flashHtml = bb_render_flash();
 
+    // Session lock-u erkən burax ki, paralel sorğular (JS/CSS yükləmələri)
+    // session faylını bloklamasın. CSRF token lazım olanda session yenidən açılacaq.
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_write_close();
+    }
+
     // Sidebar menyu itemləri
     $menuItems = bb_admin_menu_items();
 ?>

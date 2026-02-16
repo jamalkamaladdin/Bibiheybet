@@ -121,7 +121,7 @@ foreach ($rows->fetchAll() as $row) {
 }
 
 bb_admin_header($pageConfig['label'] . ' - Redaktə', [
-    'extra_js' => ['/admin/assets/js/tinymce/tinymce.min.js', '/admin/assets/js/editor.js'],
+    'extra_js' => ['/admin/assets/tinymce/tinymce.min.js', '/admin/assets/js/editor.js'],
 ]);
 ?>
 
