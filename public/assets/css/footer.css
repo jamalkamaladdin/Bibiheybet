@@ -23,7 +23,7 @@
    Logo
    ============================================ */
 .bb-footer-logo {
-    display: inline-block;
+    display: block;
     margin-bottom: 1.5rem;
     transition: opacity var(--bb-transition);
 }
@@ -33,23 +33,28 @@
 }
 
 .bb-footer-logo img {
-    height: 56px;
+    height: auto;
     width: auto;
+    max-height: 48px;
+    max-width: 180px;
 }
 
 /* ============================================
-   Nav (üfüqi linklər)
+   Nav (üfüqi linklər, bir sətirdə)
    ============================================ */
 .bb-footer-nav {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem 0;
+    gap: 0.35rem 0;
     margin-bottom: 1.25rem;
+    width: 100%;
 }
 
 .bb-footer-nav a {
+    display: inline-block;
     font-size: 0.82rem;
     color: var(--bb-color-muted);
     transition: color var(--bb-transition);
@@ -67,37 +72,45 @@
     height: 3px;
     border-radius: 50%;
     background-color: var(--bb-color-muted);
-    opacity: 0.35;
-    margin: 0 0.6rem;
-    vertical-align: middle;
+    opacity: 0.3;
+    margin: 0 0.55rem;
+    flex-shrink: 0;
 }
 
 /* ============================================
-   Sosial ikonlar
+   Sosial ikonlar (mərkəzdə, üfüqi)
    ============================================ */
 .bb-footer-social {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .bb-footer-social a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     color: var(--bb-color-muted);
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.05);
     transition: all var(--bb-transition);
+    flex-shrink: 0;
+}
+
+.bb-footer-social a svg {
+    width: 16px;
+    height: 16px;
 }
 
 .bb-footer-social a:hover {
     color: var(--bb-color-accent);
-    background: rgba(201, 168, 76, 0.1);
+    background: rgba(201, 168, 76, 0.12);
 }
 
 /* ============================================
@@ -105,13 +118,13 @@
    ============================================ */
 .bb-footer-line {
     width: 100%;
-    max-width: 400px;
+    max-width: 320px;
     height: 1px;
     background: linear-gradient(
         to right,
         transparent,
-        rgba(201, 168, 76, 0.2) 30%,
-        rgba(201, 168, 76, 0.2) 70%,
+        rgba(201, 168, 76, 0.18) 30%,
+        rgba(201, 168, 76, 0.18) 70%,
         transparent
     );
     margin-bottom: 1rem;
@@ -122,10 +135,11 @@
     color: var(--bb-color-muted);
     opacity: 0.5;
     margin: 0;
+    line-height: 1.4;
 }
 
 /* ============================================
-   Responsive
+   Responsive - Mobil
    ============================================ */
 @media (max-width: 575px) {
     .bb-footer-inner {
@@ -134,34 +148,67 @@
     }
 
     .bb-footer-logo img {
-        height: 44px;
+        max-height: 36px;
+        max-width: 140px;
+    }
+
+    .bb-footer-nav {
+        gap: 0.3rem 0;
+        margin-bottom: 1rem;
     }
 
     .bb-footer-nav a {
-        font-size: 0.78rem;
+        font-size: 0.75rem;
     }
 
     .bb-footer-nav-dot {
-        margin: 0 0.45rem;
+        width: 2px;
+        height: 2px;
+        margin: 0 0.4rem;
+    }
+
+    .bb-footer-social {
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .bb-footer-social a {
+        width: 30px;
+        height: 30px;
+    }
+
+    .bb-footer-social a svg {
+        width: 14px;
+        height: 14px;
     }
 
     .bb-footer-line {
-        max-width: 280px;
+        max-width: 200px;
+    }
+
+    .bb-footer-copy {
+        font-size: 0.68rem;
     }
 }
 
+/* Desktop */
 @media (min-width: 1024px) {
     .bb-footer-inner {
-        padding-top: 3.5rem;
+        padding-top: 3rem;
         padding-bottom: 2rem;
     }
 
     .bb-footer-logo img {
-        height: 64px;
+        max-height: 56px;
+        max-width: 220px;
     }
 
     .bb-footer-nav a {
         font-size: 0.85rem;
+    }
+
+    .bb-footer-nav-dot {
+        margin: 0 0.65rem;
     }
 }
 
