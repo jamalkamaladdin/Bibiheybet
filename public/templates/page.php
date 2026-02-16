@@ -164,10 +164,10 @@ $staticPages = [
         'icon' => 'prayer',
         'content' => [
             'az' => file_get_contents(__DIR__ . '/partials/prayer-az.html'),
-
             'en' => file_get_contents(__DIR__ . '/partials/prayer-en.html'),
-
             'ru' => file_get_contents(__DIR__ . '/partials/prayer-ru.html'),
+            'ar' => file_get_contents(__DIR__ . '/partials/prayer-ar.html'),
+            'fa' => file_get_contents(__DIR__ . '/partials/prayer-fa.html'),
         ],
     ],
 ];
