@@ -138,6 +138,13 @@ $ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
          ========================================== -->
     <section class="bb-home-prayer-strip" id="bbHomePrayerStrip" data-url="<?= bb_sanitize($ptUrl) ?>">
         <div class="bb-container bb-pt-strip-wrap">
+            <div class="bb-pt-strip-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C12 2 9 5.5 9 8a3 3 0 006 0c0-2.5-3-6-3-6z" fill="currentColor" opacity="0.7"/>
+                    <path d="M3 21V13a2 2 0 012-2h1V9.5a1.5 1.5 0 013 0V11h6V9.5a1.5 1.5 0 013 0V11h1a2 2 0 012 2v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1 21h22M10 21v-4a2 2 0 014 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
             <button class="bb-pt-strip-arrow bb-pt-strip-arrow-left" id="bbStripLeft" aria-label="Sol">
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
