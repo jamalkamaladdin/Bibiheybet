@@ -89,20 +89,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     foreach ($pageConfig['sections'] as $sectionKey => $sectionInfo) {
         $values = [':page_key' => $pageKey, ':section_key' => $sectionKey];
-        $setClauses = [];
+        $columns = [];
+        $placeholders = [];
+        $updateParts = [];
         foreach ($langs as $l) {
-            $fieldName = "content_{$l}";
-            $paramName = ":content_{$l}";
-            $values[$paramName] = $_POST["{$sectionKey}_{$l}"] ?? '';
-            $setClauses[] = "`{$fieldName}` = {$paramName}";
+            $col = "content_{$l}";
+            $param = ":content_{$l}";
+            $values[$param] = $_POST["{$sectionKey}_{$l}"] ?? '';
+            $columns[] = $col;
+            $placeholders[] = $param;
+            $updateParts[] = "`{$col}` = VALUES(`{$col}`)";
         }
 
-        $setStr = implode(', ', $setClauses);
-        $updateStr = implode(', ', array_map(fn($c) => str_replace('`', '', $c), $setClauses));
-
-        $sql = "INSERT INTO page_contents (page_key, section_key, " . implode(', ', array_map(fn($l) => "content_{$l}", $langs)) . ")
-                VALUES (:page_key, :section_key, " . implode(', ', array_map(fn($l) => ":content_{$l}", $langs)) . ")
-                ON DUPLICATE KEY UPDATE {$updateStr}";
+        $sql = "INSERT INTO page_contents (page_key, section_key, " . implode(', ', $columns) . ")
+                VALUES (:page_key, :section_key, " . implode(', ', $placeholders) . ")
+                ON DUPLICATE KEY UPDATE " . implode(', ', $updateParts);
 
         $stmt = $db->prepare($sql);
         $stmt->execute($values);
@@ -112,12 +113,122 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     bb_redirect('/admin/pages/edit.php?page=' . urlencode($pageKey));
 }
 
-// Mövcud datanı yüklə
+// Saytdakı default məzmunlar (DB-də boş olanda görünən)
+$siteDefaults = [
+    'home' => [
+        'hero_subtitle' => [
+            'az' => 'Fatimeyi-Suğra, Həkimə xanımın müqəddəs ziyarətgahı',
+            'en' => 'The holy shrine of Lady Fatima Sugra, Hakima Khanym',
+            'ru' => 'Святая обитель госпожи Фатимы ас-Сугры (Хакимы ханум)',
+            'ar' => "المقام المقدس للسيدة فاطمة الصغرى\nحكيمة خاتون عليها السلام",
+            'fa' => 'زیارتگاه مقدس حضرت فاطمه صغری حکیمه خاتون (سلام‌الله‌علیها)',
+        ],
+        'hazrat_text' => [
+            'az' => 'Həkimə xanım, 9-cu əsrdə yaşamış, İmam Musa Kazımın (a.s) qızı və İmam Əli Rzanın (a.s) bacısıdır. O, xəlifələrin təqibindən qaçaraq Bakıya sığınmış və burada "Heybət xanımın bibisi" adı ilə tanınmışdır. Vəfatından sonra, məzarı üzərində inşa edilən məscid və türbə, zamanla Bibi Heybət adı ilə məşhurlaşmışdır.',
+            'en' => 'Lady Hakima was a 9th-century figure, the daughter of Imam Musa al-Kazim (a.s.) and the sister of Imam Ali al-Ridha (a.s.). Fleeing persecution by the caliphs, she sought refuge in Baku, where she became known as "the aunt of Heybat Khanum." After her passing, a mosque and mausoleum were constructed over her grave, which in time became renowned as Bibi-Heybat.',
+            'ru' => 'Хакима ханым — религиозная деятельница IX века, дочь Имама Мусы аль-Казима (а.с.) и сестра Имама Али ар-Ризы (а.с.). Спасаясь от преследований халифов, она нашла убежище в Баку, где была известна как «тётя Хейбат ханым». После её кончины над её могилой были возведены мечеть и мавзолей, которые со временем стали известны под названием Биби-Хейбат.',
+        ],
+        'mosque_text_1' => [
+            'az' => 'Bibiheybət məscidi XIII əsrdə Şirvanşah II Fərruxzad ibn Axsitan tərəfindən inşa etdirilib. 1281-1282-ci illərdə tikilən məscidin divarındakı tarixi kitabələrdə onun memarının Mahmud ibn Sədi olduğu qeyd edilib.',
+            'en' => 'Bibi-Heybat Mosque was built in the 13th century by Shirvanshah II Farrukhzad ibn Akhsitan. Historical inscriptions on the mosque\'s walls, constructed between 1281 and 1282, state that its architect was Mahmud ibn Sadi.',
+            'ru' => 'Мечеть Биби-Хейбат была построена в XIII веке Ширваншахом II Фаррухзадом ибн Ахситаном. Исторические надписи на стенах мечети, возведённой в 1281–1282 годах, указывают, что архитектором был Махмуд ибн Сади.',
+        ],
+        'mosque_strong' => [
+            'az' => 'Nə inam öldü, nə iman',
+            'en' => 'Neither faith died, nor belief',
+            'ru' => 'Ни вера не умерла, ни убеждение',
+        ],
+        'mosque_text_2' => [
+            'az' => '1934-cü ilin sentyabr ayında kommunist rejimi tərəfindən ziyarətgah dağıdılaraq yerlə-yeksan edilib. Amma qadağalara baxmayaraq, inanclı insanlar yenə bu yerləri unutmayıblar. 1997-ci il iyulun 23-də Həzrəti Peyğəmbərin mövludu günü məscidin təməli qoyulur. Tikinti işləri bir ilə başa çatır və məscid möminlərin ixtiyarına verilir.',
+            'en' => 'In September 1934, the Communist regime destroyed the shrine, reducing it to ruins. Despite these prohibitions, devout people never forgot this sacred place. On July 23, 1997, coinciding with the Prophet\'s birthday, the foundation of the mosque was laid. Construction was completed within a year, and the mosque was returned to the worshippers.',
+            'ru' => 'В сентябре 1934 года коммунистический режим разрушил святыню, полностью её уничтожив. Но несмотря на запреты, верующие никогда не забывали это святое место. 23 июля 1997 года, в день рождения Пророка, был заложен фундамент новой мечети. Строительство завершилось в течение года, и мечеть вновь стала доступна для прихожан.',
+        ],
+        'read_more' => [
+            'az' => 'Daha ətraflı', 'en' => 'Read more', 'ru' => 'Подробнее',
+            'ar' => 'اقرأ المزيد', 'fa' => 'بیشتر بخوانید',
+        ],
+        'show_more' => [
+            'az' => 'Daha çox', 'en' => 'Show more', 'ru' => 'Показать ещё',
+            'ar' => 'عرض المزيد', 'fa' => 'نمایش بیشتر',
+        ],
+        'pilgrimages_title' => [
+            'az' => 'Ziyarətgahlar', 'en' => 'Pilgrimages', 'ru' => 'Святыни',
+            'ar' => 'المقامات والمزارات', 'fa' => 'زیارتگاه‌ها',
+        ],
+        'articles_title' => [
+            'az' => 'Məqalələr', 'en' => 'Articles', 'ru' => 'Статьи',
+            'ar' => 'المقالات', 'fa' => 'مقالات',
+        ],
+    ],
+    'about-hazrat' => [
+        'title' => [
+            'az' => 'Həzrət haqqında', 'en' => 'About the Holy Lady', 'ru' => 'О Её Светлости',
+            'ar' => 'نبذة عن السيدة حكيمة', 'fa' => 'درباره حضرت حکیمه',
+        ],
+        'description' => [
+            'az' => 'Hz. Həkimə Xanım (s) - İmam Musa Kazımın (ə.s.) qızı və İmam Əli Rzanın (ə.s.) bacısı haqqında ətraflı məlumat.',
+            'en' => 'Detailed information about Hz. Hakimah Khatun (s) - daughter of Imam Musa al-Kazim (a.s.) and sister of Imam Ali al-Ridha (a.s.).',
+            'ru' => 'Подробная информация о Хз. Хакиме Хатун (с) — дочери Имама Мусы аль-Казима (а.с.) и сестре Имама Али ар-Ризы (а.с.).',
+            'ar' => 'معلومات مفصلة عن السيدة حكيمة خاتون (ع) - ابنة الإمام موسى الكاظم (ع) وأخت الإمام علي الرضا (ع).',
+            'fa' => 'اطلاعات تفصیلی درباره حضرت حکیمه خاتون (س) - دختر امام موسی کاظم (ع) و خواهر امام علی رضا (ع).',
+        ],
+        'content' => [
+            'az' => 'Həkimə xanım, 9-cu əsrdə yaşamış, İmam Musa Kazımın (ə.s.) qızı və İmam Əli Rzanın (ə.s.) bacısıdır...',
+            'en' => 'Lady Hakima was a 9th-century figure, the daughter of Imam Musa al-Kazim (a.s.) and the sister of Imam Ali al-Ridha (a.s.)...',
+            'ru' => 'Хакима ханым — религиозная деятельница IX века, дочь Имама Мусы аль-Казима (а.с.) и сестра Имама Али ар-Ризы (а.с.)...',
+        ],
+    ],
+    'about-mosque' => [
+        'title' => [
+            'az' => 'Məscid haqqında', 'en' => 'About the Mosque', 'ru' => 'О Мечети',
+            'ar' => 'عن المسجد', 'fa' => 'درباره مسجد',
+        ],
+        'description' => [
+            'az' => 'Bibiheybət Məscidinin tarixi, memarlığı və yenidən qurulması haqqında.',
+            'en' => 'About the history, architecture and reconstruction of Bibiheybat Mosque.',
+            'ru' => 'Об истории, архитектуре и восстановлении мечети Бибиэйбат.',
+            'ar' => 'عن تاريخ وعمارة وإعادة بناء مسجد بيبي حيبات.',
+            'fa' => 'درباره تاریخ، معماری و بازسازی مسجد بی‌بی حیبات.',
+        ],
+        'content' => [
+            'az' => 'Bibiheybət məscidi — Bakının ən qədim və ən müqəddəs dini abidələrindən biridir...',
+            'en' => 'Bibi-Heybat Mosque is one of the oldest and most sacred religious monuments of Baku...',
+            'ru' => 'Мечеть Биби-Хейбат — одна из старейших и наиболее священных религиозных памятников Баку...',
+        ],
+    ],
+    'prayers' => [
+        'title' => [
+            'az' => 'Dua və ziyarətnamə', 'en' => 'Prayers and Ziyarat Texts', 'ru' => 'Молитвы и зиярат',
+            'ar' => 'الأدعية والزيارات', 'fa' => 'دعاها و زیارت‌نامه‌ها',
+        ],
+        'description' => [
+            'az' => 'Bibiheybət ziyarətgahında oxunan dua və ziyarətnamə mətnləri.',
+            'en' => 'Prayer and pilgrimage texts recited at Bibiheybat Shrine.',
+            'ru' => 'Тексты молитв и зияратов, читаемых в святыне Бибиэйбат.',
+            'ar' => 'نصوص الأدعية والزيارات التي تُقرأ في مزار بيبي حيبات.',
+            'fa' => 'متون دعاها و زیارت‌نامه‌هایی که در زیارتگاه بی‌بی حیبات خوانده می‌شود.',
+        ],
+        'content' => [],
+    ],
+];
+
+// Mövcud datanı yüklə (DB dəyərlər + default fallback)
 $existing = [];
 $rows = $db->prepare("SELECT * FROM page_contents WHERE page_key = :page_key");
 $rows->execute([':page_key' => $pageKey]);
 foreach ($rows->fetchAll() as $row) {
     $existing[$row['section_key']] = $row;
+}
+
+// Default dəyərlərlə birləşdir - DB-də olmayan sahələri default ilə doldur
+$defaults = $siteDefaults[$pageKey] ?? [];
+foreach ($pageConfig['sections'] as $sectionKey => $sectionInfo) {
+    foreach ($langs as $l) {
+        $col = "content_{$l}";
+        if (empty($existing[$sectionKey][$col]) && !empty($defaults[$sectionKey][$l])) {
+            $existing[$sectionKey][$col] = $defaults[$sectionKey][$l];
+        }
+    }
 }
 
 bb_admin_header($pageConfig['label'] . ' - Redaktə', [

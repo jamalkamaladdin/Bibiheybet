@@ -10,7 +10,7 @@ require_once __DIR__ . '/../includes/layout.php';
 $db = bb_get_db();
 $errors = [];
 $old = [
-    'name_az' => '', 'name_en' => '', 'name_ru' => '',
+    'name_az' => '', 'name_en' => '', 'name_ru' => '', 'name_ar' => '', 'name_fa' => '',
     'slug' => '', 'sort_order' => 0,
 ];
 
@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $old['name_az']    = trim($_POST['name_az'] ?? '');
         $old['name_en']    = trim($_POST['name_en'] ?? '');
         $old['name_ru']    = trim($_POST['name_ru'] ?? '');
+        $old['name_ar']    = trim($_POST['name_ar'] ?? '');
+        $old['name_fa']    = trim($_POST['name_fa'] ?? '');
         $old['slug']       = trim($_POST['slug'] ?? '');
         $old['sort_order'] = (int)($_POST['sort_order'] ?? 0);
 
@@ -53,14 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // DB insert
         if (empty($errors)) {
             $stmt = $db->prepare("
-                INSERT INTO categories (slug, name_az, name_en, name_ru, sort_order)
-                VALUES (:slug, :name_az, :name_en, :name_ru, :sort_order)
+                INSERT INTO categories (slug, name_az, name_en, name_ru, name_ar, name_fa, sort_order)
+                VALUES (:slug, :name_az, :name_en, :name_ru, :name_ar, :name_fa, :sort_order)
             ");
             $stmt->execute([
                 ':slug'       => $old['slug'],
                 ':name_az'    => $old['name_az'],
                 ':name_en'    => $old['name_en'] ?: null,
                 ':name_ru'    => $old['name_ru'] ?: null,
+                ':name_ar'    => $old['name_ar'] ?: null,
+                ':name_fa'    => $old['name_fa'] ?: null,
                 ':sort_order' => $old['sort_order'],
             ]);
 
@@ -93,6 +97,8 @@ bb_admin_header('Yeni Kateqoriya');
         <button type="button" class="bb-tab active" data-tab="az">Azərbaycan</button>
         <button type="button" class="bb-tab" data-tab="en">English</button>
         <button type="button" class="bb-tab" data-tab="ru">Русский</button>
+        <button type="button" class="bb-tab" data-tab="ar">العربية</button>
+        <button type="button" class="bb-tab" data-tab="fa">فارسی</button>
     </div>
 
     <div class="bb-tab-content active" data-tab-content="az">
@@ -113,6 +119,20 @@ bb_admin_header('Yeni Kateqoriya');
         <div class="bb-form-group">
             <label for="name_ru">Ad (RU)</label>
             <input type="text" id="name_ru" name="name_ru" value="<?= bb_sanitize($old['name_ru']) ?>">
+        </div>
+    </div>
+
+    <div class="bb-tab-content" data-tab-content="ar">
+        <div class="bb-form-group">
+            <label for="name_ar">Ad (AR)</label>
+            <input type="text" id="name_ar" name="name_ar" value="<?= bb_sanitize($old['name_ar']) ?>" dir="rtl">
+        </div>
+    </div>
+
+    <div class="bb-tab-content" data-tab-content="fa">
+        <div class="bb-form-group">
+            <label for="name_fa">Ad (FA)</label>
+            <input type="text" id="name_fa" name="name_fa" value="<?= bb_sanitize($old['name_fa']) ?>" dir="rtl">
         </div>
     </div>
 

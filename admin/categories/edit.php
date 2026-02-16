@@ -30,6 +30,8 @@ $old = [
     'name_az'    => $category['name_az'],
     'name_en'    => $category['name_en'] ?? '',
     'name_ru'    => $category['name_ru'] ?? '',
+    'name_ar'    => $category['name_ar'] ?? '',
+    'name_fa'    => $category['name_fa'] ?? '',
     'slug'       => $category['slug'],
     'sort_order' => (int)$category['sort_order'],
 ];
@@ -42,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $old['name_az']    = trim($_POST['name_az'] ?? '');
         $old['name_en']    = trim($_POST['name_en'] ?? '');
         $old['name_ru']    = trim($_POST['name_ru'] ?? '');
+        $old['name_ar']    = trim($_POST['name_ar'] ?? '');
+        $old['name_fa']    = trim($_POST['name_fa'] ?? '');
         $old['slug']       = trim($_POST['slug'] ?? '');
         $old['sort_order'] = (int)($_POST['sort_order'] ?? 0);
 
@@ -72,7 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $db->prepare("
                 UPDATE categories
                 SET slug = :slug, name_az = :name_az, name_en = :name_en,
-                    name_ru = :name_ru, sort_order = :sort_order
+                    name_ru = :name_ru, name_ar = :name_ar, name_fa = :name_fa,
+                    sort_order = :sort_order
                 WHERE id = :id
             ");
             $stmt->execute([
@@ -80,6 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':name_az'    => $old['name_az'],
                 ':name_en'    => $old['name_en'] ?: null,
                 ':name_ru'    => $old['name_ru'] ?: null,
+                ':name_ar'    => $old['name_ar'] ?: null,
+                ':name_fa'    => $old['name_fa'] ?: null,
                 ':sort_order' => $old['sort_order'],
                 ':id'         => $id,
             ]);
@@ -112,6 +119,8 @@ bb_admin_header('Kateqoriya Redaktə');
         <button type="button" class="bb-tab active" data-tab="az">Azərbaycan</button>
         <button type="button" class="bb-tab" data-tab="en">English</button>
         <button type="button" class="bb-tab" data-tab="ru">Русский</button>
+        <button type="button" class="bb-tab" data-tab="ar">العربية</button>
+        <button type="button" class="bb-tab" data-tab="fa">فارسی</button>
     </div>
 
     <div class="bb-tab-content active" data-tab-content="az">
@@ -132,6 +141,20 @@ bb_admin_header('Kateqoriya Redaktə');
         <div class="bb-form-group">
             <label for="name_ru">Ad (RU)</label>
             <input type="text" id="name_ru" name="name_ru" value="<?= bb_sanitize($old['name_ru']) ?>">
+        </div>
+    </div>
+
+    <div class="bb-tab-content" data-tab-content="ar">
+        <div class="bb-form-group">
+            <label for="name_ar">Ad (AR)</label>
+            <input type="text" id="name_ar" name="name_ar" value="<?= bb_sanitize($old['name_ar']) ?>" dir="rtl">
+        </div>
+    </div>
+
+    <div class="bb-tab-content" data-tab-content="fa">
+        <div class="bb-form-group">
+            <label for="name_fa">Ad (FA)</label>
+            <input type="text" id="name_fa" name="name_fa" value="<?= bb_sanitize($old['name_fa']) ?>" dir="rtl">
         </div>
     </div>
 

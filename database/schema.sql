@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
     `name_az` VARCHAR(255) NOT NULL,
     `name_en` VARCHAR(255) NULL,
     `name_ru` VARCHAR(255) NULL,
+    `name_ar` VARCHAR(255) NULL,
+    `name_fa` VARCHAR(255) NULL,
     `sort_order` INT NOT NULL DEFAULT 0,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -40,45 +42,61 @@ CREATE TABLE IF NOT EXISTS `articles` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `category_id` INT NULL,
     
-    -- Slugs
+    -- Slugs (5 dil)
     `slug_az` VARCHAR(255) NOT NULL,
     `slug_en` VARCHAR(255) NULL,
     `slug_ru` VARCHAR(255) NULL,
+    `slug_ar` VARCHAR(255) NULL,
+    `slug_fa` VARCHAR(255) NULL,
     
-    -- Titles
+    -- Titles (5 dil)
     `title_az` VARCHAR(500) NOT NULL,
     `title_en` VARCHAR(500) NULL,
     `title_ru` VARCHAR(500) NULL,
+    `title_ar` VARCHAR(500) NULL,
+    `title_fa` VARCHAR(500) NULL,
     
-    -- Content (HTML)
+    -- Content (HTML, 5 dil)
     `content_az` LONGTEXT NOT NULL,
     `content_en` LONGTEXT NULL,
     `content_ru` LONGTEXT NULL,
+    `content_ar` LONGTEXT NULL,
+    `content_fa` LONGTEXT NULL,
     
-    -- Excerpts
+    -- Excerpts (5 dil)
     `excerpt_az` TEXT NULL,
     `excerpt_en` TEXT NULL,
     `excerpt_ru` TEXT NULL,
+    `excerpt_ar` TEXT NULL,
+    `excerpt_fa` TEXT NULL,
     
-    -- Featured images
+    -- Featured images (5 dil)
     `featured_image` VARCHAR(500) NULL COMMENT 'Əsas foto (bütün dillər üçün default)',
     `featured_image_en` VARCHAR(500) NULL COMMENT 'EN üçün fərqli foto',
     `featured_image_ru` VARCHAR(500) NULL COMMENT 'RU üçün fərqli foto',
+    `featured_image_ar` VARCHAR(500) NULL COMMENT 'AR üçün fərqli foto',
+    `featured_image_fa` VARCHAR(500) NULL COMMENT 'FA üçün fərqli foto',
     
-    -- SEO: Meta titles
+    -- SEO: Meta titles (5 dil)
     `meta_title_az` VARCHAR(255) NULL,
     `meta_title_en` VARCHAR(255) NULL,
     `meta_title_ru` VARCHAR(255) NULL,
+    `meta_title_ar` VARCHAR(255) NULL,
+    `meta_title_fa` VARCHAR(255) NULL,
     
-    -- SEO: Meta descriptions
+    -- SEO: Meta descriptions (5 dil)
     `meta_desc_az` TEXT NULL,
     `meta_desc_en` TEXT NULL,
     `meta_desc_ru` TEXT NULL,
+    `meta_desc_ar` TEXT NULL,
+    `meta_desc_fa` TEXT NULL,
     
-    -- SEO: OG images
+    -- SEO: OG images (5 dil)
     `og_image_az` VARCHAR(500) NULL,
     `og_image_en` VARCHAR(500) NULL,
     `og_image_ru` VARCHAR(500) NULL,
+    `og_image_ar` VARCHAR(500) NULL,
+    `og_image_fa` VARCHAR(500) NULL,
     
     -- Status & dates
     `status` ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
@@ -96,6 +114,8 @@ CREATE TABLE IF NOT EXISTS `articles` (
     INDEX `idx_articles_slug_az` (`slug_az`),
     INDEX `idx_articles_slug_en` (`slug_en`),
     INDEX `idx_articles_slug_ru` (`slug_ru`),
+    INDEX `idx_articles_slug_ar` (`slug_ar`),
+    INDEX `idx_articles_slug_fa` (`slug_fa`),
     INDEX `idx_articles_category` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -105,40 +125,54 @@ CREATE TABLE IF NOT EXISTS `articles` (
 CREATE TABLE IF NOT EXISTS `pilgrimages` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     
-    -- Slugs
+    -- Slugs (5 dil)
     `slug_az` VARCHAR(255) NOT NULL,
     `slug_en` VARCHAR(255) NULL,
     `slug_ru` VARCHAR(255) NULL,
+    `slug_ar` VARCHAR(255) NULL,
+    `slug_fa` VARCHAR(255) NULL,
     
-    -- Names
+    -- Names (5 dil)
     `name_az` VARCHAR(500) NOT NULL,
     `name_en` VARCHAR(500) NULL,
     `name_ru` VARCHAR(500) NULL,
+    `name_ar` VARCHAR(500) NULL,
+    `name_fa` VARCHAR(500) NULL,
     
-    -- Content (HTML)
+    -- Content (HTML, 5 dil)
     `content_az` LONGTEXT NOT NULL,
     `content_en` LONGTEXT NULL,
     `content_ru` LONGTEXT NULL,
+    `content_ar` LONGTEXT NULL,
+    `content_fa` LONGTEXT NULL,
     
-    -- Featured images
+    -- Featured images (5 dil)
     `featured_image` VARCHAR(500) NULL COMMENT 'Əsas foto',
     `featured_image_en` VARCHAR(500) NULL,
     `featured_image_ru` VARCHAR(500) NULL,
+    `featured_image_ar` VARCHAR(500) NULL,
+    `featured_image_fa` VARCHAR(500) NULL,
     
-    -- SEO: Meta titles
+    -- SEO: Meta titles (5 dil)
     `meta_title_az` VARCHAR(255) NULL,
     `meta_title_en` VARCHAR(255) NULL,
     `meta_title_ru` VARCHAR(255) NULL,
+    `meta_title_ar` VARCHAR(255) NULL,
+    `meta_title_fa` VARCHAR(255) NULL,
     
-    -- SEO: Meta descriptions
+    -- SEO: Meta descriptions (5 dil)
     `meta_desc_az` TEXT NULL,
     `meta_desc_en` TEXT NULL,
     `meta_desc_ru` TEXT NULL,
+    `meta_desc_ar` TEXT NULL,
+    `meta_desc_fa` TEXT NULL,
     
-    -- SEO: OG images
+    -- SEO: OG images (5 dil)
     `og_image_az` VARCHAR(500) NULL,
     `og_image_en` VARCHAR(500) NULL,
     `og_image_ru` VARCHAR(500) NULL,
+    `og_image_ar` VARCHAR(500) NULL,
+    `og_image_fa` VARCHAR(500) NULL,
     
     -- Status & sorting
     `sort_order` INT NOT NULL DEFAULT 0,
@@ -151,6 +185,8 @@ CREATE TABLE IF NOT EXISTS `pilgrimages` (
     INDEX `idx_pilgrimages_slug_az` (`slug_az`),
     INDEX `idx_pilgrimages_slug_en` (`slug_en`),
     INDEX `idx_pilgrimages_slug_ru` (`slug_ru`),
+    INDEX `idx_pilgrimages_slug_ar` (`slug_ar`),
+    INDEX `idx_pilgrimages_slug_fa` (`slug_fa`),
     INDEX `idx_pilgrimages_sort` (`sort_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -164,6 +200,8 @@ CREATE TABLE IF NOT EXISTS `pilgrimage_gallery` (
     `caption_az` VARCHAR(500) NULL,
     `caption_en` VARCHAR(500) NULL,
     `caption_ru` VARCHAR(500) NULL,
+    `caption_ar` VARCHAR(500) NULL,
+    `caption_fa` VARCHAR(500) NULL,
     `sort_order` INT NOT NULL DEFAULT 0,
     
     -- Foreign key

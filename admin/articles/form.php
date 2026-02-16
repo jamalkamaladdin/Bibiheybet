@@ -39,9 +39,11 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                     <button type="button" class="bb-tab active" data-tab="az">Azərbaycan</button>
                     <button type="button" class="bb-tab" data-tab="en">English</button>
                     <button type="button" class="bb-tab" data-tab="ru">Русский</button>
+                    <button type="button" class="bb-tab" data-tab="ar">العربية</button>
+                    <button type="button" class="bb-tab" data-tab="fa">فارسی</button>
                 </div>
 
-                <?php foreach (['az', 'en', 'ru'] as $i => $lang): ?>
+                <?php foreach (['az', 'en', 'ru', 'ar', 'fa'] as $i => $lang): ?>
                     <div class="bb-tab-content<?= $i === 0 ? ' active' : '' ?>" data-tab-content="<?= $lang ?>">
                         <div class="bb-form-group">
                             <label for="title_<?= $lang ?>">Başlıq (<?= strtoupper($lang) ?>)<?= $lang === 'az' ? ' <span class="bb-required">*</span>' : '' ?></label>
@@ -178,6 +180,30 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                         <?php if ($firu): ?>
                             <div class="bb-image-preview">
                                 <img src="/<?= bb_sanitize($firu) ?>" alt="Featured RU">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="bb-form-group">
+                    <label>AR üçün fərqli foto</label>
+                    <div class="bb-image-upload" data-field="featured_image_ar">
+                        <input type="file" name="featured_image_ar" accept="image/*" class="bb-file-input">
+                        <?php $fiar = $isEdit ? ($article['featured_image_ar'] ?? '') : ''; ?>
+                        <?php if ($fiar): ?>
+                            <div class="bb-image-preview">
+                                <img src="/<?= bb_sanitize($fiar) ?>" alt="Featured AR">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="bb-form-group">
+                    <label>FA üçün fərqli foto</label>
+                    <div class="bb-image-upload" data-field="featured_image_fa">
+                        <input type="file" name="featured_image_fa" accept="image/*" class="bb-file-input">
+                        <?php $fifa = $isEdit ? ($article['featured_image_fa'] ?? '') : ''; ?>
+                        <?php if ($fifa): ?>
+                            <div class="bb-image-preview">
+                                <img src="/<?= bb_sanitize($fifa) ?>" alt="Featured FA">
                             </div>
                         <?php endif; ?>
                     </div>
