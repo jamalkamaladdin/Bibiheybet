@@ -11,54 +11,59 @@
  */
 $bb_route_map = [
     'az' => [
-        'articles'     => 'meqaleler',
-        'article'      => 'meqale',
-        'pilgrimages'  => 'ziyaretgahlar',
-        'pilgrimage'   => 'ziyaretgah',
-        'about-hazrat' => 'hezret-haqqinda',
-        'about-mosque' => 'mescid-haqqinda',
-        'prayers'      => 'dua-ve-ziyaretname',
-        'prayer-times' => 'namaz-vaxtlari',
+        'articles'      => 'meqaleler',
+        'article'       => 'meqale',
+        'pilgrimages'   => 'ziyaretgahlar',
+        'pilgrimage'    => 'ziyaretgah',
+        'about-hazrat'  => 'hezret-haqqinda',
+        'about-mosque'  => 'mescid-haqqinda',
+        'prayers'       => 'dua-ve-ziyaretname',
+        'prayer-times'  => 'namaz-vaxtlari',
+        'quran-listen'  => 'quran-dinle',
     ],
     'en' => [
-        'articles'     => 'articles',
-        'article'      => 'article',
-        'pilgrimages'  => 'pilgrimages',
-        'pilgrimage'   => 'pilgrimage',
-        'about-hazrat' => 'about-hazrat',
-        'about-mosque' => 'about-mosque',
-        'prayers'      => 'prayers',
-        'prayer-times' => 'prayer-times',
+        'articles'      => 'articles',
+        'article'       => 'article',
+        'pilgrimages'   => 'pilgrimages',
+        'pilgrimage'    => 'pilgrimage',
+        'about-hazrat'  => 'about-hazrat',
+        'about-mosque'  => 'about-mosque',
+        'prayers'       => 'prayers',
+        'prayer-times'  => 'prayer-times',
+        'quran-listen'  => 'listen-quran',
     ],
     'ru' => [
-        'articles'     => 'stati',
-        'article'      => 'statya',
-        'pilgrimages'  => 'svyatyni',
-        'pilgrimage'   => 'svyatynya',
-        'about-hazrat' => 'o-hazrat',
-        'about-mosque' => 'o-mecheti',
-        'prayers'      => 'molitvy',
-        'prayer-times' => 'vremya-namaza',
+        'articles'      => 'stati',
+        'article'       => 'statya',
+        'pilgrimages'   => 'svyatyni',
+        'pilgrimage'    => 'svyatynya',
+        'about-hazrat'  => 'o-hazrat',
+        'about-mosque'  => 'o-mecheti',
+        'prayers'       => 'molitvy',
+        'prayer-times'  => 'vremya-namaza',
+        'quran-listen'  => 'slushat-quran',
     ],
     'ar' => [
-        'articles'     => 'maqalat',
-        'article'      => 'maqala',
-        'pilgrimages'  => 'mazarat',
-        'pilgrimage'   => 'mazar',
-        'about-hazrat' => 'an-al-sayyida',
-        'about-mosque' => 'an-al-masjid',
-        'prayers'      => 'adiyya',
-        'prayer-times' => 'awqat-al-salat',
+        'articles'      => 'maqalat',
+        'article'       => 'maqala',
+        'pilgrimages'   => 'mazarat',
+        'pilgrimage'    => 'mazar',
+        'about-hazrat'  => 'an-al-sayyida',
+        'about-mosque'  => 'an-al-masjid',
+        'prayers'       => 'adiyya',
+        'prayer-times'  => 'awqat-al-salat',
+        'quran-listen'  => 'istima-quran',
     ],
     'fa' => [
-        'articles'     => 'maqalat-fa',
-        'article'      => 'maqale-fa',
-        'pilgrimages'  => 'ziyaratgahha',
-        'pilgrimage'   => 'ziyaratgah-fa',
-        'about-hazrat' => 'darbare-hazrat',
-        'about-mosque' => 'darbare-masjed',
-        'prayers'      => 'doaha',
-        'prayer-times' => 'owqat-namaz',
+        'articles'      => 'maqalat-fa',
+        'article'       => 'maqale-fa',
+        'pilgrimages'   => 'ziyaratgahha',
+        'pilgrimage'    => 'ziyaratgah-fa',
+        'about-hazrat'  => 'darbare-hazrat',
+        'about-mosque'  => 'darbare-masjed',
+        'prayers'       => 'doaha',
+        'prayer-times'  => 'owqat-namaz',
+        'quran-listen'  => 'goosh-dadan-quran',
     ],
 ];
 
@@ -407,6 +412,7 @@ $bb_menu = [
         ['label' => 'Dua və ziyarətnamə',       'route' => 'prayers'],
         ['label' => 'Ziyarətgahlar',            'route' => 'pilgrimages'],
         ['label' => 'Məqalələr',                'route' => 'articles'],
+        ['label' => 'Quran dinlə',              'route' => 'quran-listen'],
     ],
     'en' => [
         ['label' => 'Home',                     'route' => ''],
@@ -415,6 +421,7 @@ $bb_menu = [
         ['label' => 'Prayer and Ziyarat Texts', 'route' => 'prayers'],
         ['label' => 'Other Holy Shrines',       'route' => 'pilgrimages'],
         ['label' => 'Articles',                 'route' => 'articles'],
+        ['label' => 'Listen to Quran',          'route' => 'quran-listen'],
     ],
     'ru' => [
         ['label' => 'Главная',              'route' => ''],
@@ -423,6 +430,7 @@ $bb_menu = [
         ['label' => 'Молитвы и Зияраты',    'route' => 'prayers'],
         ['label' => 'Святыни',              'route' => 'pilgrimages'],
         ['label' => 'Статьи',               'route' => 'articles'],
+        ['label' => 'Слушать Коран',         'route' => 'quran-listen'],
     ],
     'ar' => [
         ['label' => 'الصفحة الرئيسية',       'route' => ''],
@@ -431,6 +439,7 @@ $bb_menu = [
         ['label' => 'الأدعية والزيارات',      'route' => 'prayers'],
         ['label' => 'المقامات والمزارات',     'route' => 'pilgrimages'],
         ['label' => 'المقالات',               'route' => 'articles'],
+        ['label' => 'استماع القرآن',          'route' => 'quran-listen'],
     ],
     'fa' => [
         ['label' => 'صفحه اصلی',                'route' => ''],
@@ -439,6 +448,7 @@ $bb_menu = [
         ['label' => 'دعاها و زیارت‌نامه‌ها',     'route' => 'prayers'],
         ['label' => 'زیارتگاه‌ها',               'route' => 'pilgrimages'],
         ['label' => 'مقالات',                    'route' => 'articles'],
+        ['label' => 'گوش دادن به قرآن',          'route' => 'quran-listen'],
     ],
 ];
 
@@ -479,8 +489,8 @@ function bb_lang_switch_url(string $targetLang): string
         return bb_lang_url(bb_get_route($routeName, $targetLang) . '/', $targetLang);
     }
 
-    // Statik səhifələr (about-hazrat, about-mosque, prayers, prayer-times)
-    if (in_array($routeName, ['about-hazrat', 'about-mosque', 'prayers', 'prayer-times'])) {
+    // Statik səhifələr (about-hazrat, about-mosque, prayers, prayer-times, quran-listen)
+    if (in_array($routeName, ['about-hazrat', 'about-mosque', 'prayers', 'prayer-times', 'quran-listen'])) {
         return bb_lang_url(bb_get_route($routeName, $targetLang) . '/', $targetLang);
     }
 

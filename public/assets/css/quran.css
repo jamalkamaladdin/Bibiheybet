@@ -1,0 +1,552 @@
+/**
+ * Bibiheybet.com - Quran Dinlə Stilləri
+ */
+
+/* ============================================
+   Bölmə
+   ============================================ */
+.bb-quran-section {
+    padding-top: var(--bb-space-lg);
+    padding-bottom: calc(var(--bb-space-2xl) + 80px);
+}
+
+/* ============================================
+   Başlıq
+   ============================================ */
+.bb-quran-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--bb-space-sm);
+}
+
+.bb-quran-header h1 {
+    font-size: 2rem;
+}
+
+.bb-quran-header .bb-separator {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bb-quran-header .bb-text-muted {
+    font-size: 0.88rem;
+    margin-bottom: 0;
+}
+
+/* ============================================
+   Audio Player — yapışqan (sticky)
+   ============================================ */
+.bb-quran-player {
+    position: sticky;
+    top: var(--bb-header-sticky-height);
+    z-index: 40;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--bb-radius-md);
+    margin: var(--bb-space-lg) 0;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.bb-quran-player-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Player info */
+.bb-quran-player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.bb-quran-player-surah {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    font-family: var(--bb-font-arabic);
+}
+
+.bb-quran-player-reciter {
+    font-size: 0.75rem;
+    color: var(--bb-color-muted);
+}
+
+/* Player controls */
+.bb-quran-player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.bb-quran-ctrl-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    color: var(--bb-color-ton2);
+    cursor: pointer;
+    transition: color var(--bb-transition-fast), background-color var(--bb-transition-fast);
+}
+
+.bb-quran-ctrl-btn:hover {
+    color: var(--bb-color-accent);
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.bb-quran-play-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--bb-color-accent);
+    border: none;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all var(--bb-transition-fast);
+}
+
+.bb-quran-play-btn:hover {
+    background-color: #d4b45c;
+    transform: scale(1.05);
+}
+
+/* Playing state */
+.bb-quran-player.bb-qp-playing .bb-quran-icon-play { display: none !important; }
+.bb-quran-player.bb-qp-playing .bb-quran-icon-pause { display: block !important; }
+.bb-quran-player.bb-qp-playing .bb-quran-icon-loading { display: none !important; }
+.bb-quran-player:not(.bb-qp-playing) .bb-quran-icon-play { display: block !important; }
+.bb-quran-player:not(.bb-qp-playing) .bb-quran-icon-pause { display: none !important; }
+.bb-quran-player:not(.bb-qp-playing) .bb-quran-icon-loading { display: none !important; }
+
+/* Loading state */
+.bb-quran-player.bb-qp-loading .bb-quran-icon-play { display: none !important; }
+.bb-quran-player.bb-qp-loading .bb-quran-icon-pause { display: none !important; }
+.bb-quran-player.bb-qp-loading .bb-quran-icon-loading { display: block !important; }
+
+/* Progress / Time */
+.bb-quran-player-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--bb-color-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.bb-quran-progress {
+    flex: 1;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.bb-quran-progress-bar {
+    height: 100%;
+    background-color: var(--bb-color-accent);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.15s linear;
+}
+
+.bb-quran-progress:hover .bb-quran-progress-bar {
+    background-color: #d4b45c;
+}
+
+/* ============================================
+   Kontrol paneli
+   ============================================ */
+.bb-quran-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--bb-space-md);
+    margin: var(--bb-space-lg) auto var(--bb-space-lg);
+    flex-wrap: wrap;
+}
+
+.bb-quran-select-wrap {
+    position: relative;
+    min-width: 200px;
+    max-width: 300px;
+    flex: 1;
+}
+
+.bb-quran-select {
+    width: 100%;
+    padding: 0.6rem 2rem 0.6rem 0.8rem;
+    font-family: var(--bb-font-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--bb-color-heading);
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--bb-radius-sm);
+    cursor: pointer;
+    transition: border-color var(--bb-transition);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239a9a8a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+}
+
+.bb-quran-select:hover,
+.bb-quran-select:focus {
+    border-color: var(--bb-color-accent);
+    outline: none;
+}
+
+.bb-quran-select option {
+    background-color: var(--bb-bg-secondary);
+    color: var(--bb-color-heading);
+}
+
+/* Axtarış */
+.bb-quran-search-wrap {
+    position: relative;
+    min-width: 180px;
+    max-width: 280px;
+    flex: 1;
+}
+
+.bb-quran-search-icon {
+    position: absolute;
+    left: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bb-color-muted);
+    pointer-events: none;
+}
+
+html[dir="rtl"] .bb-quran-search-icon {
+    left: auto;
+    right: 0.7rem;
+}
+
+.bb-quran-search {
+    width: 100%;
+    padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+    font-family: var(--bb-font-primary);
+    font-size: 0.85rem;
+    color: var(--bb-color-heading);
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--bb-radius-sm);
+    transition: border-color var(--bb-transition);
+}
+
+html[dir="rtl"] .bb-quran-search {
+    padding: 0.6rem 2.2rem 0.6rem 0.8rem;
+}
+
+.bb-quran-search:hover,
+.bb-quran-search:focus {
+    border-color: var(--bb-color-accent);
+    outline: none;
+}
+
+.bb-quran-search::placeholder {
+    color: var(--bb-color-muted);
+}
+
+/* ============================================
+   Surə Grid
+   ============================================ */
+.bb-quran-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+/* Loading */
+.bb-quran-loading {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: var(--bb-space-2xl) 0;
+    color: var(--bb-color-muted);
+    font-size: 0.85rem;
+}
+
+/* Boş nəticə */
+.bb-quran-empty {
+    text-align: center;
+    padding: var(--bb-space-xl) 0;
+    color: var(--bb-color-muted);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   Surə Kartı
+   ============================================ */
+.bb-surah-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.85rem;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--bb-radius-sm);
+    cursor: pointer;
+    transition: all var(--bb-transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.bb-surah-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.bb-surah-card.bb-surah-active {
+    border-color: var(--bb-color-accent);
+    background-color: rgba(201, 168, 76, 0.08);
+}
+
+/* Surə nömrəsi */
+.bb-surah-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--bb-color-accent);
+    background-color: rgba(201, 168, 76, 0.08);
+    border-radius: 50%;
+    position: relative;
+}
+
+.bb-surah-card.bb-surah-active .bb-surah-num {
+    background-color: var(--bb-color-accent);
+    color: #1a1a1a;
+}
+
+/* Play/EQ icon on hover/active */
+.bb-surah-num-text {
+    transition: opacity var(--bb-transition-fast);
+}
+
+.bb-surah-num-icon {
+    position: absolute;
+    display: none;
+}
+
+.bb-surah-card:hover .bb-surah-num-text {
+    opacity: 0;
+}
+
+.bb-surah-card:hover .bb-surah-num-icon {
+    display: block;
+}
+
+.bb-surah-card.bb-surah-active .bb-surah-num-text {
+    opacity: 0;
+}
+
+.bb-surah-card.bb-surah-active .bb-surah-num-icon {
+    display: block;
+}
+
+/* Surə məlumatları */
+.bb-surah-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.bb-surah-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bb-surah-meta {
+    font-size: 0.68rem;
+    color: var(--bb-color-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ərəbcə ad */
+.bb-surah-arabic {
+    font-family: var(--bb-font-arabic);
+    font-size: 1.05rem;
+    color: rgba(226, 221, 204, 0.6);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+/* ============================================
+   Desktop (1024px+)
+   ============================================ */
+@media (min-width: 1024px) {
+    .bb-quran-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .bb-quran-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .bb-surah-card {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* ============================================
+   Tablet (768px - 1023px)
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .bb-quran-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ============================================
+   Mobil (< 768px)
+   ============================================ */
+@media (max-width: 767px) {
+    .bb-quran-section {
+        padding-top: var(--bb-space-md);
+    }
+
+    .bb-quran-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .bb-quran-header .bb-text-muted {
+        font-size: 0.8rem;
+    }
+
+    .bb-quran-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: var(--bb-space-md);
+        margin-bottom: var(--bb-space-md);
+    }
+
+    .bb-quran-select-wrap,
+    .bb-quran-search-wrap {
+        max-width: 100%;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .bb-quran-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .bb-surah-card {
+        padding: 0.55rem 0.65rem;
+        gap: 0.5rem;
+    }
+
+    .bb-surah-num {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        font-size: 0.65rem;
+    }
+
+    .bb-surah-name {
+        font-size: 0.78rem;
+    }
+
+    .bb-surah-meta {
+        font-size: 0.62rem;
+    }
+
+    .bb-surah-arabic {
+        font-size: 0.9rem;
+    }
+
+    /* Player mobil */
+    .bb-quran-player {
+        padding: 0.75rem 1rem;
+        border-radius: var(--bb-radius-sm);
+        margin: var(--bb-space-md) 0;
+    }
+
+    .bb-quran-play-btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .bb-quran-player-surah {
+        font-size: 0.9rem;
+    }
+
+    .bb-quran-player-controls {
+        gap: 0.75rem;
+    }
+}
+
+/* ============================================
+   Çox kiçik ekranlar (< 400px)
+   ============================================ */
+@media (max-width: 400px) {
+    .bb-quran-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .bb-quran-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bb-surah-card {
+        padding: 0.6rem 0.75rem;
+        gap: 0.6rem;
+    }
+
+    .bb-surah-num {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+}
+
+/* ============================================
+   RTL düzəlişlər
+   ============================================ */
+html[dir="rtl"] .bb-surah-card {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bb-quran-player-time {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bb-surah-info {
+    text-align: right;
+}
+
+html[dir="rtl"] .bb-quran-select {
+    background-position: left 0.7rem center;
+    padding-left: 1.8rem;
+    padding-right: 0.8rem;
+}

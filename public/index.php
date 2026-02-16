@@ -79,6 +79,10 @@ if (empty($firstSegment)) {
                 $pageName = 'prayer-times';
                 $pageSlug = $resolvedRoute;
                 break;
+            case 'quran-listen':
+                $pageName = 'quran';
+                $pageSlug = $resolvedRoute;
+                break;
             default:
                 $pageName = '404';
                 break;
