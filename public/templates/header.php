@@ -189,7 +189,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                 </nav>
 
                 <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
-                    <img src="/public/assets/img/prayer-icon.png" alt="Namaz vaxtları" width="24" height="24">
+                    <img src="/public/assets/img/namaz-icon.png" alt="Namaz vaxtları" width="24" height="24">
                 </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
@@ -258,7 +258,7 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
             <!-- Sağ tərəf: namaz ikonu + hamburger -->
             <div class="bb-header-actions">
                 <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
-                    <img src="/public/assets/img/prayer-icon.png" alt="Namaz vaxtları" width="24" height="24">
+                    <img src="/public/assets/img/namaz-icon.png" alt="Namaz vaxtları" width="24" height="24">
                 </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
