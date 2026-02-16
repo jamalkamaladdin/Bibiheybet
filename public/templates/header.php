@@ -63,13 +63,14 @@ function bb_frontend_header(array $options = []): void
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="/public/assets/css/global.css">
-    <link rel="stylesheet" href="/public/assets/css/header.css">
-    <link rel="stylesheet" href="/public/assets/css/footer.css">
-    <link rel="stylesheet" href="/public/assets/css/mini-player.css">
+    <?php $cssVer = '?v=' . time(); ?>
+    <link rel="stylesheet" href="/public/assets/css/global.css<?= $cssVer ?>">
+    <link rel="stylesheet" href="/public/assets/css/header.css<?= $cssVer ?>">
+    <link rel="stylesheet" href="/public/assets/css/footer.css<?= $cssVer ?>">
+    <link rel="stylesheet" href="/public/assets/css/mini-player.css<?= $cssVer ?>">
     <?php if (!empty($options['extra_css'])): ?>
         <?php foreach ((array)$options['extra_css'] as $css): ?>
-    <link rel="stylesheet" href="<?= bb_sanitize($css) ?>">
+    <link rel="stylesheet" href="<?= bb_sanitize($css) ?><?= $cssVer ?>">
         <?php endforeach; ?>
     <?php endif; ?>
 </head>
