@@ -9,17 +9,19 @@
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
 
+// Session başlat və auth yoxla DƏRHAL — hər hansı DB sorğusundan ƏVVƏL.
+// Bu, session_start()-dan əvvəl output olmasının qarşısını alır.
+bb_start_session();
+bb_require_auth();
+
 /**
  * Admin səhifənin HTML başlanğıcını render edir: <head>, sidebar, topbar.
- * İçində bb_require_auth() var — hər səhifədə avtomatik auth yoxlanışı.
+ * Auth yoxlanışı artıq yuxarıda (include vaxtı) avtomatik baş verir.
  */
 function bb_admin_header(string $pageTitle = 'Dashboard', array $options = []): void
 {
     global $_bb_admin_extra_js;
     $_bb_admin_extra_js = $options['extra_js'] ?? [];
-
-    bb_require_auth();
-    bb_start_session();
 
     $adminUsername = bb_current_admin_username() ?? 'Admin';
     $currentUri = $_SERVER['REQUEST_URI'] ?? '';
