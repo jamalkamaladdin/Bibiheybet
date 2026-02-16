@@ -16,6 +16,18 @@ require_once INCLUDES_PATH . '/seo.php';
 // Session (dil cookie/session üçün)
 bb_start_session();
 
+// Defensive fallback: route-un birinci segmenti dil kodudursa,
+// .htaccess onu düzgün yönləndirməyib. GET parametrlərini düzəlt.
+$_rawRoute = trim($_GET['route'] ?? '', '/');
+if (!empty($_rawRoute)) {
+    $_rawSegments = explode('/', $_rawRoute, 2);
+    $_possibleLang = $_rawSegments[0];
+    if (in_array($_possibleLang, bb_all_langs()) && $_possibleLang !== ($_GET['lang'] ?? '')) {
+        $_GET['lang'] = $_possibleLang;
+        $_GET['route'] = $_rawSegments[1] ?? '';
+    }
+}
+
 // Dil detect
 $lang = bb_get_lang();
 

@@ -40,6 +40,8 @@ $GLOBALS['bb_page_context']['alternate_urls'] = bb_get_alternate_urls('pilgrimag
     'az' => $pilgrimage['slug_az'] ?? '',
     'en' => $pilgrimage['slug_en'] ?? '',
     'ru' => $pilgrimage['slug_ru'] ?? '',
+    'ar' => $pilgrimage['slug_ar'] ?? '',
+    'fa' => $pilgrimage['slug_fa'] ?? '',
 ]);
 
 $seoData = bb_prepare_seo_data($pilgrimage, 'pilgrimage', $lang);

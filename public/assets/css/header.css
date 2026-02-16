@@ -56,7 +56,6 @@
         max-width: 240px;
         width: 80%;
         line-height: 1.5;
-        top: 15%;
     }
 }
 
@@ -230,13 +229,8 @@
     filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.4));
 }
 
-/* Hero subtitle (iki minarə arasında) */
+/* Hero subtitle (məscidin altında) */
 .bb-hero-subtitle {
-    position: absolute;
-    top: 18%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
     color: var(--bb-color-ton2);
     font-family: var(--bb-font-primary);
     font-size: 1.35rem;
@@ -244,12 +238,11 @@
     text-align: center;
     line-height: 1.6;
     letter-spacing: 0.04em;
-    max-width: 460px;
-    width: 80%;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-    pointer-events: none;
+    max-width: 520px;
+    width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 var(--bb-space-md);
+    padding-bottom: var(--bb-space-lg);
 }
 
 /* ============================================
@@ -589,8 +582,7 @@
 @media (min-width: 768px) and (max-width: 1023px) {
     .bb-hero-subtitle {
         font-size: 1rem;
-        max-width: 340px;
-        width: 70%;
+        max-width: 400px;
     }
 
     .bb-hero-mosque {
@@ -674,7 +666,9 @@
 
     .bb-hero-subtitle {
         font-size: 1.5rem;
-        max-width: 520px;
+        max-width: 600px;
+        text-align: left;
+        align-self: flex-start;
     }
 
     /* Kompakt header: desktop nav göstər (flex row with lang) */
@@ -704,6 +698,8 @@ html[dir="rtl"] .bb-mobile-menu-item a {
 html[dir="rtl"] .bb-hero-subtitle {
     font-family: 'Noto Naskh Arabic', 'Amiri', serif;
     font-size: 1.4rem;
+    text-align: right;
+    align-self: flex-end;
 }
 
 html[dir="rtl"] .bb-lang-dropdown-list {

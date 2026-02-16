@@ -46,9 +46,12 @@ RewriteRule ^uploads/ - [L]
 RewriteRule ^admin/ - [L]
 
 # ============================================
-# Dil routing (EN, RU)
+# Dil routing (EN, RU, AR, FA)
 # ============================================
-# /en/... və /ru/... URL-ləri public/index.php-yə yönləndirilir
+# Slash-sız dil kodları: /ar -> /ar/ redirect
+RewriteRule ^(en|ru|ar|fa)$ /$1/ [R=301,L]
+
+# /en/... /ru/... /ar/... /fa/... URL-ləri public/index.php-yə yönləndirilir
 RewriteRule ^(en|ru|ar|fa)/(.*)$ public/index.php?lang=$1&route=$2 [L,QSA]
 
 # ============================================

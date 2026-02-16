@@ -33,6 +33,8 @@ $GLOBALS['bb_page_context']['alternate_urls'] = bb_get_alternate_urls('article',
     'az' => $article['slug_az'] ?? '',
     'en' => $article['slug_en'] ?? '',
     'ru' => $article['slug_ru'] ?? '',
+    'ar' => $article['slug_ar'] ?? '',
+    'fa' => $article['slug_fa'] ?? '',
 ]);
 
 $seoData = bb_prepare_seo_data($article, 'article', $lang);
