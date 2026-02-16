@@ -120,7 +120,7 @@ bb_frontend_header([
     <section class="bb-home-hazrat" data-animate>
         <div class="bb-container bb-text-center">
             <div class="bb-home-hazrat-ornament" aria-hidden="true">
-                <img src="/public/assets/img/top.webp" alt="">
+                <img src="/public/assets/img/naxis.png" alt="">
             </div>
             <div class="bb-home-hazrat-body">
                 <p class="bb-home-hazrat-text"><?= bb_sanitize($t('hazrat_text')) ?></p>

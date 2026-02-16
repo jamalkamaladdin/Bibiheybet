@@ -131,11 +131,14 @@ function bb_set_lang(string $lang): void
     }
 
     // Cookie: 1 il müddət
+    $isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+        || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
     setcookie('bb_lang', $lang, [
         'expires'  => time() + (365 * 24 * 60 * 60),
         'path'     => '/',
-        'secure'   => isset($_SERVER['HTTPS']),
-        'httponly'  => false, // JS-dən oxuna bilsin (dil switch üçün)
+        'secure'   => $isSecure,
+        'httponly'  => false,
         'samesite' => 'Lax',
     ]);
 

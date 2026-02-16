@@ -176,7 +176,9 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                         </button>
                         <ul class="bb-lang-dropdown-list" id="bbLangList">
                             <?php foreach (AVAILABLE_LANGS as $switchLang): ?>
-                                <?php if ($switchLang !== $lang): ?>
+                                <?php if ($switchLang === $lang): ?>
+                            <li><span class="bb-lang-dropdown-item bb-lang-active"><?= strtoupper($switchLang) ?></span></li>
+                                <?php else: ?>
                             <li><a href="<?= bb_sanitize(bb_lang_switch_url($switchLang)) ?>" class="bb-lang-dropdown-item"><?= strtoupper($switchLang) ?></a></li>
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -237,7 +239,9 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
                     </button>
                     <ul class="bb-lang-dropdown-list" id="bbLangList">
                         <?php foreach (AVAILABLE_LANGS as $switchLang): ?>
-                            <?php if ($switchLang !== $lang): ?>
+                            <?php if ($switchLang === $lang): ?>
+                        <li><span class="bb-lang-dropdown-item bb-lang-active"><?= strtoupper($switchLang) ?></span></li>
+                            <?php else: ?>
                         <li><a href="<?= bb_sanitize(bb_lang_switch_url($switchLang)) ?>" class="bb-lang-dropdown-item"><?= strtoupper($switchLang) ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>

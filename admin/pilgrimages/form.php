@@ -211,9 +211,4 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
 
 <script>
     initTabs();
-    if (typeof bbInitEditors === 'function') bbInitEditors();
-    if (typeof bbInitImageUploads === 'function') bbInitImageUploads();
-    <?php if ($isEdit): ?>
-    if (typeof bbInitGallery === 'function') bbInitGallery();
-    <?php endif; ?>
 </script>

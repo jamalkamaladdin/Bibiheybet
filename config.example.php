@@ -13,7 +13,7 @@
 // ============================================
 define('APP_ENV', 'production');           // 'development' və ya 'production'
 define('APP_DEBUG', false);                // true = xəta detalları göstərilir
-define('SITE_URL', 'https://bibiheybet.com');
+define('SITE_URL', 'https://bibiheybet.com');  // Domen adını öz domeninizə dəyişin
 define('SITE_NAME', 'Bibiheybət Ziyarətgahı');
 
 // ============================================

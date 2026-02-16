@@ -56,19 +56,19 @@
     overflow: hidden;
 }
 
-/* Dekorativ ornament — dairəvi fırlanma */
+/* Dekorativ ornament — dairəvi fırlanma (naxis.png) */
 .bb-home-hazrat-ornament {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     pointer-events: none;
 }
 
 .bb-home-hazrat-ornament img {
-    width: 100px;
-    height: auto;
-    opacity: 0.5;
-    animation: bb-spin-cw 35s linear infinite;
+    width: 160px;
+    height: 160px;
+    opacity: 0.35;
+    animation: bb-spin-cw 60s linear infinite;
 }
 
 /* Həzrət mətn bloku */
@@ -350,7 +350,7 @@
 
 /* Ornament-in opacity-si section visibility-dən asılı deyil */
 .bb-home-hazrat.bb-visible .bb-home-hazrat-ornament img {
-    opacity: 0.5;
+    opacity: 0.35;
 }
 
 /* ============================================
@@ -367,7 +367,8 @@
     }
 
     .bb-home-hazrat-ornament img {
-        width: 70px;
+        width: 120px;
+        height: 120px;
     }
 
     .bb-home-hazrat-text {
@@ -472,7 +473,8 @@
     }
 
     .bb-home-hazrat-ornament img {
-        width: 120px;
+        width: 180px;
+        height: 180px;
     }
 
     .bb-home-hazrat-text {

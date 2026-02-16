@@ -218,13 +218,13 @@
     transform: translateX(-50%);
     z-index: 2;
     color: var(--bb-color-ton2);
-    font-family: 'Amiri', 'Noto Naskh Arabic', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-family: var(--bb-font-primary);
+    font-size: 1.35rem;
+    font-weight: 500;
     text-align: center;
     line-height: 1.6;
     letter-spacing: 0.04em;
-    max-width: 420px;
+    max-width: 460px;
     width: 80%;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
     pointer-events: none;
@@ -385,6 +385,12 @@
 .bb-lang-dropdown-item:hover {
     color: var(--bb-color-accent);
     background-color: rgba(255, 255, 255, 0.05);
+}
+
+.bb-lang-dropdown-item.bb-lang-active {
+    color: var(--bb-color-accent);
+    cursor: default;
+    opacity: 0.7;
 }
 
 /* ============================================
@@ -634,8 +640,8 @@
     }
 
     .bb-hero-subtitle {
-        font-size: 1.25rem;
-        max-width: 480px;
+        font-size: 1.5rem;
+        max-width: 520px;
     }
 
     /* Kompakt header: desktop nav göstər (flex row with lang) */
@@ -664,6 +670,7 @@ html[dir="rtl"] .bb-mobile-menu-item a {
 
 html[dir="rtl"] .bb-hero-subtitle {
     font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 1.4rem;
 }
 
 html[dir="rtl"] .bb-lang-dropdown-list {

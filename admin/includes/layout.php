@@ -15,6 +15,9 @@ require_once __DIR__ . '/../../includes/functions.php';
  */
 function bb_admin_header(string $pageTitle = 'Dashboard', array $options = []): void
 {
+    global $_bb_admin_extra_js;
+    $_bb_admin_extra_js = $options['extra_js'] ?? [];
+
     bb_require_auth();
     bb_start_session();
 
@@ -106,16 +109,21 @@ function bb_admin_header(string $pageTitle = 'Dashboard', array $options = []): 
  */
 function bb_admin_footer(array $options = []): void
 {
+    global $_bb_admin_extra_js;
+    $extraJs = !empty($options['extra_js']) ? (array)$options['extra_js'] : (array)($_bb_admin_extra_js ?? []);
 ?>
         </main>
     </div>
 
     <script src="/admin/assets/js/admin.js"></script>
-    <?php if (!empty($options['extra_js'])): ?>
-        <?php foreach ((array)$options['extra_js'] as $js): ?>
-            <script src="<?= bb_sanitize($js) ?>"></script>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <?php foreach ($extraJs as $js): ?>
+        <script src="<?= bb_sanitize($js) ?>"></script>
+    <?php endforeach; ?>
+    <script>
+        if (typeof bbInitEditors === 'function') bbInitEditors();
+        if (typeof bbInitImageUploads === 'function') bbInitImageUploads();
+        if (typeof bbInitGallery === 'function') bbInitGallery();
+    </script>
 </body>
 </html>
 <?php
