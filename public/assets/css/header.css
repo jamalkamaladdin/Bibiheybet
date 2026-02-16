@@ -229,7 +229,7 @@
     filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.4));
 }
 
-/* Hero subtitle (məscidin altında) */
+/* Hero subtitle */
 .bb-hero-subtitle {
     color: var(--bb-color-ton2);
     font-family: var(--bb-font-primary);
@@ -665,10 +665,16 @@
     }
 
     .bb-hero-subtitle {
+        position: absolute;
+        top: 18%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
         font-size: 1.5rem;
-        max-width: 600px;
-        text-align: left;
-        align-self: flex-start;
+        max-width: 520px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+        padding-bottom: 0;
     }
 
     /* Kompakt header: desktop nav göstər (flex row with lang) */
@@ -698,8 +704,6 @@ html[dir="rtl"] .bb-mobile-menu-item a {
 html[dir="rtl"] .bb-hero-subtitle {
     font-family: 'Noto Naskh Arabic', 'Amiri', serif;
     font-size: 1.4rem;
-    text-align: right;
-    align-self: flex-end;
 }
 
 html[dir="rtl"] .bb-lang-dropdown-list {

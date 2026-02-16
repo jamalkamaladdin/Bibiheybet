@@ -200,8 +200,8 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
             <!-- Məscid illustrasiyası + subtitle -->
             <div class="bb-hero-mosque">
                 <img src="/public/assets/img/bibiheybet-ziyaretgah.png?v=2" alt="Bibiheybət Məscidi">
+                <p class="bb-hero-subtitle"><?= nl2br(bb_sanitize($heroSubtitle)) ?></p>
             </div>
-            <p class="bb-hero-subtitle"><?= nl2br(bb_sanitize($heroSubtitle)) ?></p>
         </div>
     </header>
 <?php
