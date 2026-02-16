@@ -22,6 +22,9 @@ uploads/media/*
 *.psd
 /assets/
 
+# Zip faylları (plugin, theme arxivləri)
+*.zip
+
 # OS files
 .DS_Store
 Thumbs.db
