@@ -82,7 +82,10 @@ $langs = ['az', 'en', 'ru', 'ar', 'fa'];
 
 // POST: Yadda saxla
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    bb_verify_csrf();
+    if (!bb_verify_csrf($_POST['csrf_token'] ?? '')) {
+        bb_flash('error', 'CSRF doğrulaması uğursuz oldu. Yenidən cəhd edin.');
+        bb_redirect('/admin/pages/edit.php?page=' . urlencode($pageKey));
+    }
 
     foreach ($pageConfig['sections'] as $sectionKey => $sectionInfo) {
         $values = [':page_key' => $pageKey, ':section_key' => $sectionKey];
@@ -118,7 +121,7 @@ foreach ($rows->fetchAll() as $row) {
 }
 
 bb_admin_header($pageConfig['label'] . ' - Redaktə', [
-    'extra_js' => ['/admin/assets/js/tinymce/tinymce.min.js'],
+    'extra_js' => ['/admin/assets/js/tinymce/tinymce.min.js', '/admin/assets/js/editor.js'],
 ]);
 ?>
 

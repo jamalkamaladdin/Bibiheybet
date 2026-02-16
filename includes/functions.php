@@ -428,9 +428,7 @@ function bb_redirect(string $url, int $statusCode = 302): void
  */
 function bb_flash(string $type, string $message): void
 {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    bb_start_session();
 
     if (!isset($_SESSION['flash_messages'])) {
         $_SESSION['flash_messages'] = [];
@@ -449,9 +447,7 @@ function bb_flash(string $type, string $message): void
  */
 function bb_get_flash(): array
 {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    bb_start_session();
 
     $messages = $_SESSION['flash_messages'] ?? [];
     unset($_SESSION['flash_messages']);

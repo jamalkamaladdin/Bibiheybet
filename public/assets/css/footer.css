@@ -2,26 +2,343 @@
  * Bibiheybet.com - Footer Stilləri
  */
 
+/* ============================================
+   Footer Ana Konteyner
+   ============================================ */
 .bb-footer {
-    padding: var(--bb-space-xl) 0 var(--bb-space-lg);
+    position: relative;
+    background-color: var(--bb-bg-secondary);
+    padding: 4rem 0 0;
     /* Player üçün alt padding */
-    padding-bottom: calc(var(--bb-space-lg) + 64px);
+    padding-bottom: calc(1.5rem + 64px);
+    overflow: hidden;
+}
+
+/* Dekorativ ornament */
+.bb-footer-ornament {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+    animation: bb-spin-cw 90s linear infinite;
+}
+
+.bb-footer-ornament img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .bb-footer-inner {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   Footer Grid (3 sütun)
+   ============================================ */
+.bb-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 3rem;
+    padding-bottom: 2.5rem;
+}
+
+/* ============================================
+   Brand / Logo bölməsi
+   ============================================ */
+.bb-footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bb-footer-logo {
+    display: inline-block;
+    transition: opacity var(--bb-transition);
+}
+
+.bb-footer-logo:hover {
+    opacity: 0.8;
+}
+
+.bb-footer-logo img {
+    height: 80px;
+    width: auto;
+}
+
+/* ============================================
+   Footer Başlıqlar
+   ============================================ */
+.bb-footer-heading {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bb-color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1.2rem;
+}
+
+/* ============================================
+   Naviqasiya linkləri
+   ============================================ */
+.bb-footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.bb-footer-links li a {
+    font-size: 0.9rem;
+    color: var(--bb-color-muted);
+    transition: color var(--bb-transition), padding-left var(--bb-transition);
+    display: inline-block;
+}
+
+.bb-footer-links li a:hover {
+    color: var(--bb-color-ton2);
+    padding-left: 4px;
+}
+
+/* ============================================
+   Əlaqə bölməsi
+   ============================================ */
+.bb-footer-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--bb-color-muted);
+    line-height: 1.6;
+}
+
+.bb-footer-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--bb-color-accent);
+    opacity: 0.7;
+}
+
+/* ============================================
+   Sosial media
+   ============================================ */
+.bb-footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.bb-footer-social-label {
+    font-size: 0.8rem;
+    color: var(--bb-color-muted);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+.bb-footer-social-links {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.bb-footer-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--bb-bg-section);
+    color: var(--bb-color-ton2);
+    transition: all var(--bb-transition);
+}
+
+.bb-footer-social-btn:hover {
+    background-color: var(--bb-color-accent);
+    color: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   Alt bar (separator + copyright)
+   ============================================ */
+.bb-footer-bottom {
     text-align: center;
 }
 
 .bb-footer-separator {
-    width: 80px;
-    height: 2px;
-    background-color: var(--bb-color-ton1);
-    margin: 0 auto var(--bb-space-md);
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(201, 168, 76, 0.2) 20%,
+        rgba(201, 168, 76, 0.3) 50%,
+        rgba(201, 168, 76, 0.2) 80%,
+        transparent
+    );
+    margin-bottom: 1.5rem;
 }
 
 .bb-footer-copyright {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--bb-color-muted);
     font-weight: 400;
     margin: 0;
+    opacity: 0.7;
+}
+
+/* ============================================
+   Responsive - Mobil (<576px)
+   ============================================ */
+@media (max-width: 575px) {
+    .bb-footer {
+        padding: 3rem 0 0;
+        padding-bottom: calc(1.5rem + 64px);
+    }
+
+    .bb-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .bb-footer-brand {
+        align-items: center;
+    }
+
+    .bb-footer-logo img {
+        height: 64px;
+    }
+
+    .bb-footer-heading {
+        font-size: 0.8rem;
+    }
+
+    .bb-footer-links {
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .bb-footer-links li a:hover {
+        padding-left: 0;
+    }
+
+    .bb-footer-address {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .bb-footer-social {
+        align-items: center;
+    }
+
+    .bb-footer-social-links {
+        justify-content: center;
+    }
+
+    .bb-footer-ornament {
+        width: 150px;
+        height: 150px;
+        top: -40px;
+        right: -40px;
+    }
+}
+
+/* Tablet (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .bb-footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .bb-footer-brand {
+        grid-column: 1 / -1;
+        align-items: center;
+        text-align: center;
+    }
+
+    .bb-footer-logo img {
+        height: 68px;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .bb-footer-grid {
+        grid-template-columns: 1fr 1fr 1.2fr;
+        gap: 2rem;
+    }
+
+    .bb-footer-logo img {
+        height: 72px;
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .bb-footer {
+        padding-top: 5rem;
+    }
+
+    .bb-footer-grid {
+        gap: 4rem;
+    }
+
+    .bb-footer-logo img {
+        height: 88px;
+    }
+
+    .bb-footer-ornament {
+        width: 280px;
+        height: 280px;
+        top: -80px;
+        right: -80px;
+    }
+}
+
+/* ============================================
+   RTL Dəstək (Ərəb, Fars)
+   ============================================ */
+html[dir="rtl"] .bb-footer-brand {
+    align-items: flex-end;
+}
+
+html[dir="rtl"] .bb-footer-links li a:hover {
+    padding-left: 0;
+    padding-right: 4px;
+}
+
+html[dir="rtl"] .bb-footer-heading,
+html[dir="rtl"] .bb-footer-links li a,
+html[dir="rtl"] .bb-footer-address,
+html[dir="rtl"] .bb-footer-social-label,
+html[dir="rtl"] .bb-footer-copyright {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}
+
+html[dir="rtl"] .bb-footer-ornament {
+    right: auto;
+    left: -60px;
+}
+
+@media (max-width: 575px) {
+    html[dir="rtl"] .bb-footer-brand {
+        align-items: center;
+    }
+
+    html[dir="rtl"] .bb-footer-links li a:hover {
+        padding-right: 0;
+    }
+
+    html[dir="rtl"] .bb-footer-ornament {
+        left: -40px;
+    }
 }

@@ -65,7 +65,7 @@ $t = function (string $key) use ($_strings, $lang): string {
 bb_frontend_header([
     'seo_data'   => $seoData,
     'body_class' => 'bb-page-pilgrimages',
-    'extra_css'  => ['/public/assets/css/pilgrimages.css'],
+    'extra_css'  => ['/public/assets/css/pilgrimages.css', '/public/assets/css/home.css'],
 ]);
 ?>
 
@@ -90,33 +90,27 @@ bb_frontend_header([
 
     <?php if (!empty($pilgrimages)): ?>
     <section class="bb-pilgrimages-grid-section" data-animate>
-        <div class="bb-container">
-            <div class="bb-pilgrimages-grid">
+        <div class="bb-container bb-text-center">
+            <div class="bb-home-pilgrimages-grid">
                 <?php foreach ($pilgrimages as $p): ?>
                     <?php
                         $pName  = bb_get_field($p, 'name', $lang);
                         $pSlug  = bb_get_field($p, 'slug', $lang);
                         $pImage = bb_get_featured_image($p, $lang);
                         $pUrl   = bb_lang_url(bb_get_route('pilgrimage', $lang) . '/' . $pSlug, $lang);
-                        $pExcerpt = bb_truncate(bb_get_field($p, 'content', $lang) ?? '', 120);
                     ?>
-                <a href="<?= bb_sanitize($pUrl) ?>" class="bb-pilgrimages-card">
-                    <div class="bb-pilgrimages-card-frame">
+                <a href="<?= bb_sanitize($pUrl) ?>" class="bb-home-pilgrimage-item">
+                    <div class="bb-home-pilgrimage-frame">
                         <?php if ($pImage): ?>
-                        <img class="bb-pilgrimages-card-photo"
+                        <img class="bb-home-pilgrimage-photo"
                              src="/<?= bb_sanitize($pImage) ?>"
                              alt="<?= bb_sanitize($pName) ?>"
                              loading="lazy">
                         <?php else: ?>
-                        <div class="bb-pilgrimages-card-placeholder"></div>
+                        <div class="bb-home-pilgrimage-placeholder"></div>
                         <?php endif; ?>
                     </div>
-                    <div class="bb-pilgrimages-card-info">
-                        <h2 class="bb-pilgrimages-card-title"><?= bb_sanitize($pName) ?></h2>
-                        <?php if ($pExcerpt): ?>
-                        <p class="bb-pilgrimages-card-excerpt"><?= bb_sanitize($pExcerpt) ?></p>
-                        <?php endif; ?>
-                    </div>
+                    <h3 class="bb-home-pilgrimage-title"><?= bb_sanitize($pName) ?></h3>
                 </a>
                 <?php endforeach; ?>
             </div>
