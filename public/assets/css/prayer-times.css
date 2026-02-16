@@ -1,7 +1,7 @@
 /**
  * Bibiheybet.com - Namaz Vaxtları Stilləri
  * 
- * Kartlar, dropdown, responsive grid.
+ * Bu gün kartları, aylıq cədvəl, dropdown, responsive.
  */
 
 /* ============================================
@@ -10,6 +10,20 @@
 .bb-pt-section {
     padding-top: var(--bb-space-xl);
     padding-bottom: var(--bb-space-2xl);
+}
+
+/* ============================================
+   Başlıq (mərkəzləşdirilmiş)
+   ============================================ */
+.bb-pt-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--bb-space-md);
+}
+
+.bb-pt-header .bb-separator {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* ============================================
@@ -22,6 +36,9 @@
     gap: var(--bb-space-md);
     margin: var(--bb-space-xl) 0 var(--bb-space-lg);
     flex-wrap: wrap;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bb-pt-select-wrap {
@@ -69,7 +86,29 @@
 }
 
 /* ============================================
-   Namaz vaxtları grid
+   Bölmə alt başlığı (Bu gün / Aylıq cədvəl)
+   ============================================ */
+.bb-pt-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    margin: var(--bb-space-2xl) 0 var(--bb-space-lg);
+    padding-bottom: var(--bb-space-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bb-pt-subtitle-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--bb-color-accent);
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Namaz vaxtları grid (Bu gün)
    ============================================ */
 .bb-pt-grid {
     display: grid;
@@ -129,6 +168,125 @@
 }
 
 /* ============================================
+   Ay naviqasiyası
+   ============================================ */
+.bb-pt-month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--bb-space-lg);
+    margin-bottom: var(--bb-space-lg);
+}
+
+.bb-pt-month-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--bb-color-heading);
+    cursor: pointer;
+    transition: all var(--bb-transition);
+}
+
+.bb-pt-month-btn:hover {
+    border-color: var(--bb-color-accent);
+    color: var(--bb-color-accent);
+    background-color: rgba(201, 168, 76, 0.08);
+}
+
+.bb-pt-month-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    min-width: 170px;
+    text-align: center;
+}
+
+/* ============================================
+   Aylıq cədvəl (Table)
+   ============================================ */
+.bb-pt-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--bb-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bb-pt-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.88rem;
+}
+
+.bb-pt-table thead {
+    background-color: var(--bb-bg-section);
+}
+
+.bb-pt-table th {
+    padding: 0.85rem 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--bb-color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    text-align: center;
+    border-bottom: 2px solid rgba(201, 168, 76, 0.15);
+}
+
+.bb-pt-table .bb-pt-th-day {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.bb-pt-table td {
+    padding: 0.65rem 0.6rem;
+    text-align: center;
+    color: var(--bb-color-ton2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    white-space: nowrap;
+}
+
+/* Alternating row colours */
+.bb-pt-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.015);
+}
+
+.bb-pt-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Bu gün vurğusu */
+.bb-pt-row-today {
+    background-color: rgba(201, 168, 76, 0.1) !important;
+}
+
+.bb-pt-row-today td {
+    color: var(--bb-color-heading);
+    font-weight: 500;
+}
+
+.bb-pt-row-today .bb-pt-cell-day {
+    color: var(--bb-color-accent);
+    font-weight: 700;
+}
+
+/* Gün sütunu */
+.bb-pt-cell-day {
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    text-align: left !important;
+    padding-left: 1rem !important;
+    min-width: 42px;
+}
+
+/* ============================================
    Metod qeydi
    ============================================ */
 .bb-pt-method {
@@ -147,6 +305,14 @@
 @media (min-width: 768px) {
     .bb-pt-card-time {
         font-size: 1.8rem;
+    }
+
+    .bb-pt-table {
+        font-size: 0.9rem;
+    }
+
+    .bb-pt-table th {
+        font-size: 0.75rem;
     }
 }
 
@@ -180,6 +346,20 @@
 
     .bb-pt-card-time {
         font-size: 1.4rem;
+    }
+
+    .bb-pt-subtitle {
+        font-size: 1.05rem;
+        margin-top: var(--bb-space-xl);
+    }
+
+    .bb-pt-month-nav {
+        gap: var(--bb-space-md);
+    }
+
+    .bb-pt-month-label {
+        font-size: 1rem;
+        min-width: 140px;
     }
 }
 

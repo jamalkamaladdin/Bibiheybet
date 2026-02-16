@@ -3,12 +3,24 @@
  * 
  * PrayTimes kitabxanası ilə Cəfəri məzhəbinə uyğun hesablama.
  * Azərbaycanın bütün şəhər və rayonları üçün.
+ * Bu gün + aylıq cədvəl.
  */
 (function () {
     'use strict';
 
     var LANG = document.documentElement.lang || 'az';
     var TZ = 'Asia/Baku';
+
+    /* =============================================
+       Ay adları (çoxdilli)
+       ============================================= */
+    var MONTH_NAMES = {
+        az: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'],
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+    };
+
+    var months = MONTH_NAMES[LANG] || MONTH_NAMES.az;
 
     /* =============================================
        Azərbaycan şəhər və rayonları — [enlik, uzunluq]
@@ -94,14 +106,30 @@
     /* =============================================
        DOM elementləri
        ============================================= */
-    var regionSelect = document.getElementById('bbRegionSelect');
-    var prayerGrid   = document.getElementById('bbPrayerGrid');
-    var dateEl       = document.getElementById('bbPrayerDate');
-    var methodEl     = document.getElementById('bbPrayerMethod');
+    var regionSelect   = document.getElementById('bbRegionSelect');
+    var prayerGrid     = document.getElementById('bbPrayerGrid');
+    var dateEl         = document.getElementById('bbPrayerDate');
+    var methodEl       = document.getElementById('bbPrayerMethod');
+    var todaySection   = document.getElementById('bbTodaySection');
+    var monthlySection = document.getElementById('bbMonthlySection');
+    var monthLabel     = document.getElementById('bbMonthLabel');
+    var monthPrev      = document.getElementById('bbMonthPrev');
+    var monthNext      = document.getElementById('bbMonthNext');
+    var monthlyBody    = document.getElementById('bbMonthlyBody');
 
     if (!regionSelect) return;
 
-    /* Dropdown-u doldur (ada görə sıralı) */
+    /* =============================================
+       Vəziyyət
+       ============================================= */
+    var currentRegion = null;
+    var todayDate     = new Date();
+    var currentYear   = todayDate.getFullYear();
+    var currentMonth  = todayDate.getMonth();
+
+    /* =============================================
+       Dropdown-u doldur (ada görə sıralı)
+       ============================================= */
     function populateRegions() {
         var entries = [];
         for (var key in REGIONS) {
@@ -120,31 +148,44 @@
             regionSelect.appendChild(opt);
         }
 
-        // Əvvəlki seçimi cookie-dən bərpa et
         var saved = getCookie('bb_region');
         if (saved && REGIONS[saved]) {
             regionSelect.value = saved;
-            calculate(saved);
+            onRegionChange(saved);
         }
     }
 
-    /** Namaz vaxtlarını hesabla və göstər */
-    function calculate(regionKey) {
+    /* =============================================
+       Rayon dəyişdikdə
+       ============================================= */
+    function onRegionChange(regionKey) {
         var region = REGIONS[regionKey];
         if (!region) {
-            prayerGrid.style.display = 'none';
+            todaySection.style.display = 'none';
+            monthlySection.style.display = 'none';
             methodEl.style.display = 'none';
             return;
         }
 
-        // PrayTimes — Cəfəri metodu
-        var pt = new PrayTime('Jafari');
-        var times = pt
-            .location(region.c)
-            .timezone(TZ)
-            .getTimes();
+        currentRegion = regionKey;
 
-        // Vaxtları render et
+        calculateToday(region);
+        calculateMonthly(region);
+
+        todaySection.style.display = '';
+        monthlySection.style.display = '';
+        methodEl.style.display = '';
+
+        setCookie('bb_region', regionKey, 365);
+    }
+
+    /* =============================================
+       Bu günün namaz vaxtlarını hesabla
+       ============================================= */
+    function calculateToday(region) {
+        var pt = new PrayTime('Jafari');
+        var times = pt.location(region.c).timezone(TZ).getTimes();
+
         document.getElementById('bbTimeFajr').textContent     = times.fajr;
         document.getElementById('bbTimeSunrise').textContent   = times.sunrise;
         document.getElementById('bbTimeDhuhr').textContent     = times.dhuhr;
@@ -154,10 +195,8 @@
         document.getElementById('bbTimeIsha').textContent      = times.isha;
         document.getElementById('bbTimeMidnight').textContent  = times.midnight;
 
-        // Aktiv namaz vaxtını vurğula
         highlightCurrent(times);
 
-        // Tarix göstər
         var locale = LANG === 'az' ? 'az-AZ' : LANG === 'ru' ? 'ru-RU' : 'en-US';
         dateEl.textContent = new Date().toLocaleDateString(locale, {
             weekday: 'long',
@@ -165,20 +204,59 @@
             month: 'long',
             day: 'numeric'
         });
-
-        prayerGrid.style.display = '';
-        methodEl.style.display = '';
-
-        // Cookie-yə yaz (1 il)
-        setCookie('bb_region', regionKey, 365);
     }
 
-    /** Hazırda hansı namaz vaxtıdırsa, onu vurğula */
+    /* =============================================
+       Aylıq cədvəli hesabla və render et
+       ============================================= */
+    function calculateMonthly(region) {
+        monthLabel.textContent = months[currentMonth] + ' ' + currentYear;
+
+        var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        var pt = new PrayTime('Jafari');
+        pt.location(region.c).timezone(TZ);
+
+        var isCurrentMonth = (todayDate.getFullYear() === currentYear && todayDate.getMonth() === currentMonth);
+        var todayDay = todayDate.getDate();
+
+        var html = '';
+        for (var d = 1; d <= daysInMonth; d++) {
+            var date = new Date(currentYear, currentMonth, d);
+            var times = pt.getTimes(date);
+            var isToday = isCurrentMonth && d === todayDay;
+
+            html += '<tr' + (isToday ? ' class="bb-pt-row-today"' : '') + '>' +
+                '<td class="bb-pt-cell-day">' + d + '</td>' +
+                '<td>' + times.fajr + '</td>' +
+                '<td>' + times.sunrise + '</td>' +
+                '<td>' + times.dhuhr + '</td>' +
+                '<td>' + times.asr + '</td>' +
+                '<td>' + times.sunset + '</td>' +
+                '<td>' + times.maghrib + '</td>' +
+                '<td>' + times.isha + '</td>' +
+                '<td>' + times.midnight + '</td>' +
+                '</tr>';
+        }
+
+        monthlyBody.innerHTML = html;
+
+        if (isCurrentMonth) {
+            var todayRow = monthlyBody.querySelector('.bb-pt-row-today');
+            if (todayRow) {
+                setTimeout(function () {
+                    todayRow.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    }
+
+    /* =============================================
+       Hazırda hansı namaz vaxtıdırsa, onu vurğula
+       ============================================= */
     function highlightCurrent(times) {
         var now = new Date();
         var nowMin = now.getHours() * 60 + now.getMinutes();
 
-        // Vaxtları dəqiqəyə çevir
         var order = ['fajr', 'sunrise', 'dhuhr', 'asr', 'sunset', 'maghrib', 'isha'];
         var mins = {};
         for (var i = 0; i < order.length; i++) {
@@ -186,7 +264,6 @@
             mins[order[i]] = parts.length === 2 ? parseInt(parts[0]) * 60 + parseInt(parts[1]) : -1;
         }
 
-        // Hansı intervaldayıq?
         var active = '';
         for (var j = order.length - 1; j >= 0; j--) {
             if (mins[order[j]] >= 0 && nowMin >= mins[order[j]]) {
@@ -195,13 +272,30 @@
             }
         }
 
-        // CSS class əlavə et
         var cards = prayerGrid.querySelectorAll('.bb-pt-card');
         for (var k = 0; k < cards.length; k++) {
             cards[k].classList.remove('bb-pt-card-active');
             if (cards[k].getAttribute('data-prayer') === active) {
                 cards[k].classList.add('bb-pt-card-active');
             }
+        }
+    }
+
+    /* =============================================
+       Ay naviqasiyası
+       ============================================= */
+    function changeMonth(delta) {
+        currentMonth += delta;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        } else if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+
+        if (currentRegion && REGIONS[currentRegion]) {
+            calculateMonthly(REGIONS[currentRegion]);
         }
     }
 
@@ -224,7 +318,15 @@
        Event listener + init
        ============================================= */
     regionSelect.addEventListener('change', function () {
-        calculate(this.value);
+        onRegionChange(this.value);
+    });
+
+    monthPrev.addEventListener('click', function () {
+        changeMonth(-1);
+    });
+
+    monthNext.addEventListener('click', function () {
+        changeMonth(1);
     });
 
     populateRegions();
