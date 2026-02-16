@@ -32,7 +32,7 @@ function bb_frontend_footer(array $options = []): void
     </footer>
 
     <!-- Audio Mini Player -->
-    <div class="bb-player" id="bbPlayer" data-src="<?= bb_sanitize($audioFile) ?>">
+    <div class="bb-player" id="bbPlayer" data-src="<?= bb_sanitize($audioFile) ?>" data-is-home="<?= !empty($options['is_home']) ? '1' : '0' ?>">
         <div class="bb-player-inner">
             <!-- Play/Pause -->
             <button type="button" class="bb-player-btn bb-player-play" id="bbPlayerPlay" aria-label="Oxut / Dayandır">

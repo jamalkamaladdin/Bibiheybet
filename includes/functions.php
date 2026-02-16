@@ -359,6 +359,41 @@ function bb_resize_image(string $source, string $dest, int $maxWidth, int $maxHe
 }
 
 /**
+ * Səhifə məzmunlarını DB-dən yükləyir.
+ * DB-də tapılmadıqda $defaults fallback kimi istifadə olunur.
+ * 
+ * @param PDO $db Database bağlantısı
+ * @param string $pageKey Səhifə açarı (home, about-hazrat, və s.)
+ * @param array $defaults Default dəyərlər [section_key => [lang => value, ...], ...]
+ * @return array [section_key => [lang => value, ...], ...]
+ */
+function bb_load_page_contents(PDO $db, string $pageKey, array $defaults = []): array
+{
+    $result = $defaults;
+
+    try {
+        $stmt = $db->prepare("SELECT * FROM page_contents WHERE page_key = :page_key");
+        $stmt->execute([':page_key' => $pageKey]);
+        $rows = $stmt->fetchAll();
+
+        foreach ($rows as $row) {
+            $sectionKey = $row['section_key'];
+            $langs = ['az', 'en', 'ru', 'ar', 'fa'];
+            foreach ($langs as $l) {
+                $dbValue = $row["content_{$l}"] ?? '';
+                if (!empty(trim($dbValue))) {
+                    $result[$sectionKey][$l] = $dbValue;
+                }
+            }
+        }
+    } catch (PDOException $e) {
+        // Cədvəl mövcud deyilsə fallback-ləri istifadə et
+    }
+
+    return $result;
+}
+
+/**
  * XSS qoruması üçün output escaping.
  * 
  * @param string|null $input Giriş mətni

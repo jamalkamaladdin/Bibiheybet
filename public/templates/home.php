@@ -49,8 +49,15 @@ $pilgrimagesList = $db->query(
     "SELECT * FROM pilgrimages WHERE status = 'published' ORDER BY sort_order ASC LIMIT 8"
 )->fetchAll();
 
-/** Çoxdilli statik mətnlər */
-$_strings = [
+/** Çoxdilli statik mətnlər (default-lar, DB-dən override oluna bilər) */
+$_defaults = [
+    'hero_subtitle' => [
+        'az' => 'Fatimeyi-Suğra, Həkimə xanımın müqəddəs ziyarətgahı',
+        'en' => 'The holy shrine of Lady Fatima Sugra, Hakima Khanym',
+        'ru' => 'Святая обитель госпожи Фатимы ас-Сугры (Хакимы ханум)',
+        'ar' => "المقام المقدس للسيدة فاطمة الصغرى\nحكيمة خاتون عليها السلام",
+        'fa' => 'زیارتگاه مقدس حضرت فاطمه صغری حکیمه خاتون (سلام‌الله‌علیها)',
+    ],
     'hazrat_text' => [
         'az' => 'Həkimə xanım, 9-cu əsrdə yaşamış, İmam Musa Kazımın (a.s) qızı və İmam Əli Rzanın (a.s) bacısıdır. O, xəlifələrin təqibindən qaçaraq Bakıya sığınmış və burada "Heybət xanımın bibisi" adı ilə tanınmışdır. Vəfatından sonra, məzarı üzərində inşa edilən məscid və türbə, zamanla Bibi Heybət adı ilə məşhurlaşmışdır.',
         'en' => 'Lady Hakima was a 9th-century figure, the daughter of Imam Musa al-Kazim (a.s.) and the sister of Imam Ali al-Ridha (a.s.). Fleeing persecution by the caliphs, she sought refuge in Baku, where she became known as "the aunt of Heybat Khanum." After her passing, a mosque and mausoleum were constructed over her grave, which in time became renowned as Bibi-Heybat.',
@@ -101,6 +108,8 @@ $_strings = [
     ],
 ];
 
+$_strings = bb_load_page_contents($db, 'home', $_defaults);
+
 /** Dil-uyğun mətn qaytarır */
 $t = function (string $key) use ($_strings, $lang): string {
     return $_strings[$key][$lang] ?? $_strings[$key]['az'] ?? '';
@@ -111,6 +120,7 @@ bb_frontend_header([
     'body_class' => 'bb-page-home',
     'is_home'    => true,
     'extra_css'  => ['/public/assets/css/home.css'],
+    'hero_subtitle' => $_strings['hero_subtitle'][$lang] ?? $_strings['hero_subtitle']['az'] ?? '',
 ]);
 ?>
 
@@ -244,4 +254,4 @@ bb_frontend_header([
     <?php endif; ?>
 
 <?php
-bb_frontend_footer(['extra_js' => ['/public/assets/js/home.js']]);
+bb_frontend_footer(['extra_js' => ['/public/assets/js/home.js'], 'is_home' => true]);

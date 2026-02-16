@@ -176,7 +176,26 @@ CREATE TABLE IF NOT EXISTS `pilgrimage_gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================
--- 6. media - Media Faylları
+-- 6. page_contents - Səhifə Məzmunları
+-- ============================================
+-- Statik səhifələrin və ana səhifənin editlənə bilən mətnləri.
+-- page_key: 'home', 'about-hazrat', 'about-mosque', 'prayers'
+-- section_key: 'hazrat_text', 'mosque_text_1', 'content', və s.
+CREATE TABLE IF NOT EXISTS `page_contents` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `page_key` VARCHAR(100) NOT NULL,
+    `section_key` VARCHAR(100) NOT NULL,
+    `content_az` LONGTEXT NULL,
+    `content_en` LONGTEXT NULL,
+    `content_ru` LONGTEXT NULL,
+    `content_ar` LONGTEXT NULL,
+    `content_fa` LONGTEXT NULL,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY `uq_page_section` (`page_key`, `section_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================
+-- 7. media - Media Faylları
 -- ============================================
 CREATE TABLE IF NOT EXISTS `media` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,

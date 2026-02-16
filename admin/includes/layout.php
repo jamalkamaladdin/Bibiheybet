@@ -161,6 +161,13 @@ function bb_admin_menu_items(): array
             'url'   => '/admin/pilgrimages/',
             'icon'  => '&#x1F54C;', // mosque
         ],
+        ['type' => 'separator'],
+        [
+            'type'  => 'link',
+            'label' => 'Səhifə Məzmunları',
+            'url'   => '/admin/pages/',
+            'icon'  => '&#x1F4C4;', // page
+        ],
     ];
 }
 

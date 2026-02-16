@@ -267,9 +267,16 @@ if (!$pageInfo) {
     return;
 }
 
-$title = $pageInfo['title'][$lang] ?? $pageInfo['title']['az'];
-$description = $pageInfo['description'][$lang] ?? $pageInfo['description']['az'];
-$content = $pageInfo['content'][$lang] ?? $pageInfo['content']['az'] ?? '';
+// DB-dən override-ları yüklə (fallback: hardcoded dəyərlər)
+$dbContents = bb_load_page_contents($db, $pageSlug, [
+    'title'       => $pageInfo['title'] ?? [],
+    'description' => $pageInfo['description'] ?? [],
+    'content'     => $pageInfo['content'] ?? [],
+]);
+
+$title = $dbContents['title'][$lang] ?? $dbContents['title']['az'] ?? ($pageInfo['title'][$lang] ?? $pageInfo['title']['az']);
+$description = $dbContents['description'][$lang] ?? $dbContents['description']['az'] ?? ($pageInfo['description'][$lang] ?? $pageInfo['description']['az']);
+$content = $dbContents['content'][$lang] ?? $dbContents['content']['az'] ?? ($pageInfo['content'][$lang] ?? $pageInfo['content']['az'] ?? '');
 
 $seoData = [
     'title'            => $title,

@@ -76,7 +76,7 @@ function bb_frontend_header(array $options = []): void
 <body class="<?= bb_sanitize($bodyClass) ?>">
 
 <?php if ($isHome): ?>
-    <?php bb_render_hero_header($menuItems, $currentRoute, $lang); ?>
+    <?php bb_render_hero_header($menuItems, $currentRoute, $lang, $options['hero_subtitle'] ?? ''); ?>
 <?php else: ?>
     <?php bb_render_compact_header($menuItems, $currentRoute, $lang); ?>
 <?php endif; ?>
@@ -126,7 +126,7 @@ function bb_frontend_header(array $options = []): void
 }
 
 /** Ana səhifə hero header */
-function bb_render_hero_header(array $menuItems, string $currentRoute, string $lang): void
+function bb_render_hero_header(array $menuItems, string $currentRoute, string $lang, string $heroSubtitleOverride = ''): void
 {
     $heroSubtitles = [
         'az' => 'Fatimeyi-Suğra, Həkimə xanımın müqəddəs ziyarətgahı',
@@ -135,7 +135,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
         'ar' => "المقام المقدس للسيدة فاطمة الصغرى\nحكيمة خاتون عليها السلام",
         'fa' => 'زیارتگاه مقدس حضرت فاطمه صغری حکیمه خاتون (سلام‌الله‌علیها)',
     ];
-    $heroSubtitle = $heroSubtitles[$lang] ?? $heroSubtitles['az'];
+    $heroSubtitle = !empty($heroSubtitleOverride) ? $heroSubtitleOverride : ($heroSubtitles[$lang] ?? $heroSubtitles['az']);
 ?>
     <header class="bb-hero-header" id="bbHeader" data-header-type="hero">
         <!-- Fon naxışları -->
@@ -214,7 +214,7 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
         <div class="bb-header-inner bb-container">
             <!-- Logo -->
             <a href="<?= bb_lang_url('', $lang) ?>" class="bb-header-logo" aria-label="<?= bb_sanitize(SITE_NAME) ?>">
-                <img src="/public/assets/img/logo-esas.png" alt="<?= bb_sanitize(SITE_NAME) ?>">
+                <img src="/public/assets/img/logo.png" alt="<?= bb_sanitize(SITE_NAME) ?>">
             </a>
 
             <!-- Desktop nav -->
