@@ -170,11 +170,28 @@
 .bb-home-pilgrimages {
     position: relative;
     background-color: var(--bb-bg-primary);
-    background-image: url('/public/assets/img/bg.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     padding: 5rem 0 4rem;
+    overflow: hidden;
+}
+
+/* Arxa fon: bg.png tam örtən fon şəkli */
+.bb-home-pilgrimages-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.07;
+}
+
+.bb-home-pilgrimages-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bb-home-pilgrimages > .bb-container {
+    position: relative;
+    z-index: 1;
 }
 
 /* 4 sütun grid */
@@ -254,7 +271,7 @@
 .bb-home-articles-ornament {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     pointer-events: none;
 }
 
