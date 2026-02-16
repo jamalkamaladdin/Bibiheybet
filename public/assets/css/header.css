@@ -17,26 +17,46 @@
     background-color: var(--bb-bg-primary);
 }
 
-/* Mobildə hero header kompakt (sadəcə logo + menu) */
+/* Mobildə hero header - naxışlar gizli, kontent görünür */
 @media (max-width: 1023px) {
     .bb-hero-header {
         min-height: auto;
     }
 
+    /* Yalnız fon naxışları və desktop logo gizlə */
     .bb-hero-bg,
-    .bb-hero-logo,
     .bb-hero-title,
-    .bb-hero-mosque {
+    .bb-hero-logo {
         display: none !important;
     }
 
     .bb-hero-content {
         padding: 0 var(--bb-space-md);
+        padding-bottom: 0;
     }
 
     .bb-hero-topbar {
         padding: var(--bb-space-sm) 0;
         min-height: var(--bb-header-height);
+    }
+
+    /* Mobil hero məscid */
+    .bb-hero-mosque {
+        display: block;
+        max-width: 100%;
+        margin-top: 0;
+    }
+
+    .bb-hero-mosque img {
+        filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+    }
+
+    .bb-hero-subtitle {
+        font-size: 0.8rem;
+        max-width: 240px;
+        width: 80%;
+        line-height: 1.5;
+        top: 15%;
     }
 }
 
@@ -565,7 +585,20 @@
    RESPONSIVE
    ============================================ */
 
-/* Tablet (768px+) */
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .bb-hero-subtitle {
+        font-size: 1rem;
+        max-width: 340px;
+        width: 70%;
+    }
+
+    .bb-hero-mosque {
+        max-width: 700px;
+    }
+}
+
+/* Tablet+ (768px+) */
 @media (min-width: 768px) {
     .bb-hero-pattern {
         width: 700px;

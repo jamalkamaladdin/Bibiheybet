@@ -8,29 +8,8 @@
 .bb-footer {
     position: relative;
     background-color: var(--bb-bg-secondary);
-    padding: 4rem 0 0;
-    /* Player üçün alt padding */
+    padding: 3rem 0 0;
     padding-bottom: calc(1.5rem + 64px);
-    overflow: hidden;
-}
-
-/* Dekorativ ornament */
-.bb-footer-ornament {
-    position: absolute;
-    top: -60px;
-    right: -60px;
-    width: 220px;
-    height: 220px;
-    opacity: 0.04;
-    pointer-events: none;
-    z-index: 0;
-    animation: bb-spin-cw 90s linear infinite;
-}
-
-.bb-footer-ornament img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
 }
 
 .bb-footer-inner {
@@ -39,22 +18,12 @@
 }
 
 /* ============================================
-   Footer Grid (3 sütun)
+   Top: Logo (mərkəzləşdirilmiş)
    ============================================ */
-.bb-footer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
-    gap: 3rem;
-    padding-bottom: 2.5rem;
-}
-
-/* ============================================
-   Brand / Logo bölməsi
-   ============================================ */
-.bb-footer-brand {
+.bb-footer-top {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    padding-bottom: 2rem;
 }
 
 .bb-footer-logo {
@@ -67,20 +36,53 @@
 }
 
 .bb-footer-logo img {
-    height: 80px;
+    height: 64px;
     width: auto;
+}
+
+/* ============================================
+   Divider (qızılı xətt)
+   ============================================ */
+.bb-footer-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(201, 168, 76, 0.15) 20%,
+        rgba(201, 168, 76, 0.25) 50%,
+        rgba(201, 168, 76, 0.15) 80%,
+        transparent
+    );
+}
+
+/* ============================================
+   Grid (3 sütun)
+   ============================================ */
+.bb-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.bb-footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 /* ============================================
    Footer Başlıqlar
    ============================================ */
 .bb-footer-heading {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--bb-color-accent);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 1.2rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 1rem;
 }
 
 /* ============================================
@@ -92,19 +94,18 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.45rem;
 }
 
 .bb-footer-links li a {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--bb-color-muted);
-    transition: color var(--bb-transition), padding-left var(--bb-transition);
+    transition: color var(--bb-transition);
     display: inline-block;
 }
 
 .bb-footer-links li a:hover {
     color: var(--bb-color-ton2);
-    padding-left: 4px;
 }
 
 /* ============================================
@@ -112,19 +113,17 @@
    ============================================ */
 .bb-footer-address {
     display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
     color: var(--bb-color-muted);
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .bb-footer-icon {
     flex-shrink: 0;
-    margin-top: 2px;
     color: var(--bb-color-accent);
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 /* ============================================
@@ -132,31 +131,18 @@
    ============================================ */
 .bb-footer-social {
     display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-}
-
-.bb-footer-social-label {
-    font-size: 0.8rem;
-    color: var(--bb-color-muted);
-    font-weight: 500;
-    letter-spacing: 0.03em;
-}
-
-.bb-footer-social-links {
-    display: flex;
-    gap: 0.6rem;
+    gap: 0.5rem;
 }
 
 .bb-footer-social-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background-color: var(--bb-bg-section);
-    color: var(--bb-color-ton2);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--bb-color-muted);
     transition: all var(--bb-transition);
 }
 
@@ -167,32 +153,19 @@
 }
 
 /* ============================================
-   Alt bar (separator + copyright)
+   Alt bar (copyright)
    ============================================ */
 .bb-footer-bottom {
     text-align: center;
 }
 
-.bb-footer-separator {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(
-        to right,
-        transparent,
-        rgba(201, 168, 76, 0.2) 20%,
-        rgba(201, 168, 76, 0.3) 50%,
-        rgba(201, 168, 76, 0.2) 80%,
-        transparent
-    );
-    margin-bottom: 1.5rem;
-}
-
 .bb-footer-copyright {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--bb-color-muted);
     font-weight: 400;
     margin: 0;
-    opacity: 0.7;
+    padding-top: 1.5rem;
+    opacity: 0.6;
 }
 
 /* ============================================
@@ -200,55 +173,36 @@
    ============================================ */
 @media (max-width: 575px) {
     .bb-footer {
-        padding: 3rem 0 0;
+        padding: 2.5rem 0 0;
         padding-bottom: calc(1.5rem + 64px);
+    }
+
+    .bb-footer-logo img {
+        height: 52px;
     }
 
     .bb-footer-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-    }
-
-    .bb-footer-brand {
-        align-items: center;
-    }
-
-    .bb-footer-logo img {
-        height: 64px;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
     }
 
     .bb-footer-heading {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
+        margin-bottom: 0.75rem;
     }
 
     .bb-footer-links {
-        align-items: center;
-        gap: 0.5rem;
+        gap: 0.35rem;
     }
 
-    .bb-footer-links li a:hover {
-        padding-left: 0;
+    .bb-footer-links li a {
+        font-size: 0.82rem;
     }
 
-    .bb-footer-address {
-        justify-content: center;
-        text-align: center;
-    }
-
-    .bb-footer-social {
-        align-items: center;
-    }
-
-    .bb-footer-social-links {
-        justify-content: center;
-    }
-
-    .bb-footer-ornament {
-        width: 150px;
-        height: 150px;
-        top: -40px;
-        right: -40px;
+    .bb-footer-copyright {
+        font-size: 0.72rem;
+        padding-top: 1.2rem;
     }
 }
 
@@ -256,89 +210,40 @@
 @media (min-width: 576px) and (max-width: 767px) {
     .bb-footer-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
-    .bb-footer-brand {
+    .bb-footer-col:last-child {
         grid-column: 1 / -1;
-        align-items: center;
-        text-align: center;
     }
 
     .bb-footer-logo img {
-        height: 68px;
-    }
-}
-
-/* Tablet (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-    .bb-footer-grid {
-        grid-template-columns: 1fr 1fr 1.2fr;
-        gap: 2rem;
-    }
-
-    .bb-footer-logo img {
-        height: 72px;
+        height: 56px;
     }
 }
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
     .bb-footer {
-        padding-top: 5rem;
-    }
-
-    .bb-footer-grid {
-        gap: 4rem;
+        padding-top: 3.5rem;
     }
 
     .bb-footer-logo img {
-        height: 88px;
+        height: 72px;
     }
 
-    .bb-footer-ornament {
-        width: 280px;
-        height: 280px;
-        top: -80px;
-        right: -80px;
+    .bb-footer-grid {
+        gap: 3rem;
+        padding: 2.5rem 0;
     }
 }
 
 /* ============================================
    RTL Dəstək (Ərəb, Fars)
    ============================================ */
-html[dir="rtl"] .bb-footer-brand {
-    align-items: flex-end;
-}
-
-html[dir="rtl"] .bb-footer-links li a:hover {
-    padding-left: 0;
-    padding-right: 4px;
-}
-
 html[dir="rtl"] .bb-footer-heading,
 html[dir="rtl"] .bb-footer-links li a,
 html[dir="rtl"] .bb-footer-address,
-html[dir="rtl"] .bb-footer-social-label,
 html[dir="rtl"] .bb-footer-copyright {
     font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-}
-
-html[dir="rtl"] .bb-footer-ornament {
-    right: auto;
-    left: -60px;
-}
-
-@media (max-width: 575px) {
-    html[dir="rtl"] .bb-footer-brand {
-        align-items: center;
-    }
-
-    html[dir="rtl"] .bb-footer-links li a:hover {
-        padding-right: 0;
-    }
-
-    html[dir="rtl"] .bb-footer-ornament {
-        left: -40px;
-    }
 }
