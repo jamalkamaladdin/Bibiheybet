@@ -154,7 +154,6 @@ bb_admin_header('Kateqoriya Redaktə');
     </div>
 </form>
 
-<script>initTabs();</script>
 
 <?php
 bb_admin_footer();

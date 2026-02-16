@@ -201,9 +201,6 @@ bb_admin_header($pageConfig['label'] . ' - Redaktə', [
 }
 </style>
 
-<script>
-    initTabs();
-</script>
 
 <?php
 bb_admin_footer();

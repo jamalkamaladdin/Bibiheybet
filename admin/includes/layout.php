@@ -120,6 +120,7 @@ function bb_admin_footer(array $options = []): void
         <script src="<?= bb_sanitize($js) ?>"></script>
     <?php endforeach; ?>
     <script>
+        if (typeof initTabs === 'function') initTabs();
         if (typeof bbInitEditors === 'function') bbInitEditors();
         if (typeof bbInitImageUploads === 'function') bbInitImageUploads();
         if (typeof bbInitGallery === 'function') bbInitGallery();

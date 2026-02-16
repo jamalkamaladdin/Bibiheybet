@@ -137,7 +137,6 @@ bb_admin_header('Yeni Kateqoriya');
     </div>
 </form>
 
-<script>initTabs();</script>
 
 <?php
 bb_admin_footer();

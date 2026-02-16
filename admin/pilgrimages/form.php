@@ -209,6 +209,3 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
     </div>
 </form>
 
-<script>
-    initTabs();
-</script>
