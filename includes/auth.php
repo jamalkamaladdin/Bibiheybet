@@ -128,23 +128,20 @@ function bb_require_auth(): void
 
 /**
  * CSRF token yaradır və session-a yazır.
+ * Əgər session-da etibarlı token varsa, onu təkrar istifadə edir.
  * 
  * @return string Hidden input elementi (<input type="hidden" ...>)
  */
 function bb_generate_csrf(): string
 {
-    bb_start_session();
-
-    $token = bin2hex(random_bytes(32));
-    $_SESSION['csrf_token'] = $token;
-    $_SESSION['csrf_token_time'] = time();
-
+    $token = bb_generate_csrf_token();
     return '<input type="hidden" name="csrf_token" value="' . $token . '">';
 }
 
 /**
  * CSRF token yaradır və yalnız token dəyərini qaytarır.
- * AJAX sorğularda istifadə üçün.
+ * Əgər session-da etibarlı token varsa, onu təkrar istifadə edir (yeni yaratmır).
+ * AJAX sorğularda və formda eyni token istifadə olunur.
  * 
  * @return string Token dəyəri
  */
@@ -152,6 +149,14 @@ function bb_generate_csrf_token(): string
 {
     bb_start_session();
 
+    // Session-da etibarlı token varsa, onu qaytar
+    if (!empty($_SESSION['csrf_token']) && !empty($_SESSION['csrf_token_time'])) {
+        if (!defined('CSRF_TOKEN_LIFETIME') || (time() - $_SESSION['csrf_token_time'] <= CSRF_TOKEN_LIFETIME)) {
+            return $_SESSION['csrf_token'];
+        }
+    }
+
+    // Yeni token yarat
     $token = bin2hex(random_bytes(32));
     $_SESSION['csrf_token'] = $token;
     $_SESSION['csrf_token_time'] = time();
@@ -161,6 +166,7 @@ function bb_generate_csrf_token(): string
 
 /**
  * CSRF token-i doğrulayır.
+ * Token session ərzində etibarlıdır (bir dəfəlik deyil).
  * 
  * @param string $token POST-dan gələn token
  * @return bool Token doğrudursa true
@@ -185,9 +191,6 @@ function bb_verify_csrf(string $token): bool
             return false;
         }
     }
-
-    // İstifadə olunmuş token-i sil (bir dəfəlik istifadə)
-    unset($_SESSION['csrf_token'], $_SESSION['csrf_token_time']);
 
     return true;
 }
