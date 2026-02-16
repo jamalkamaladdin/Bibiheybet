@@ -20,6 +20,7 @@ $bb_route_map = [
         'prayers'       => 'dua-ve-ziyaretname',
         'prayer-times'  => 'namaz-vaxtlari',
         'quran-listen'  => 'quran-dinle',
+        'search'        => 'axtaris',
     ],
     'en' => [
         'articles'      => 'articles',
@@ -31,6 +32,7 @@ $bb_route_map = [
         'prayers'       => 'prayers',
         'prayer-times'  => 'prayer-times',
         'quran-listen'  => 'listen-quran',
+        'search'        => 'search',
     ],
     'ru' => [
         'articles'      => 'stati',
@@ -42,6 +44,7 @@ $bb_route_map = [
         'prayers'       => 'molitvy',
         'prayer-times'  => 'vremya-namaza',
         'quran-listen'  => 'slushat-quran',
+        'search'        => 'poisk',
     ],
     'ar' => [
         'articles'      => 'maqalat',
@@ -53,6 +56,7 @@ $bb_route_map = [
         'prayers'       => 'adiyya',
         'prayer-times'  => 'awqat-al-salat',
         'quran-listen'  => 'istima-quran',
+        'search'        => 'bahth',
     ],
     'fa' => [
         'articles'      => 'maqalat-fa',
@@ -64,6 +68,7 @@ $bb_route_map = [
         'prayers'       => 'doaha',
         'prayer-times'  => 'owqat-namaz',
         'quran-listen'  => 'goosh-dadan-quran',
+        'search'        => 'jostoju',
     ],
 ];
 

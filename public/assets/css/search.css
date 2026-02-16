@@ -1,0 +1,210 @@
+/**
+ * Bibiheybet.com - Axtarış Səhifəsi Stilləri
+ */
+
+/* Section */
+.bb-search-section {
+    padding: var(--bb-space-xl) 0 var(--bb-space-2xl);
+}
+
+/* Başlıq */
+.bb-search-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    margin-bottom: var(--bb-space-sm);
+}
+
+/* Axtarış formu */
+.bb-search-form {
+    max-width: 600px;
+    margin: var(--bb-space-xl) auto var(--bb-space-lg);
+}
+
+.bb-search-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--bb-radius-md);
+    transition: border-color var(--bb-transition);
+}
+
+.bb-search-input-wrap:focus-within {
+    border-color: var(--bb-color-accent);
+}
+
+.bb-search-input-icon {
+    flex-shrink: 0;
+    color: var(--bb-color-muted);
+    transition: color var(--bb-transition);
+}
+
+.bb-search-input-wrap:focus-within .bb-search-input-icon {
+    color: var(--bb-color-accent);
+}
+
+.bb-search-input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    color: var(--bb-color-ton2);
+    font-family: var(--bb-font-primary);
+}
+
+.bb-search-input::placeholder {
+    color: var(--bb-color-muted);
+    opacity: 0.7;
+}
+
+/* Nəticə sayı */
+.bb-search-count {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--bb-color-muted);
+    margin-bottom: var(--bb-space-lg);
+}
+
+/* Nəticə kartları */
+.bb-search-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bb-space-md);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.bb-search-card {
+    display: flex;
+    gap: var(--bb-space-md);
+    padding: var(--bb-space-md);
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--bb-radius-md);
+    transition: all var(--bb-transition);
+    text-decoration: none;
+}
+
+.bb-search-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.04);
+    transform: translateY(-1px);
+}
+
+/* Kart şəkil */
+.bb-search-card-img {
+    flex-shrink: 0;
+    width: 120px;
+    height: 90px;
+    border-radius: var(--bb-radius-sm);
+    overflow: hidden;
+    background-color: var(--bb-bg-primary);
+}
+
+.bb-search-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bb-search-card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bb-bg-section) 0%, var(--bb-bg-primary) 100%);
+}
+
+/* Kart məzmun */
+.bb-search-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.bb-search-card-type {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bb-color-accent);
+    margin-bottom: 4px;
+}
+
+.bb-search-card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--bb-color-heading);
+    line-height: 1.4;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.bb-search-card:hover .bb-search-card-title {
+    color: var(--bb-color-accent);
+}
+
+.bb-search-card-excerpt {
+    font-size: 0.85rem;
+    color: var(--bb-color-muted);
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Boş nəticə */
+.bb-search-empty {
+    text-align: center;
+    padding: var(--bb-space-2xl) 0;
+}
+
+.bb-search-empty p {
+    font-size: 1.05rem;
+    color: var(--bb-color-muted);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .bb-search-title {
+        font-size: 1.5rem;
+    }
+
+    .bb-search-card {
+        flex-direction: column;
+        gap: var(--bb-space-sm);
+    }
+
+    .bb-search-card-img {
+        width: 100%;
+        height: 160px;
+    }
+}
+
+/* RTL */
+html[dir="rtl"] .bb-search-card {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bb-search-input,
+html[dir="rtl"] .bb-search-card-title,
+html[dir="rtl"] .bb-search-card-excerpt {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}
+
+@media (max-width: 600px) {
+    html[dir="rtl"] .bb-search-card {
+        flex-direction: column;
+    }
+}

@@ -109,7 +109,7 @@ function bb_frontend_header(array $options = []): void
 
             <!-- Axtarış paneli -->
             <div class="bb-mobile-search">
-                <form action="<?= bb_lang_url(bb_get_route('search', $lang) ?? 'search', $lang) ?>" method="get" class="bb-mobile-search-form">
+                <form action="<?= bb_lang_url(bb_get_route('search', $lang) . '/', $lang) ?>" method="get" class="bb-mobile-search-form">
                     <svg class="bb-mobile-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     <input type="text" name="q" class="bb-mobile-search-input" placeholder="<?= bb_sanitize($extraLabels['search']) ?>" autocomplete="off">
                 </form>
@@ -146,9 +146,6 @@ function bb_frontend_header(array $options = []): void
                     </a>
                     <a href="https://www.facebook.com/bibiheybetmecidi/" target="_blank" rel="noopener" aria-label="Facebook">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.669-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    </a>
-                    <a href="https://www.youtube.com/@bibiheybetziyaretgahi" target="_blank" rel="noopener" aria-label="YouTube">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </a>
                 </div>
                 <div class="bb-mobile-lang">
@@ -229,15 +226,6 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                             <?php endforeach; ?>
                         </ul>
                     </div>
-                    <div class="bb-more-dropdown" id="bbMoreDropdown">
-                        <button type="button" class="bb-more-toggle" id="bbMoreToggle" aria-expanded="false" aria-label="Əlavə menyu">
-                            <span></span><span></span><span></span>
-                        </button>
-                        <ul class="bb-more-dropdown-list" id="bbMoreList">
-                            <li><a href="<?= bb_sanitize($prayerTimesUrl) ?>" class="bb-more-dropdown-item"><img src="/public/assets/img/namaz-icon.png" alt="" width="18" height="18"><?= bb_sanitize($extraLabels['prayer']) ?></a></li>
-                            <li><a href="<?= bb_sanitize($quranListenUrl) ?>" class="bb-more-dropdown-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><?= bb_sanitize($extraLabels['quran']) ?></a></li>
-                        </ul>
-                    </div>
                 </nav>
 
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
@@ -300,15 +288,6 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
                         <li><a href="<?= bb_sanitize(bb_lang_switch_url($switchLang)) ?>" class="bb-lang-dropdown-item"><?= strtoupper($switchLang) ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="bb-more-dropdown" id="bbMoreDropdown">
-                    <button type="button" class="bb-more-toggle" id="bbMoreToggle" aria-expanded="false" aria-label="Əlavə menyu">
-                        <span></span><span></span><span></span>
-                    </button>
-                    <ul class="bb-more-dropdown-list" id="bbMoreList">
-                        <li><a href="<?= bb_sanitize($prayerTimesUrl) ?>" class="bb-more-dropdown-item"><img src="/public/assets/img/namaz-icon.png" alt="" width="18" height="18"><?= bb_sanitize($extraLabels['prayer']) ?></a></li>
-                        <li><a href="<?= bb_sanitize($quranListenUrl) ?>" class="bb-more-dropdown-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><?= bb_sanitize($extraLabels['quran']) ?></a></li>
                     </ul>
                 </div>
             </nav>

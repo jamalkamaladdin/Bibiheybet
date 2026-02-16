@@ -83,6 +83,9 @@ if (empty($firstSegment)) {
                 $pageName = 'quran';
                 $pageSlug = $resolvedRoute;
                 break;
+            case 'search':
+                $pageName = 'search';
+                break;
             default:
                 $pageName = '404';
                 break;
