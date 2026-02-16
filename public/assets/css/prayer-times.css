@@ -297,6 +297,12 @@
 /* ============================================
    Ana səhifə strip — paylaşılan komponent
    ============================================ */
+.bb-pt-strip-wrap {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+
 .bb-pt-strip {
     display: flex;
     align-items: stretch;
@@ -305,6 +311,9 @@
     background-color: rgba(255, 255, 255, 0.04);
     border-radius: var(--bb-radius-sm);
     overflow: hidden;
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
 }
 
 .bb-pt-strip-item {
@@ -343,6 +352,30 @@
     color: var(--bb-color-heading);
     font-variant-numeric: tabular-nums;
     line-height: 1.2;
+}
+
+/* Arrow düymələr — default gizli (desktop) */
+.bb-pt-strip-arrow {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--bb-bg-secondary);
+    border: none;
+    color: var(--bb-color-accent);
+    cursor: pointer;
+    padding: 0;
+    width: 28px;
+    flex-shrink: 0;
+    z-index: 2;
+    transition: background-color var(--bb-transition-fast), opacity var(--bb-transition-fast);
+}
+
+.bb-pt-strip-arrow:active {
+    background: rgba(201, 168, 76, 0.12);
+}
+
+.bb-pt-strip-arrow svg {
+    display: block;
 }
 
 /* ============================================
@@ -439,13 +472,23 @@
         font-size: 0.85rem;
     }
 
-    /* Strip mobil */
+    /* Strip mobil — karusel */
     .bb-pt-strip {
-        flex-wrap: wrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        justify-content: flex-start;
+        border-radius: 0;
+    }
+
+    .bb-pt-strip::-webkit-scrollbar {
+        display: none;
     }
 
     .bb-pt-strip-item {
         flex: 0 0 25%;
+        scroll-snap-align: start;
         padding: 0.4rem 0.2rem;
     }
 
@@ -455,6 +498,10 @@
 
     .bb-pt-strip-time {
         font-size: 0.8rem;
+    }
+
+    .bb-pt-strip-arrow {
+        display: flex;
     }
 
     /* Cədvəl */
@@ -489,10 +536,15 @@
     }
 
     .bb-pt-strip-item {
+        flex: 0 0 25%;
         padding: 0.35rem 0.15rem;
     }
 
     .bb-pt-strip-time {
         font-size: 0.72rem;
+    }
+
+    .bb-pt-strip-arrow {
+        width: 24px;
     }
 }

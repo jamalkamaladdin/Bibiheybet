@@ -136,9 +136,12 @@ $ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
     <!-- ==========================================
          Namaz vaxtları strip
          ========================================== -->
-    <section class="bb-home-prayer-strip">
-        <a href="<?= bb_sanitize($ptUrl) ?>" class="bb-container bb-home-prayer-link" id="bbHomePrayerStrip">
-            <div class="bb-pt-strip">
+    <section class="bb-home-prayer-strip" id="bbHomePrayerStrip" data-url="<?= bb_sanitize($ptUrl) ?>">
+        <div class="bb-container bb-pt-strip-wrap">
+            <button class="bb-pt-strip-arrow bb-pt-strip-arrow-left" id="bbStripLeft" aria-label="Sol">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="bb-pt-strip" id="bbStripScroll">
                 <?php foreach ($ptKeys as $key): ?>
                 <div class="bb-pt-strip-item" data-prayer="<?= $key ?>">
                     <span class="bb-pt-strip-label"><?= bb_sanitize($ptL[$key]) ?></span>
@@ -146,7 +149,10 @@ $ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
                 </div>
                 <?php endforeach; ?>
             </div>
-        </a>
+            <button class="bb-pt-strip-arrow bb-pt-strip-arrow-right" id="bbStripRight" aria-label="Sağ">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
     </section>
 
     <!-- ==========================================

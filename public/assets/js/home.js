@@ -36,8 +36,12 @@
 
     /** Ana səhifə namaz vaxtları strip */
     function initPrayerStrip() {
-        var strip = document.getElementById('bbHomePrayerStrip');
-        if (!strip || typeof PrayTime === 'undefined') return;
+        var section = document.getElementById('bbHomePrayerStrip');
+        if (!section || typeof PrayTime === 'undefined') return;
+
+        var scrollEl = document.getElementById('bbStripScroll');
+        var btnLeft = document.getElementById('bbStripLeft');
+        var btnRight = document.getElementById('bbStripRight');
 
         try {
             var pt = new PrayTime('Jafari');
@@ -60,7 +64,7 @@
             }
 
             if (active) {
-                var items = strip.querySelectorAll('.bb-pt-strip-item');
+                var items = section.querySelectorAll('.bb-pt-strip-item');
                 for (var k = 0; k < items.length; k++) {
                     if (items[k].getAttribute('data-prayer') === active) {
                         items[k].classList.add('bb-pt-strip-item-active');
@@ -69,6 +73,39 @@
             }
         } catch (e) {
             if (typeof console !== 'undefined') console.error('Prayer strip error:', e);
+        }
+
+        if (scrollEl && btnLeft && btnRight) {
+            var scrollAmount = function () {
+                var item = scrollEl.querySelector('.bb-pt-strip-item');
+                return item ? item.offsetWidth * 4 : 200;
+            };
+
+            btnLeft.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                scrollEl.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+            });
+
+            btnRight.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                scrollEl.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+            });
+
+            var updateArrows = function () {
+                btnLeft.style.opacity = scrollEl.scrollLeft <= 2 ? '0.3' : '1';
+                btnRight.style.opacity = (scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 2) ? '0.3' : '1';
+            };
+            scrollEl.addEventListener('scroll', updateArrows);
+            setTimeout(updateArrows, 100);
+        }
+
+        var ptUrl = section.getAttribute('data-url');
+        if (ptUrl && scrollEl) {
+            scrollEl.addEventListener('click', function () {
+                window.location.href = ptUrl;
+            });
         }
     }
 

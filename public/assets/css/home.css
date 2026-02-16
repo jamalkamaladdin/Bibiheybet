@@ -54,15 +54,8 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.bb-home-prayer-link {
-    display: block;
-    text-decoration: none;
+.bb-home-prayer-strip .bb-pt-strip-wrap {
     padding: 0;
-    transition: opacity var(--bb-transition-fast);
-}
-
-.bb-home-prayer-link:hover {
-    opacity: 0.9;
 }
 
 /* ============================================
