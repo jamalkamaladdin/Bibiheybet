@@ -1,0 +1,323 @@
+/**
+ * Bibiheybet.com - Ana Səhifə Quran Player Stilləri
+ */
+
+/* ============================================
+   Bölmə
+   ============================================ */
+.bb-home-quran {
+    position: relative;
+    background-color: var(--bb-bg-primary);
+    padding: 5rem 0 4rem;
+    overflow: hidden;
+}
+
+.bb-home-quran > .bb-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Arxa fon */
+.bb-home-quran-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+.bb-home-quran-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ornament */
+.bb-home-quran-ornament {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    pointer-events: none;
+}
+
+.bb-home-quran-ornament img {
+    width: 120px;
+    height: 120px;
+    opacity: 0.3;
+    animation: bb-spin-cw 60s linear infinite;
+}
+
+/* Alt başlıq */
+.bb-home-quran-subtitle {
+    font-size: 0.9rem;
+    color: var(--bb-color-muted);
+    margin-bottom: 0;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   Player — kompakt, mərkəzli
+   ============================================ */
+.bb-home-qp {
+    max-width: 520px;
+    margin: 2.5rem auto 0;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--bb-radius-lg);
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Display: ərəbcə ad + yerli ad */
+.bb-home-qp-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    min-height: 52px;
+    justify-content: center;
+}
+
+.bb-home-qp-arabic {
+    font-family: var(--bb-font-arabic);
+    font-size: 1.5rem;
+    color: var(--bb-color-heading);
+    line-height: 1.6;
+    transition: all var(--bb-transition);
+}
+
+.bb-home-qp-name {
+    font-size: 0.8rem;
+    color: var(--bb-color-muted);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+/* ============================================
+   Kontrol düymələri
+   ============================================ */
+.bb-home-qp-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.bb-home-qp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    color: var(--bb-color-ton2);
+    cursor: pointer;
+    transition: color var(--bb-transition-fast), background-color var(--bb-transition-fast);
+}
+
+.bb-home-qp-btn:hover {
+    color: var(--bb-color-accent);
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.bb-home-qp-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c9a84c, #d4b45c);
+    border: none;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all var(--bb-transition-fast);
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+}
+
+.bb-home-qp-play:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 24px rgba(201, 168, 76, 0.4);
+}
+
+/* Playing state */
+.bb-home-qp.bb-hq-playing .bb-hq-icon-play { display: none !important; }
+.bb-home-qp.bb-hq-playing .bb-hq-icon-pause { display: block !important; }
+.bb-home-qp.bb-hq-playing .bb-hq-icon-loading { display: none !important; }
+.bb-home-qp:not(.bb-hq-playing) .bb-hq-icon-play { display: block !important; }
+.bb-home-qp:not(.bb-hq-playing) .bb-hq-icon-pause { display: none !important; }
+.bb-home-qp:not(.bb-hq-playing) .bb-hq-icon-loading { display: none !important; }
+
+/* Loading state */
+.bb-home-qp.bb-hq-loading .bb-hq-icon-play { display: none !important; }
+.bb-home-qp.bb-hq-loading .bb-hq-icon-pause { display: none !important; }
+.bb-home-qp.bb-hq-loading .bb-hq-icon-loading { display: block !important; }
+
+/* ============================================
+   Progress / vaxt
+   ============================================ */
+.bb-home-qp-time {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    color: var(--bb-color-muted);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 1.25rem;
+}
+
+.bb-home-qp-progress {
+    flex: 1;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.bb-home-qp-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--bb-color-accent), #d4b45c);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.15s linear;
+}
+
+.bb-home-qp-progress:hover .bb-home-qp-progress-bar {
+    background: linear-gradient(90deg, #d4b45c, #dfc06c);
+}
+
+/* ============================================
+   Seçimlər (Surə + Qari)
+   ============================================ */
+.bb-home-qp-selects {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.bb-home-qp-select {
+    flex: 1;
+    padding: 0.55rem 1.8rem 0.55rem 0.75rem;
+    font-family: var(--bb-font-primary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--bb-color-heading);
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--bb-radius-sm);
+    cursor: pointer;
+    transition: border-color var(--bb-transition);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239a9a8a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+}
+
+.bb-home-qp-select:hover,
+.bb-home-qp-select:focus {
+    border-color: var(--bb-color-accent);
+    outline: none;
+}
+
+.bb-home-qp-select option {
+    background-color: var(--bb-bg-secondary);
+    color: var(--bb-color-heading);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 575px) {
+    .bb-home-quran {
+        padding: 3rem 0;
+    }
+
+    .bb-home-quran-ornament img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .bb-home-quran-subtitle {
+        font-size: 0.82rem;
+    }
+
+    .bb-home-qp {
+        padding: 1.5rem 1.25rem 1.25rem;
+        margin-top: 2rem;
+        border-radius: var(--bb-radius-md);
+    }
+
+    .bb-home-qp-arabic {
+        font-size: 1.25rem;
+    }
+
+    .bb-home-qp-play {
+        width: 52px;
+        height: 52px;
+    }
+
+    .bb-home-qp-controls {
+        gap: 1rem;
+    }
+
+    .bb-home-qp-selects {
+        flex-direction: column;
+    }
+
+    .bb-home-qp-display {
+        min-height: 44px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .bb-home-qp {
+        max-width: 460px;
+        padding: 1.75rem 1.5rem 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .bb-home-quran {
+        padding: 6rem 0 5rem;
+    }
+
+    .bb-home-quran-ornament img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .bb-home-qp {
+        max-width: 540px;
+        padding: 2.5rem 2.5rem 2rem;
+    }
+
+    .bb-home-qp-arabic {
+        font-size: 1.7rem;
+    }
+}
+
+/* ============================================
+   RTL dəstək
+   ============================================ */
+html[dir="rtl"] .bb-home-qp-select {
+    background-position: left 0.6rem center;
+    padding-left: 1.8rem;
+    padding-right: 0.75rem;
+}
+
+html[dir="rtl"] .bb-home-qp-time {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bb-home-quran-subtitle,
+html[dir="rtl"] .bb-home-qp-name {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}

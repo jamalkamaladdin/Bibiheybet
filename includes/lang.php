@@ -412,7 +412,6 @@ $bb_menu = [
         ['label' => 'Dua və ziyarətnamə',       'route' => 'prayers'],
         ['label' => 'Ziyarətgahlar',            'route' => 'pilgrimages'],
         ['label' => 'Məqalələr',                'route' => 'articles'],
-        ['label' => 'Quran dinlə',              'route' => 'quran-listen'],
     ],
     'en' => [
         ['label' => 'Home',                     'route' => ''],
@@ -421,7 +420,6 @@ $bb_menu = [
         ['label' => 'Prayer and Ziyarat Texts', 'route' => 'prayers'],
         ['label' => 'Other Holy Shrines',       'route' => 'pilgrimages'],
         ['label' => 'Articles',                 'route' => 'articles'],
-        ['label' => 'Listen to Quran',          'route' => 'quran-listen'],
     ],
     'ru' => [
         ['label' => 'Главная',              'route' => ''],
@@ -430,7 +428,6 @@ $bb_menu = [
         ['label' => 'Молитвы и Зияраты',    'route' => 'prayers'],
         ['label' => 'Святыни',              'route' => 'pilgrimages'],
         ['label' => 'Статьи',               'route' => 'articles'],
-        ['label' => 'Слушать Коран',         'route' => 'quran-listen'],
     ],
     'ar' => [
         ['label' => 'الصفحة الرئيسية',       'route' => ''],
@@ -439,7 +436,6 @@ $bb_menu = [
         ['label' => 'الأدعية والزيارات',      'route' => 'prayers'],
         ['label' => 'المقامات والمزارات',     'route' => 'pilgrimages'],
         ['label' => 'المقالات',               'route' => 'articles'],
-        ['label' => 'استماع القرآن',          'route' => 'quran-listen'],
     ],
     'fa' => [
         ['label' => 'صفحه اصلی',                'route' => ''],
@@ -448,7 +444,6 @@ $bb_menu = [
         ['label' => 'دعاها و زیارت‌نامه‌ها',     'route' => 'prayers'],
         ['label' => 'زیارتگاه‌ها',               'route' => 'pilgrimages'],
         ['label' => 'مقالات',                    'route' => 'articles'],
-        ['label' => 'گوش دادن به قرآن',          'route' => 'quran-listen'],
     ],
 ];
 

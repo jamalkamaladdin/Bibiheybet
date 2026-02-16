@@ -49,6 +49,56 @@ $pilgrimagesList = $db->query(
     "SELECT * FROM pilgrimages WHERE status = 'published' ORDER BY sort_order ASC LIMIT 8"
 )->fetchAll();
 
+/** Quran bölməsi üçün etiketlər */
+$quranLabels = [
+    'az' => [
+        'title'     => 'Qurani-Kərim dinlə',
+        'subtitle'  => 'Tanınmış qarilər tərəfindən 114 surənin tilavəti',
+        'reciter'   => 'Qari seçin',
+        'surah'     => 'Surə seçin',
+        'verses'    => 'ayə',
+        'meccan'    => 'Məkkə',
+        'medinan'   => 'Mədinə',
+    ],
+    'en' => [
+        'title'     => 'Listen to the Holy Quran',
+        'subtitle'  => 'Recitation of 114 surahs by renowned reciters',
+        'reciter'   => 'Select reciter',
+        'surah'     => 'Select surah',
+        'verses'    => 'verses',
+        'meccan'    => 'Meccan',
+        'medinan'   => 'Medinan',
+    ],
+    'ru' => [
+        'title'     => 'Слушать Священный Коран',
+        'subtitle'  => 'Чтение 114 сур известными чтецами',
+        'reciter'   => 'Выберите чтеца',
+        'surah'     => 'Выберите суру',
+        'verses'    => 'аятов',
+        'meccan'    => 'Мекканская',
+        'medinan'   => 'Мединская',
+    ],
+    'ar' => [
+        'title'     => 'استمع إلى القرآن الكريم',
+        'subtitle'  => 'تلاوة ١١٤ سورة بأصوات أشهر القراء',
+        'reciter'   => 'اختر القارئ',
+        'surah'     => 'اختر السورة',
+        'verses'    => 'آية',
+        'meccan'    => 'مكية',
+        'medinan'   => 'مدنية',
+    ],
+    'fa' => [
+        'title'     => 'گوش دادن به قرآن کریم',
+        'subtitle'  => 'تلاوت ۱۱۴ سوره توسط قاریان مشهور',
+        'reciter'   => 'قاری را انتخاب کنید',
+        'surah'     => 'سوره را انتخاب کنید',
+        'verses'    => 'آیه',
+        'meccan'    => 'مکی',
+        'medinan'   => 'مدنی',
+    ],
+];
+$ql = $quranLabels[$lang] ?? $quranLabels['az'];
+
 /** Çoxdilli statik mətnlər (default-lar, DB-dən override oluna bilər) */
 $_defaults = [
     'hero_subtitle' => [
@@ -119,7 +169,7 @@ bb_frontend_header([
     'seo_data'   => $seoData,
     'body_class' => 'bb-page-home',
     'is_home'    => true,
-    'extra_css'  => ['/public/assets/css/home.css', '/public/assets/css/prayer-times.css'],
+    'extra_css'  => ['/public/assets/css/home.css', '/public/assets/css/prayer-times.css', '/public/assets/css/home-quran.css'],
     'hero_subtitle' => $_strings['hero_subtitle'][$lang] ?? $_strings['hero_subtitle']['az'] ?? '',
 ]);
 
@@ -192,6 +242,75 @@ $ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
                    class="bb-btn bb-btn-gold">
                     <?= bb_sanitize($t('read_more')) ?>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         Bölmə: Quran Dinlə
+         ========================================== -->
+    <section class="bb-home-quran" data-animate>
+        <div class="bb-home-quran-bg" aria-hidden="true">
+            <img src="/public/assets/img/bg.png" alt="">
+        </div>
+        <div class="bb-container bb-text-center">
+            <div class="bb-home-quran-ornament" aria-hidden="true">
+                <img src="/public/assets/img/naxis.png" alt="">
+            </div>
+
+            <h2 class="bb-home-section-title"><?= bb_sanitize($ql['title']) ?></h2>
+            <div class="bb-separator bb-separator-center"></div>
+            <p class="bb-home-quran-subtitle"><?= bb_sanitize($ql['subtitle']) ?></p>
+
+            <!-- Player -->
+            <div class="bb-home-qp" id="bbHomeQuranPlayer">
+                <!-- Surə adı (ərəbcə) -->
+                <div class="bb-home-qp-display" id="bbHQDisplay">
+                    <span class="bb-home-qp-arabic" id="bbHQArabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</span>
+                    <span class="bb-home-qp-name" id="bbHQName"></span>
+                </div>
+
+                <!-- Kontrol paneli -->
+                <div class="bb-home-qp-controls">
+                    <button type="button" class="bb-home-qp-btn bb-home-qp-prev" id="bbHQPrev" aria-label="Previous">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </button>
+                    <button type="button" class="bb-home-qp-play" id="bbHQPlayBtn" aria-label="Play">
+                        <svg class="bb-hq-icon-play" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg class="bb-hq-icon-pause" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                        <svg class="bb-hq-icon-loading" width="28" height="28" viewBox="0 0 24 24" fill="none" style="display:none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="31.4 31.4" stroke-linecap="round">
+                                <animateTransform attributeName="transform" type="rotate" values="0 12 12;360 12 12" dur="1s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </button>
+                    <button type="button" class="bb-home-qp-btn bb-home-qp-next" id="bbHQNext" aria-label="Next">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                    </button>
+                </div>
+
+                <!-- Progress -->
+                <div class="bb-home-qp-time">
+                    <span id="bbHQCurrentTime">0:00</span>
+                    <div class="bb-home-qp-progress" id="bbHQProgress">
+                        <div class="bb-home-qp-progress-bar" id="bbHQProgressBar"></div>
+                    </div>
+                    <span id="bbHQDuration">0:00</span>
+                </div>
+
+                <!-- Seçimlər -->
+                <div class="bb-home-qp-selects">
+                    <select id="bbHQSurahSelect" class="bb-home-qp-select" aria-label="<?= bb_sanitize($ql['surah']) ?>">
+                        <option value=""><?= bb_sanitize($ql['surah']) ?></option>
+                    </select>
+                    <select id="bbHQReciterSelect" class="bb-home-qp-select" aria-label="<?= bb_sanitize($ql['reciter']) ?>">
+                        <option value=""><?= bb_sanitize($ql['reciter']) ?></option>
+                    </select>
+                </div>
             </div>
         </div>
     </section>
@@ -285,10 +404,17 @@ $ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
     <?php endif; ?>
 
 <?php
+?>
+    <script>
+        window.BB_HQ_LABELS = <?= json_encode($ql, JSON_UNESCAPED_UNICODE) ?>;
+        window.BB_HQ_LANG = <?= json_encode($lang) ?>;
+    </script>
+<?php
 bb_frontend_footer([
     'extra_js' => [
         'https://cdn.jsdelivr.net/npm/praytime/src/praytime.js',
         '/public/assets/js/home.js',
+        '/public/assets/js/home-quran.js',
     ],
     'is_home' => true,
 ]);
