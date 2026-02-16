@@ -354,21 +354,6 @@
     line-height: 1.2;
 }
 
-/* Məscid ikonu — desktopda görünür */
-.bb-pt-strip-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 0.6rem;
-    color: var(--bb-color-accent);
-    flex-shrink: 0;
-    opacity: 0.85;
-}
-
-.bb-pt-strip-icon svg {
-    display: block;
-}
-
 /* Arrow düymələr — default gizli (desktop) */
 .bb-pt-strip-arrow {
     display: none;
@@ -485,11 +470,6 @@
 
     .bb-pt-card-time {
         font-size: 0.85rem;
-    }
-
-    /* İkon mobildə gizlənir */
-    .bb-pt-strip-icon {
-        display: none;
     }
 
     /* Strip mobil — karusel */

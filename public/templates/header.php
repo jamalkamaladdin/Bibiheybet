@@ -129,6 +129,7 @@ function bb_frontend_header(array $options = []): void
 /** Ana səhifə hero header */
 function bb_render_hero_header(array $menuItems, string $currentRoute, string $lang, string $heroSubtitleOverride = ''): void
 {
+    $prayerUrl = bb_lang_url(bb_get_route('prayer-times', $lang) . '/', $lang);
     $heroSubtitles = [
         'az' => 'Fatimeyi-Suğra, Həkimə xanımın müqəddəs ziyarətgahı',
         'en' => 'The holy shrine of Lady Fatima Sugra, Hakima Khanym',
@@ -187,6 +188,13 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                     </div>
                 </nav>
 
+                <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.5c0 0-2.5 3-2.5 5a2.5 2.5 0 005 0c0-2-2.5-5-2.5-5z" fill="currentColor" opacity="0.6"/>
+                        <path d="M4 21v-7a2 2 0 012-2h1v-1.5a1.5 1.5 0 013 0V12h4v-1.5a1.5 1.5 0 013 0V12h1a2 2 0 012 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 21h20M10 21v-3.5a2 2 0 014 0V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
@@ -210,6 +218,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
 /** Digər səhifələr üçün kompakt header */
 function bb_render_compact_header(array $menuItems, string $currentRoute, string $lang): void
 {
+    $prayerUrl = bb_lang_url(bb_get_route('prayer-times', $lang) . '/', $lang);
 ?>
     <header class="bb-header" id="bbHeader" data-header-type="compact">
         <div class="bb-header-inner bb-container">
@@ -250,8 +259,15 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
                 </div>
             </nav>
 
-            <!-- Sağ tərəf: hamburger -->
+            <!-- Sağ tərəf: namaz ikonu + hamburger -->
             <div class="bb-header-actions">
+                <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.5c0 0-2.5 3-2.5 5a2.5 2.5 0 005 0c0-2-2.5-5-2.5-5z" fill="currentColor" opacity="0.6"/>
+                        <path d="M4 21v-7a2 2 0 012-2h1v-1.5a1.5 1.5 0 013 0V12h4v-1.5a1.5 1.5 0 013 0V12h1a2 2 0 012 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 21h20M10 21v-3.5a2 2 0 014 0V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
