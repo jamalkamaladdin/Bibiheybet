@@ -31,8 +31,8 @@ if ($imageId <= 0) {
     exit;
 }
 
-// Yalnız az, en, ru dilləri icazə verilir
-$allowedLangs = ['az', 'en', 'ru'];
+// Yalnız mövcud dillər icazə verilir
+$allowedLangs = AVAILABLE_LANGS;
 if (!in_array($lang, $allowedLangs)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => 'Yanlış dil kodu.']);

@@ -21,8 +21,17 @@ function bb_frontend_header(array $options = []): void
 
     $isHome = !empty($options['is_home']);
 
+    // RTL dillər
+    $rtlLangs = ['ar', 'fa'];
+    $dir = in_array($lang, $rtlLangs) ? 'rtl' : 'ltr';
+
     // SEO meta taglar
     $seoHtml = '';
+    $defaultAlternateUrls = [];
+    foreach (AVAILABLE_LANGS as $altLang) {
+        $defaultAlternateUrls[$altLang] = bb_lang_url('', $altLang);
+    }
+
     if (!empty($options['seo_data'])) {
         $seoHtml = bb_render_meta($options['seo_data']);
     } else {
@@ -31,11 +40,7 @@ function bb_frontend_header(array $options = []): void
             'lang'      => $lang,
             'og_type'   => 'website',
             'canonical_url' => bb_lang_url('', $lang),
-            'alternate_urls' => [
-                'az' => bb_lang_url('', 'az'),
-                'en' => bb_lang_url('', 'en'),
-                'ru' => bb_lang_url('', 'ru'),
-            ],
+            'alternate_urls' => $defaultAlternateUrls,
         ]);
     }
 
@@ -48,7 +53,7 @@ function bb_frontend_header(array $options = []): void
     $currentRoute = trim($_GET['route'] ?? '', '/');
 ?>
 <!DOCTYPE html>
-<html lang="<?= bb_sanitize($lang) ?>" dir="ltr">
+<html lang="<?= bb_sanitize($lang) ?>" dir="<?= $dir ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,7 +61,7 @@ function bb_frontend_header(array $options = []): void
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" href="/public/assets/css/global.css">
     <link rel="stylesheet" href="/public/assets/css/header.css">
@@ -123,6 +128,14 @@ function bb_frontend_header(array $options = []): void
 /** Ana səhifə hero header */
 function bb_render_hero_header(array $menuItems, string $currentRoute, string $lang): void
 {
+    $heroSubtitles = [
+        'az' => 'Fatimeyi-Suğra, Həkimə xanımın müqəddəs ziyarətgahı',
+        'en' => 'The holy shrine of Lady Fatima Sugra, Hakima Khanym',
+        'ru' => 'Святая обитель госпожи Фатимы ас-Сугры (Хакимы ханум)',
+        'ar' => "المقام المقدس للسيدة فاطمة الصغرى\nحكيمة خاتون عليها السلام",
+        'fa' => 'زیارتگاه مقدس حضرت فاطمه صغری حکیمه خاتون (سلام‌الله‌علیها)',
+    ];
+    $heroSubtitle = $heroSubtitles[$lang] ?? $heroSubtitles['az'];
 ?>
     <header class="bb-hero-header" id="bbHeader" data-header-type="hero">
         <!-- Fon naxışları -->
@@ -181,8 +194,9 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                 <img src="/public/assets/img/logo.png" alt="<?= bb_sanitize(SITE_NAME) ?>">
             </a>
 
-            <!-- Məscid illustrasiyası -->
+            <!-- Məscid illustrasiyası + subtitle -->
             <div class="bb-hero-mosque">
+                <p class="bb-hero-subtitle"><?= nl2br(bb_sanitize($heroSubtitle)) ?></p>
                 <img src="/public/assets/img/bibiheybet-ziyaretgah.png?v=2" alt="Bibiheybət Məscidi">
             </div>
         </div>

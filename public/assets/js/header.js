@@ -98,7 +98,7 @@
             item.addEventListener('click', function () {
                 var href = this.getAttribute('href');
                 if (href) {
-                    var langMatch = href.match(/\/(en|ru)\//);
+                    var langMatch = href.match(/\/(en|ru|ar|fa)\//);
                     var newLang = langMatch ? langMatch[1] : 'az';
                     if (window.bbApp && window.bbApp.setCookie) {
                         window.bbApp.setCookie('bb_lang', newLang, 365);

@@ -13,13 +13,22 @@ $homeTitle = [
     'az' => 'Hz. Həkimə Xanımın (s) Ziyarətgahı',
     'en' => 'Shrine of Hz. Hakimah Khatun (s)',
     'ru' => 'Святыня Хз. Хакимы Хатун (с)',
+    'ar' => 'المقام المقدس للسيدة حكيمة خاتون (ع)',
+    'fa' => 'زیارتگاه حضرت حکیمه خاتون (س)',
 ];
 
 $homeDesc = [
     'az' => 'Bibiheybət Ziyarətgahı - Hz. Həkimə Xanımın (s) müqəddəs məzarının rəsmi veb saytı.',
     'en' => 'Bibiheybat Shrine - Official website of the holy shrine of Hz. Hakimah Khatun (s).',
     'ru' => 'Святыня Бибиэйбат - Официальный сайт священной гробницы Хз. Хакимы Хатун (с).',
+    'ar' => 'مزار بيبي حيبات - الموقع الرسمي للمقام المقدس للسيدة حكيمة خاتون (ع).',
+    'fa' => 'زیارتگاه بی‌بی حیبات - وب‌سایت رسمی زیارتگاه مقدس حضرت حکیمه خاتون (س).',
 ];
+
+$homeAlternateUrls = [];
+foreach (AVAILABLE_LANGS as $altLang) {
+    $homeAlternateUrls[$altLang] = bb_lang_url('', $altLang);
+}
 
 $seoData = [
     'title'           => $homeTitle[$lang] ?? $homeTitle['az'],
@@ -28,11 +37,7 @@ $seoData = [
     'og_type'         => 'website',
     'schema_type'     => 'WebPage',
     'canonical_url'   => bb_lang_url('', $lang),
-    'alternate_urls'  => [
-        'az' => bb_lang_url('', 'az'),
-        'en' => bb_lang_url('', 'en'),
-        'ru' => bb_lang_url('', 'ru'),
-    ],
+    'alternate_urls'  => $homeAlternateUrls,
 ];
 
 // DB sorğuları
@@ -70,21 +75,29 @@ $_strings = [
         'az' => 'Daha ətraflı',
         'en' => 'Read more',
         'ru' => 'Подробнее',
+        'ar' => 'اقرأ المزيد',
+        'fa' => 'بیشتر بخوانید',
     ],
     'show_more' => [
         'az' => 'Daha çox',
         'en' => 'Show more',
         'ru' => 'Показать ещё',
+        'ar' => 'عرض المزيد',
+        'fa' => 'نمایش بیشتر',
     ],
     'pilgrimages_title' => [
         'az' => 'Ziyarətgahlar',
         'en' => 'Pilgrimages',
         'ru' => 'Святыни',
+        'ar' => 'المقامات والمزارات',
+        'fa' => 'زیارتگاه‌ها',
     ],
     'articles_title' => [
         'az' => 'Məqalələr',
         'en' => 'Articles',
         'ru' => 'Статьи',
+        'ar' => 'المقالات',
+        'fa' => 'مقالات',
     ],
 ];
 
@@ -105,10 +118,10 @@ bb_frontend_header([
          Bölmə: Həzrət haqqında
          ========================================== -->
     <section class="bb-home-hazrat" data-animate>
-        <div class="bb-home-hazrat-ornament" aria-hidden="true">
-            <img src="/public/assets/img/naxis.png" alt="">
-        </div>
         <div class="bb-container bb-text-center">
+            <div class="bb-home-hazrat-ornament" aria-hidden="true">
+                <img src="/public/assets/img/top.webp" alt="">
+            </div>
             <div class="bb-home-hazrat-body">
                 <p class="bb-home-hazrat-text"><?= bb_sanitize($t('hazrat_text')) ?></p>
                 <a href="<?= bb_sanitize(bb_lang_url(bb_get_route('about-hazrat', $lang) . '/', $lang)) ?>"
@@ -123,6 +136,9 @@ bb_frontend_header([
          Bölmə: Məscid haqqında
          ========================================== -->
     <section class="bb-home-mosque" data-animate>
+        <div class="bb-home-mosque-naxis" aria-hidden="true">
+            <img src="/public/assets/img/naxis.png" alt="">
+        </div>
         <div class="bb-home-mosque-bg" aria-hidden="true">
             <img src="/public/assets/img/bibiheybet.png" alt="">
         </div>

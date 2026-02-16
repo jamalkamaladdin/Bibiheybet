@@ -46,7 +46,7 @@ define('ALLOWED_IMAGE_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'webp']);
 // Language
 // ============================================
 define('DEFAULT_LANG', 'az');
-define('AVAILABLE_LANGS', ['az', 'en', 'ru']);
+define('AVAILABLE_LANGS', ['az', 'en', 'ru', 'ar', 'fa']);
 
 // ============================================
 // Session & Security

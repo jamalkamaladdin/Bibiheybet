@@ -56,30 +56,19 @@
     overflow: hidden;
 }
 
-/* Naxis ornament — yarı dairə, sağdan sola drift */
+/* Dekorativ ornament — dairəvi fırlanma */
 .bb-home-hazrat-ornament {
-    position: absolute;
-    top: -120px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 380px;
-    height: 190px;
-    overflow: hidden;
-    opacity: 0.10;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
     pointer-events: none;
-    z-index: 0;
 }
 
 .bb-home-hazrat-ornament img {
-    width: 380px;
-    height: 380px;
-    object-fit: contain;
-    animation: bb-drift-rtl 35s ease-in-out infinite;
-}
-
-@keyframes bb-drift-rtl {
-    0%, 100% { transform: translateX(40px); }
-    50%      { transform: translateX(-40px); }
+    width: 100px;
+    height: auto;
+    opacity: 0.5;
+    animation: bb-spin-cw 35s linear infinite;
 }
 
 /* Həzrət mətn bloku */
@@ -107,12 +96,30 @@
     overflow: hidden;
 }
 
-/* Arxa fon: bibiheybet.png sağ tərəfdə */
+/* Naxis ornament sol üst */
+.bb-home-mosque-naxis {
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 300px;
+    height: 300px;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+    animation: bb-spin-cw 90s linear infinite;
+}
+
+.bb-home-mosque-naxis img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Arxa fon: bibiheybet.png sağ alt küncə */
 .bb-home-mosque-bg {
     position: absolute;
-    right: -5%;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 30px;
+    bottom: 0;
     width: 55%;
     max-width: 700px;
     opacity: 0.15;
@@ -341,9 +348,9 @@
     transform: translateY(0);
 }
 
-/* Naxis ornament-in opacity-si section visibility-dən asılı deyil */
-.bb-home-hazrat.bb-visible .bb-home-hazrat-ornament {
-    opacity: 0.10;
+/* Ornament-in opacity-si section visibility-dən asılı deyil */
+.bb-home-hazrat.bb-visible .bb-home-hazrat-ornament img {
+    opacity: 0.5;
 }
 
 /* ============================================
@@ -359,15 +366,8 @@
         padding: 3rem 0;
     }
 
-    .bb-home-hazrat-ornament {
-        width: 260px;
-        height: 130px;
-        top: -80px;
-    }
-
     .bb-home-hazrat-ornament img {
-        width: 260px;
-        height: 260px;
+        width: 70px;
     }
 
     .bb-home-hazrat-text {
@@ -389,6 +389,14 @@
     .bb-home-mosque-bg {
         width: 80%;
         opacity: 0.08;
+        right: 15px;
+    }
+
+    .bb-home-mosque-naxis {
+        width: 180px;
+        height: 180px;
+        top: -50px;
+        left: -50px;
     }
 
     /* Ziyarətgahlar: 2 sütun */
@@ -426,6 +434,14 @@
     .bb-home-mosque-bg {
         width: 65%;
         opacity: 0.10;
+        right: 20px;
+    }
+
+    .bb-home-mosque-naxis {
+        width: 220px;
+        height: 220px;
+        top: -60px;
+        left: -60px;
     }
 }
 
@@ -455,15 +471,8 @@
         padding: 6rem 0 5rem;
     }
 
-    .bb-home-hazrat-ornament {
-        width: 480px;
-        height: 240px;
-        top: -150px;
-    }
-
     .bb-home-hazrat-ornament img {
-        width: 480px;
-        height: 480px;
+        width: 120px;
     }
 
     .bb-home-hazrat-text {
@@ -498,4 +507,39 @@
     .bb-home-section-title {
         font-size: 2rem;
     }
+}
+
+/* ============================================
+   RTL DƏSTƏK (Ərəb, Fars)
+   ============================================ */
+html[dir="rtl"] .bb-home-hazrat-text,
+html[dir="rtl"] .bb-home-mosque-text,
+html[dir="rtl"] .bb-home-mosque-strong,
+html[dir="rtl"] .bb-home-section-title,
+html[dir="rtl"] .bb-home-pilgrimage-title,
+html[dir="rtl"] .bb-home-article-title {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}
+
+html[dir="rtl"] .bb-home-mosque-content {
+    margin-left: auto;
+    margin-right: 0;
+    text-align: right;
+}
+
+html[dir="rtl"] .bb-home-mosque-strong {
+    border-left: none;
+    border-right: 3px solid var(--bb-color-accent);
+    padding-left: 0;
+    padding-right: 1.2rem;
+}
+
+html[dir="rtl"] .bb-home-mosque-naxis {
+    left: auto;
+    right: -80px;
+}
+
+html[dir="rtl"] .bb-home-mosque-bg {
+    right: auto;
+    left: 30px;
 }

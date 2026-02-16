@@ -206,7 +206,7 @@ function bb_render_jsonld(array $data, string $lang = 'az'): string
     }
 
     // inLanguage
-    $langMap = ['az' => 'az', 'en' => 'en', 'ru' => 'ru'];
+    $langMap = ['az' => 'az', 'en' => 'en', 'ru' => 'ru', 'ar' => 'ar', 'fa' => 'fa'];
     $jsonLd['inLanguage'] = $langMap[$lang] ?? 'az';
 
     $json = json_encode($jsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);

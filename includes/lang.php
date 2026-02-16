@@ -40,6 +40,26 @@ $bb_route_map = [
         'prayers'      => 'molitvy',
         'prayer-times' => 'vremya-namaza',
     ],
+    'ar' => [
+        'articles'     => 'maqalat',
+        'article'      => 'maqala',
+        'pilgrimages'  => 'mazarat',
+        'pilgrimage'   => 'mazar',
+        'about-hazrat' => 'an-al-sayyida',
+        'about-mosque' => 'an-al-masjid',
+        'prayers'      => 'adiyya',
+        'prayer-times' => 'awqat-al-salat',
+    ],
+    'fa' => [
+        'articles'     => 'maqalat-fa',
+        'article'      => 'maqale-fa',
+        'pilgrimages'  => 'ziyaratgahha',
+        'pilgrimage'   => 'ziyaratgah-fa',
+        'about-hazrat' => 'darbare-hazrat',
+        'about-mosque' => 'darbare-masjed',
+        'prayers'      => 'doaha',
+        'prayer-times' => 'owqat-namaz',
+    ],
 ];
 
 /**
@@ -49,6 +69,8 @@ $bb_lang_names = [
     'az' => 'AZ',
     'en' => 'EN',
     'ru' => 'RU',
+    'ar' => 'AR',
+    'fa' => 'FA',
 ];
 
 /**
@@ -58,6 +80,8 @@ $bb_lang_locales = [
     'az' => 'az_AZ',
     'en' => 'en_US',
     'ru' => 'ru_RU',
+    'ar' => 'ar_SA',
+    'fa' => 'fa_IR',
 ];
 
 /**
@@ -324,31 +348,44 @@ function bb_get_alternate_urls(string $routeName, array $slugs): array
 /** Sayt menyusu - hər dil üçün label və route adı */
 $bb_menu = [
     'az' => [
-        ['label' => 'Ana səhifə',         'route' => ''],
-        ['label' => 'Həzrət haqqında',     'route' => 'about-hazrat'],
-        ['label' => 'Məscid haqqında',     'route' => 'about-mosque'],
-        ['label' => 'Dua və ziyarətnamə',  'route' => 'prayers'],
-        ['label' => 'Namaz vaxtları',      'route' => 'prayer-times'],
-        ['label' => 'Ziyarətgahlar',       'route' => 'pilgrimages'],
-        ['label' => 'Məqalələr',           'route' => 'articles'],
+        ['label' => 'Ana səhifə',              'route' => ''],
+        ['label' => 'Həkimə xanım haqqında',   'route' => 'about-hazrat'],
+        ['label' => 'Məscid haqqında',          'route' => 'about-mosque'],
+        ['label' => 'Dua və ziyarətnamə',       'route' => 'prayers'],
+        ['label' => 'Ziyarətgahlar',            'route' => 'pilgrimages'],
+        ['label' => 'Məqalələr',                'route' => 'articles'],
     ],
     'en' => [
-        ['label' => 'Home',            'route' => ''],
-        ['label' => 'About Hazrat',    'route' => 'about-hazrat'],
-        ['label' => 'About Mosque',    'route' => 'about-mosque'],
-        ['label' => 'Prayers',         'route' => 'prayers'],
-        ['label' => 'Prayer Times',    'route' => 'prayer-times'],
-        ['label' => 'Pilgrimages',     'route' => 'pilgrimages'],
-        ['label' => 'Articles',        'route' => 'articles'],
+        ['label' => 'Home',                     'route' => ''],
+        ['label' => 'About the Holy Lady',      'route' => 'about-hazrat'],
+        ['label' => 'About the Mosque',         'route' => 'about-mosque'],
+        ['label' => 'Prayer and Ziyarat Texts', 'route' => 'prayers'],
+        ['label' => 'Other Holy Shrines',       'route' => 'pilgrimages'],
+        ['label' => 'Articles',                 'route' => 'articles'],
     ],
     'ru' => [
-        ['label' => 'Главная',     'route' => ''],
-        ['label' => 'О Хазрат',    'route' => 'about-hazrat'],
-        ['label' => 'О Мечети',    'route' => 'about-mosque'],
-        ['label' => 'Молитвы',     'route' => 'prayers'],
-        ['label' => 'Время намаза', 'route' => 'prayer-times'],
-        ['label' => 'Святыни',     'route' => 'pilgrimages'],
-        ['label' => 'Статьи',      'route' => 'articles'],
+        ['label' => 'Главная',              'route' => ''],
+        ['label' => 'О Её Светлости',       'route' => 'about-hazrat'],
+        ['label' => 'О Мечети',             'route' => 'about-mosque'],
+        ['label' => 'Молитвы и Зияраты',    'route' => 'prayers'],
+        ['label' => 'Святыни',              'route' => 'pilgrimages'],
+        ['label' => 'Статьи',               'route' => 'articles'],
+    ],
+    'ar' => [
+        ['label' => 'الصفحة الرئيسية',       'route' => ''],
+        ['label' => 'نبذة عن السيدة حكيمة',  'route' => 'about-hazrat'],
+        ['label' => 'عن المسجد',              'route' => 'about-mosque'],
+        ['label' => 'الأدعية والزيارات',      'route' => 'prayers'],
+        ['label' => 'المقامات والمزارات',     'route' => 'pilgrimages'],
+        ['label' => 'المقالات',               'route' => 'articles'],
+    ],
+    'fa' => [
+        ['label' => 'صفحه اصلی',                'route' => ''],
+        ['label' => 'درباره حضرت حکیمه',        'route' => 'about-hazrat'],
+        ['label' => 'درباره مسجد',               'route' => 'about-mosque'],
+        ['label' => 'دعاها و زیارت‌نامه‌ها',     'route' => 'prayers'],
+        ['label' => 'زیارتگاه‌ها',               'route' => 'pilgrimages'],
+        ['label' => 'مقالات',                    'route' => 'articles'],
     ],
 ];
 

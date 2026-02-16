@@ -39,7 +39,7 @@ RewriteRule ^admin/ - [L]
 # Dil routing (EN, RU)
 # ============================================
 # /en/... və /ru/... URL-ləri public/index.php-yə yönləndirilir
-RewriteRule ^(en|ru)/(.*)$ public/index.php?lang=$1&route=$2 [L,QSA]
+RewriteRule ^(en|ru|ar|fa)/(.*)$ public/index.php?lang=$1&route=$2 [L,QSA]
 
 # ============================================
 # Default dil routing (AZ)

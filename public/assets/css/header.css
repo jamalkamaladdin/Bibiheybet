@@ -198,6 +198,7 @@
 
 /* Hero məscid */
 .bb-hero-mosque {
+    position: relative;
     width: 100%;
     max-width: 900px;
     margin-top: auto;
@@ -207,6 +208,28 @@
     width: 100%;
     height: auto;
     filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.4));
+}
+
+/* Hero subtitle (iki minarə arasında) */
+.bb-hero-subtitle {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: var(--bb-color-ton2);
+    font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    max-width: 420px;
+    width: 80%;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* ============================================
@@ -610,6 +633,11 @@
         max-width: 1020px;
     }
 
+    .bb-hero-subtitle {
+        font-size: 1.25rem;
+        max-width: 480px;
+    }
+
     /* Kompakt header: desktop nav göstər (flex row with lang) */
     .bb-header-nav {
         display: flex;
@@ -618,4 +646,37 @@
     .bb-header .bb-hamburger {
         display: none;
     }
+}
+
+/* ============================================
+   RTL DƏSTƏK (Ərəb, Fars)
+   ============================================ */
+html[dir="rtl"] .bb-hero-menu,
+html[dir="rtl"] .bb-header-menu {
+    direction: rtl;
+}
+
+html[dir="rtl"] .bb-hero-menu-item a,
+html[dir="rtl"] .bb-header-menu-item a,
+html[dir="rtl"] .bb-mobile-menu-item a {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}
+
+html[dir="rtl"] .bb-hero-subtitle {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}
+
+html[dir="rtl"] .bb-lang-dropdown-list {
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .bb-header-inner {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bb-hero-menu-item a::after,
+html[dir="rtl"] .bb-header-menu-item a::after {
+    left: auto;
+    right: 0;
 }

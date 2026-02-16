@@ -67,11 +67,10 @@ $seoData = [
     'og_type'          => 'website',
     'schema_type'      => 'WebPage',
     'canonical_url'    => bb_lang_url(bb_get_route($pageSlug, $lang) . '/', $lang),
-    'alternate_urls'   => [
-        'az' => bb_lang_url(bb_get_route($pageSlug, 'az') . '/', 'az'),
-        'en' => bb_lang_url(bb_get_route($pageSlug, 'en') . '/', 'en'),
-        'ru' => bb_lang_url(bb_get_route($pageSlug, 'ru') . '/', 'ru'),
-    ],
+    'alternate_urls'   => array_combine(
+        AVAILABLE_LANGS,
+        array_map(fn($l) => bb_lang_url(bb_get_route($pageSlug, $l) . '/', $l), AVAILABLE_LANGS)
+    ),
 ];
 
 bb_frontend_header([
