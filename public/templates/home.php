@@ -192,9 +192,6 @@ bb_frontend_header([
                         <?php else: ?>
                         <div class="bb-home-pilgrimage-placeholder"></div>
                         <?php endif; ?>
-                        <img class="bb-home-pilgrimage-shape"
-                             src="/public/assets/img/shape.png"
-                             alt="" aria-hidden="true">
                     </div>
                     <h3 class="bb-home-pilgrimage-title"><?= bb_sanitize($pName) ?></h3>
                 </a>

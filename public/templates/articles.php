@@ -108,6 +108,13 @@ bb_frontend_header([
 ]);
 ?>
 
+    <div class="bb-container">
+        <?= bb_render_breadcrumbs([
+            ['label' => ['az'=>'Ana səhifə','en'=>'Home','ru'=>'Главная','ar'=>'الرئيسية','fa'=>'خانه'][$lang] ?? 'Ana səhifə', 'url' => bb_lang_url('', $lang)],
+            ['label' => $pageTitle[$lang] ?? $pageTitle['az']],
+        ]) ?>
+    </div>
+
     <!-- Məqalə siyahısı hero -->
     <section class="bb-articles-hero" data-animate>
         <div class="bb-container bb-text-center">

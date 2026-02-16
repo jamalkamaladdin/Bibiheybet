@@ -88,6 +88,13 @@ $labels = [
 $l = $labels[$lang] ?? $labels['az'];
 ?>
 
+    <div class="bb-container">
+        <?= bb_render_breadcrumbs([
+            ['label' => ['az'=>'Ana səhifə','en'=>'Home','ru'=>'Главная','ar'=>'الرئيسية','fa'=>'خانه'][$lang] ?? 'Ana səhifə', 'url' => bb_lang_url('', $lang)],
+            ['label' => $title],
+        ]) ?>
+    </div>
+
     <section class="bb-section bb-pt-section">
         <div class="bb-container-narrow">
             <h1><?= bb_sanitize($title) ?></h1>

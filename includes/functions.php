@@ -483,3 +483,44 @@ function bb_render_flash(): string
 
     return $html;
 }
+
+/**
+ * Breadcrumb HTML render edir.
+ * 
+ * @param array $items Breadcrumb elementləri: [['label' => '...', 'url' => '...'], ...]
+ *                     Son element aktiv səhifədir (url olmaya bilər).
+ * @return string HTML
+ */
+function bb_render_breadcrumbs(array $items): string
+{
+    if (empty($items)) return '';
+
+    $html = '<nav class="bb-breadcrumb" aria-label="Breadcrumb">';
+    $html .= '<ol class="bb-breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">';
+
+    foreach ($items as $i => $item) {
+        $isLast = ($i === count($items) - 1);
+        $pos = $i + 1;
+
+        $html .= '<li class="bb-breadcrumb-item' . ($isLast ? ' bb-breadcrumb-active' : '') . '"';
+        $html .= ' itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+
+        if (!$isLast && !empty($item['url'])) {
+            $html .= '<a href="' . bb_sanitize($item['url']) . '" itemprop="item">';
+            $html .= '<span itemprop="name">' . bb_sanitize($item['label']) . '</span>';
+            $html .= '</a>';
+        } else {
+            $html .= '<span itemprop="name">' . bb_sanitize($item['label']) . '</span>';
+        }
+
+        $html .= '<meta itemprop="position" content="' . $pos . '">';
+        $html .= '</li>';
+
+        if (!$isLast) {
+            $html .= '<li class="bb-breadcrumb-sep" aria-hidden="true">/</li>';
+        }
+    }
+
+    $html .= '</ol></nav>';
+    return $html;
+}

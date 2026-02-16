@@ -48,6 +48,14 @@ bb_frontend_header([
 ]);
 ?>
 
+    <div class="bb-container">
+        <?= bb_render_breadcrumbs([
+            ['label' => ['az'=>'Ana səhifə','en'=>'Home','ru'=>'Главная','ar'=>'الرئيسية','fa'=>'خانه'][$lang] ?? 'Ana səhifə', 'url' => bb_lang_url('', $lang)],
+            ['label' => ['az'=>'Məqalələr','en'=>'Articles','ru'=>'Статьи','ar'=>'المقالات','fa'=>'مقالات'][$lang] ?? 'Məqalələr', 'url' => bb_lang_url(bb_get_route('articles', $lang) . '/', $lang)],
+            ['label' => bb_get_field($article, 'title', $lang)],
+        ]) ?>
+    </div>
+
     <section class="bb-section">
         <div class="bb-container-narrow">
             <h1><?= bb_sanitize(bb_get_field($article, 'title', $lang)) ?></h1>

@@ -69,6 +69,13 @@ bb_frontend_header([
 ]);
 ?>
 
+    <div class="bb-container">
+        <?= bb_render_breadcrumbs([
+            ['label' => ['az'=>'Ana səhifə','en'=>'Home','ru'=>'Главная','ar'=>'الرئيسية','fa'=>'خانه'][$lang] ?? 'Ana səhifə', 'url' => bb_lang_url('', $lang)],
+            ['label' => $pageTitle[$lang] ?? $pageTitle['az']],
+        ]) ?>
+    </div>
+
     <!-- Ziyarətgah siyahısı -->
     <section class="bb-pilgrimages-hero" data-animate>
         <div class="bb-container bb-text-center">
@@ -103,9 +110,6 @@ bb_frontend_header([
                         <?php else: ?>
                         <div class="bb-pilgrimages-card-placeholder"></div>
                         <?php endif; ?>
-                        <img class="bb-pilgrimages-card-shape"
-                             src="/public/assets/img/shape.png"
-                             alt="" aria-hidden="true">
                     </div>
                     <div class="bb-pilgrimages-card-info">
                         <h2 class="bb-pilgrimages-card-title"><?= bb_sanitize($pName) ?></h2>

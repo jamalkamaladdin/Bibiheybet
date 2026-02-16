@@ -194,59 +194,33 @@
     transform: translateY(-4px);
 }
 
-/* Shape frame */
+/* Foto frame */
 .bb-home-pilgrimage-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 0.88;
+    aspect-ratio: 1;
     margin-bottom: 0.8rem;
+    border-radius: var(--bb-radius-md);
+    overflow: hidden;
 }
 
-/* Foto — mask sistemi ilə shape daxilinə tam oturur */
+/* Foto */
 .bb-home-pilgrimage-photo {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1;
-    -webkit-mask-image: url('/public/assets/img/shape-mask.svg');
-    mask-image: url('/public/assets/img/shape-mask.svg');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+    transition: transform 0.5s ease;
+}
+
+.bb-home-pilgrimage-item:hover .bb-home-pilgrimage-photo {
+    transform: scale(1.06);
 }
 
 /* Placeholder foto olmayanda */
 .bb-home-pilgrimage-placeholder {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, var(--bb-bg-secondary) 0%, var(--bb-bg-section) 100%);
-    z-index: 1;
-    -webkit-mask-image: url('/public/assets/img/shape-mask.svg');
-    mask-image: url('/public/assets/img/shape-mask.svg');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-}
-
-/* Shape.png overlay */
-.bb-home-pilgrimage-shape {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: 2;
 }
 
 /* Ziyarətgah başlığı */

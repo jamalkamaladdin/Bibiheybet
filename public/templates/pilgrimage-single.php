@@ -113,18 +113,13 @@ bb_frontend_header([
 ]);
 ?>
 
-    <!-- Geri düyməsi -->
-    <section class="bb-ps-back-section">
-        <div class="bb-container">
-            <a href="<?= bb_sanitize(bb_lang_url(bb_get_route('pilgrimages', $lang) . '/', $lang)) ?>"
-               class="bb-ps-back-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-                <?= bb_sanitize($t('back')) ?>
-            </a>
-        </div>
-    </section>
+    <div class="bb-container">
+        <?= bb_render_breadcrumbs([
+            ['label' => ['az'=>'Ana səhifə','en'=>'Home','ru'=>'Главная','ar'=>'الرئيسية','fa'=>'خانه'][$lang] ?? 'Ana səhifə', 'url' => bb_lang_url('', $lang)],
+            ['label' => ['az'=>'Ziyarətgahlar','en'=>'Holy Shrines','ru'=>'Святыни','ar'=>'المقامات','fa'=>'زیارتگاه‌ها'][$lang] ?? 'Ziyarətgahlar', 'url' => bb_lang_url(bb_get_route('pilgrimages', $lang) . '/', $lang)],
+            ['label' => $pName],
+        ]) ?>
+    </div>
 
     <!-- Əsas kontent -->
     <section class="bb-ps-content-section">

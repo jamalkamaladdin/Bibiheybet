@@ -326,6 +326,56 @@ strong, b {
 }
 
 /* ============================================
+   Breadcrumb
+   ============================================ */
+.bb-breadcrumb {
+    padding: 1.2rem 0 0;
+}
+
+.bb-breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.bb-breadcrumb-item a {
+    color: var(--bb-color-muted);
+    font-size: 0.85rem;
+    transition: color var(--bb-transition-fast);
+}
+
+.bb-breadcrumb-item a:hover {
+    color: var(--bb-color-accent);
+}
+
+.bb-breadcrumb-active span {
+    color: var(--bb-color-ton2);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.bb-breadcrumb-sep {
+    color: var(--bb-color-muted);
+    font-size: 0.75rem;
+    margin: 0 0.5rem;
+    opacity: 0.5;
+    user-select: none;
+}
+
+html[dir="rtl"] .bb-breadcrumb-list {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bb-breadcrumb-item a,
+html[dir="rtl"] .bb-breadcrumb-active span {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+}
+
+/* ============================================
    Responsive Breakpoints (Mobile-first)
    ============================================ */
 
