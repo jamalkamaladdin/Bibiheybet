@@ -331,7 +331,6 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    color: var(--bb-color-accent);
     background: rgba(201, 168, 76, 0.08);
     border: 1px solid rgba(201, 168, 76, 0.15);
     transition: all var(--bb-transition);
@@ -344,8 +343,11 @@
     transform: scale(1.08);
 }
 
-.bb-header-prayer-icon svg {
+.bb-header-prayer-icon img {
     display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
 /* ============================================

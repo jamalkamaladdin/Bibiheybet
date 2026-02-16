@@ -189,11 +189,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                 </nav>
 
                 <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2.5c0 0-2.5 3-2.5 5a2.5 2.5 0 005 0c0-2-2.5-5-2.5-5z" fill="currentColor" opacity="0.6"/>
-                        <path d="M4 21v-7a2 2 0 012-2h1v-1.5a1.5 1.5 0 013 0V12h4v-1.5a1.5 1.5 0 013 0V12h1a2 2 0 012 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 21h20M10 21v-3.5a2 2 0 014 0V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="/public/assets/img/prayer-icon.png" alt="Namaz vaxtları" width="24" height="24">
                 </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
@@ -262,11 +258,7 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
             <!-- Sağ tərəf: namaz ikonu + hamburger -->
             <div class="bb-header-actions">
                 <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2.5c0 0-2.5 3-2.5 5a2.5 2.5 0 005 0c0-2-2.5-5-2.5-5z" fill="currentColor" opacity="0.6"/>
-                        <path d="M4 21v-7a2 2 0 012-2h1v-1.5a1.5 1.5 0 013 0V12h4v-1.5a1.5 1.5 0 013 0V12h1a2 2 0 012 2v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 21h20M10 21v-3.5a2 2 0 014 0V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="/public/assets/img/prayer-icon.png" alt="Namaz vaxtları" width="24" height="24">
                 </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
