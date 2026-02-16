@@ -85,10 +85,22 @@ $bb_lang_locales = [
 ];
 
 /**
+ * Route map-dan bütün dəstəklənən dilləri qaytarır.
+ * config.php-dən asılı deyil — həmişə 5 dil qaytarır.
+ * 
+ * @return array Dil kodları (az, en, ru, ar, fa)
+ */
+function bb_all_langs(): array
+{
+    global $bb_route_map;
+    return array_keys($bb_route_map);
+}
+
+/**
  * Cari dili müəyyən edir.
  * Prioritet: URL prefix > Cookie > Session > Default (az).
  * 
- * @return string Dil kodu (az, en, ru)
+ * @return string Dil kodu (az, en, ru, ar, fa)
  */
 function bb_detect_lang(): string
 {
@@ -96,7 +108,7 @@ function bb_detect_lang(): string
         require_once __DIR__ . '/../config.php';
     }
 
-    $availableLangs = AVAILABLE_LANGS;
+    $availableLangs = bb_all_langs();
     $defaultLang = DEFAULT_LANG;
 
     // 1. URL prefix-dən (GET parametr olaraq gəlir .htaccess-dən)
@@ -126,7 +138,7 @@ function bb_detect_lang(): string
  */
 function bb_set_lang(string $lang): void
 {
-    if (!in_array($lang, AVAILABLE_LANGS)) {
+    if (!in_array($lang, bb_all_langs())) {
         $lang = DEFAULT_LANG;
     }
 
@@ -165,13 +177,13 @@ function bb_get_lang(): string
 }
 
 /**
- * Mövcud dilləri qaytarır.
+ * Mövcud dilləri qaytarır (route map-dan).
  * 
  * @return array
  */
 function bb_get_available_langs(): array
 {
-    return AVAILABLE_LANGS;
+    return bb_all_langs();
 }
 
 /**
@@ -330,7 +342,7 @@ function bb_get_alternate_urls(string $routeName, array $slugs): array
 {
     $urls = [];
 
-    foreach (AVAILABLE_LANGS as $lang) {
+    foreach (bb_all_langs() as $lang) {
         $route = bb_get_route($routeName, $lang);
         $slug = $slugs[$lang] ?? $slugs['az'] ?? '';
 

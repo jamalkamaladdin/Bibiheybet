@@ -34,8 +34,8 @@ $seoData = [
     'schema_type'      => 'WebPage',
     'canonical_url'    => bb_lang_url(bb_get_route('prayer-times', $lang) . '/', $lang),
     'alternate_urls'   => array_combine(
-        AVAILABLE_LANGS,
-        array_map(fn($l) => bb_lang_url(bb_get_route('prayer-times', $l) . '/', $l), AVAILABLE_LANGS)
+        bb_all_langs(),
+        array_map(fn($l) => bb_lang_url(bb_get_route('prayer-times', $l) . '/', $l), bb_all_langs())
     ),
 ];
 

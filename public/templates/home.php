@@ -26,7 +26,7 @@ $homeDesc = [
 ];
 
 $homeAlternateUrls = [];
-foreach (AVAILABLE_LANGS as $altLang) {
+foreach (bb_all_langs() as $altLang) {
     $homeAlternateUrls[$altLang] = bb_lang_url('', $altLang);
 }
 

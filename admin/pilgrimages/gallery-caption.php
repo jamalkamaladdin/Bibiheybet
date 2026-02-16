@@ -32,7 +32,7 @@ if ($imageId <= 0) {
 }
 
 // Yalnız mövcud dillər icazə verilir
-$allowedLangs = AVAILABLE_LANGS;
+$allowedLangs = function_exists('bb_all_langs') ? bb_all_langs() : (defined('AVAILABLE_LANGS') ? AVAILABLE_LANGS : ['az', 'en', 'ru', 'ar', 'fa']);
 if (!in_array($lang, $allowedLangs)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => 'Yanlış dil kodu.']);

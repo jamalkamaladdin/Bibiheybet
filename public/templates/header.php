@@ -28,7 +28,7 @@ function bb_frontend_header(array $options = []): void
     // SEO meta taglar
     $seoHtml = '';
     $defaultAlternateUrls = [];
-    foreach (AVAILABLE_LANGS as $altLang) {
+    foreach (bb_all_langs() as $altLang) {
         $defaultAlternateUrls[$altLang] = bb_lang_url('', $altLang);
     }
 
@@ -101,7 +101,7 @@ function bb_frontend_header(array $options = []): void
                 </ul>
             </nav>
             <div class="bb-mobile-lang">
-                <?php foreach (AVAILABLE_LANGS as $switchLang): ?>
+                <?php foreach (bb_all_langs() as $switchLang): ?>
                     <?php if ($switchLang === $lang): ?>
                 <span class="bb-mobile-lang-item bb-mobile-lang-active"><?= strtoupper($switchLang) ?></span>
                     <?php else: ?>
@@ -175,7 +175,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                             <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg>
                         </button>
                         <ul class="bb-lang-dropdown-list" id="bbLangList">
-                            <?php foreach (AVAILABLE_LANGS as $switchLang): ?>
+                            <?php foreach (bb_all_langs() as $switchLang): ?>
                                 <?php if ($switchLang === $lang): ?>
                             <li><span class="bb-lang-dropdown-item bb-lang-active"><?= strtoupper($switchLang) ?></span></li>
                                 <?php else: ?>
@@ -238,7 +238,7 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
                         <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg>
                     </button>
                     <ul class="bb-lang-dropdown-list" id="bbLangList">
-                        <?php foreach (AVAILABLE_LANGS as $switchLang): ?>
+                        <?php foreach (bb_all_langs() as $switchLang): ?>
                             <?php if ($switchLang === $lang): ?>
                         <li><span class="bb-lang-dropdown-item bb-lang-active"><?= strtoupper($switchLang) ?></span></li>
                             <?php else: ?>
