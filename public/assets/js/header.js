@@ -11,6 +11,7 @@
         initHamburgerMenu();
         initStickyHeader();
         initLangDropdown();
+        initMoreDropdown();
     });
 
     /** Hamburger menyu açma/bağlama (fullscreen) */
@@ -105,6 +106,35 @@
                     }
                 }
             });
+        });
+    }
+
+    /** Əlavə menyu dropdown */
+    function initMoreDropdown() {
+        var dropdown = document.querySelector('.bb-more-dropdown');
+        var toggle = document.querySelector('.bb-more-toggle');
+
+        if (!dropdown || !toggle) return;
+
+        toggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = dropdown.classList.contains('bb-open');
+            dropdown.classList.toggle('bb-open', !isOpen);
+            toggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('bb-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && dropdown.classList.contains('bb-open')) {
+                dropdown.classList.remove('bb-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
         });
     }
 })();

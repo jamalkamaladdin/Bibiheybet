@@ -323,29 +323,6 @@
     gap: var(--bb-space-md);
 }
 
-/* Namaz vaxtları ikonu (header) */
-.bb-header-prayer-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px;
-    margin-left: var(--bb-space-sm);
-    flex-shrink: 0;
-    transition: opacity var(--bb-transition), transform var(--bb-transition);
-}
-
-.bb-header-prayer-icon:hover {
-    opacity: 0.8;
-    transform: scale(1.1);
-}
-
-.bb-header-prayer-icon img {
-    display: block;
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
 /* ============================================
    DİL DROPDOWN (ortaq)
    ============================================ */
@@ -427,6 +404,102 @@
     color: var(--bb-color-accent);
     cursor: default;
     opacity: 0.7;
+}
+
+/* ============================================
+   ƏLAVƏ MENYU DROPDOWN (hamburger dropdown)
+   ============================================ */
+.bb-more-dropdown {
+    position: relative;
+    display: none;
+}
+
+.bb-more-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--bb-radius-sm);
+    transition: all var(--bb-transition);
+}
+
+.bb-more-toggle span {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background-color: var(--bb-color-ton2);
+    border-radius: 2px;
+    transition: all var(--bb-transition);
+}
+
+.bb-more-toggle:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.bb-more-toggle:hover span {
+    background-color: var(--bb-color-accent);
+}
+
+.bb-more-dropdown-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 180px;
+    background-color: var(--bb-bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--bb-radius-sm);
+    box-shadow: var(--bb-shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 10;
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+}
+
+.bb-more-dropdown.bb-open .bb-more-dropdown-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.bb-more-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--bb-color-ton2);
+    transition: all var(--bb-transition-fast);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.bb-more-dropdown-item:hover {
+    color: var(--bb-color-accent);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.bb-more-dropdown-item img,
+.bb-more-dropdown-item svg {
+    flex-shrink: 0;
+    opacity: 0.8;
+}
+
+.bb-more-dropdown-item:hover img,
+.bb-more-dropdown-item:hover svg {
+    opacity: 1;
 }
 
 /* ============================================
@@ -707,6 +780,11 @@
 
     .bb-header .bb-hamburger {
         display: none;
+    }
+
+    /* Desktop: əlavə menyu dropdown göstər */
+    .bb-more-dropdown {
+        display: block;
     }
 }
 

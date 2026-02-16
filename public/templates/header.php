@@ -51,6 +51,17 @@ function bb_frontend_header(array $options = []): void
 
     $menuItems = bb_get_menu($lang);
     $currentRoute = trim($_GET['route'] ?? '', '/');
+
+    $extraMenuLabels = [
+        'az' => ['prayer' => 'Namaz vaxtları', 'quran' => 'Quran dinlə'],
+        'en' => ['prayer' => 'Prayer Times',   'quran' => 'Listen Quran'],
+        'ru' => ['prayer' => 'Время намаза',    'quran' => 'Слушать Коран'],
+        'ar' => ['prayer' => 'أوقات الصلاة',    'quran' => 'استمع للقرآن'],
+        'fa' => ['prayer' => 'اوقات نماز',      'quran' => 'قرآن بشنوید'],
+    ];
+    $extraLabels = $extraMenuLabels[$lang] ?? $extraMenuLabels['az'];
+    $prayerTimesUrl = bb_lang_url(bb_get_route('prayer-times', $lang) . '/', $lang);
+    $quranListenUrl = bb_lang_url(bb_get_route('quran-listen', $lang) . '/', $lang);
 ?>
 <!DOCTYPE html>
 <html lang="<?= bb_sanitize($lang) ?>" dir="<?= $dir ?>">
@@ -99,6 +110,12 @@ function bb_frontend_header(array $options = []): void
                         <a href="<?= bb_sanitize($menuUrl) ?>"><?= bb_sanitize($item['label']) ?></a>
                     </li>
                     <?php endforeach; ?>
+                    <li class="bb-mobile-menu-item bb-mobile-menu-extra<?= (strpos($currentRoute, bb_get_route('prayer-times', $lang)) !== false) ? ' active' : '' ?>">
+                        <a href="<?= bb_sanitize($prayerTimesUrl) ?>"><?= bb_sanitize($extraLabels['prayer']) ?></a>
+                    </li>
+                    <li class="bb-mobile-menu-item bb-mobile-menu-extra<?= (strpos($currentRoute, bb_get_route('quran-listen', $lang)) !== false) ? ' active' : '' ?>">
+                        <a href="<?= bb_sanitize($quranListenUrl) ?>"><?= bb_sanitize($extraLabels['quran']) ?></a>
+                    </li>
                 </ul>
             </nav>
             <div class="bb-mobile-lang">
@@ -129,7 +146,7 @@ function bb_frontend_header(array $options = []): void
 /** Ana səhifə hero header */
 function bb_render_hero_header(array $menuItems, string $currentRoute, string $lang, string $heroSubtitleOverride = ''): void
 {
-    $prayerUrl = bb_lang_url(bb_get_route('prayer-times', $lang) . '/', $lang);
+    global $extraLabels, $prayerTimesUrl, $quranListenUrl;
     $heroSubtitles = [
         'az' => 'Fatimeyi-Suğra, Həkimə xanımın müqəddəs ziyarətgahı',
         'en' => 'The holy shrine of Lady Fatima Sugra, Hakima Khanym',
@@ -186,11 +203,17 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
                             <?php endforeach; ?>
                         </ul>
                     </div>
+                    <div class="bb-more-dropdown" id="bbMoreDropdown">
+                        <button type="button" class="bb-more-toggle" id="bbMoreToggle" aria-expanded="false" aria-label="Əlavə menyu">
+                            <span></span><span></span><span></span>
+                        </button>
+                        <ul class="bb-more-dropdown-list" id="bbMoreList">
+                            <li><a href="<?= bb_sanitize($prayerTimesUrl) ?>" class="bb-more-dropdown-item"><img src="/public/assets/img/namaz-icon.png" alt="" width="18" height="18"><?= bb_sanitize($extraLabels['prayer']) ?></a></li>
+                            <li><a href="<?= bb_sanitize($quranListenUrl) ?>" class="bb-more-dropdown-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><?= bb_sanitize($extraLabels['quran']) ?></a></li>
+                        </ul>
+                    </div>
                 </nav>
 
-                <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
-                    <img src="/public/assets/img/namaz-icon.png" alt="Namaz vaxtları" width="24" height="24">
-                </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
@@ -214,7 +237,7 @@ function bb_render_hero_header(array $menuItems, string $currentRoute, string $l
 /** Digər səhifələr üçün kompakt header */
 function bb_render_compact_header(array $menuItems, string $currentRoute, string $lang): void
 {
-    $prayerUrl = bb_lang_url(bb_get_route('prayer-times', $lang) . '/', $lang);
+    global $extraLabels, $prayerTimesUrl, $quranListenUrl;
 ?>
     <header class="bb-header" id="bbHeader" data-header-type="compact">
         <div class="bb-header-inner bb-container">
@@ -253,13 +276,19 @@ function bb_render_compact_header(array $menuItems, string $currentRoute, string
                         <?php endforeach; ?>
                     </ul>
                 </div>
+                <div class="bb-more-dropdown" id="bbMoreDropdown">
+                    <button type="button" class="bb-more-toggle" id="bbMoreToggle" aria-expanded="false" aria-label="Əlavə menyu">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <ul class="bb-more-dropdown-list" id="bbMoreList">
+                        <li><a href="<?= bb_sanitize($prayerTimesUrl) ?>" class="bb-more-dropdown-item"><img src="/public/assets/img/namaz-icon.png" alt="" width="18" height="18"><?= bb_sanitize($extraLabels['prayer']) ?></a></li>
+                        <li><a href="<?= bb_sanitize($quranListenUrl) ?>" class="bb-more-dropdown-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><?= bb_sanitize($extraLabels['quran']) ?></a></li>
+                    </ul>
+                </div>
             </nav>
 
-            <!-- Sağ tərəf: namaz ikonu + hamburger -->
+            <!-- Sağ tərəf: hamburger -->
             <div class="bb-header-actions">
-                <a href="<?= bb_sanitize($prayerUrl) ?>" class="bb-header-prayer-icon" aria-label="Namaz vaxtları" title="Namaz vaxtları">
-                    <img src="/public/assets/img/namaz-icon.png" alt="Namaz vaxtları" width="24" height="24">
-                </a>
                 <button type="button" class="bb-hamburger" id="bbHamburger" aria-label="Menyunu aç" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
