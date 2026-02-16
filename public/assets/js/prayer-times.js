@@ -149,10 +149,9 @@
         }
 
         var saved = getCookie('bb_region');
-        if (saved && REGIONS[saved]) {
-            regionSelect.value = saved;
-            onRegionChange(saved);
-        }
+        var defaultRegion = (saved && REGIONS[saved]) ? saved : 'baki';
+        regionSelect.value = defaultRegion;
+        onRegionChange(defaultRegion);
     }
 
     /* =============================================
@@ -169,12 +168,17 @@
 
         currentRegion = regionKey;
 
-        calculateToday(region);
-        calculateMonthly(region);
-
         todaySection.style.display = '';
         monthlySection.style.display = '';
         methodEl.style.display = '';
+
+        calculateToday(region);
+
+        try {
+            calculateMonthly(region);
+        } catch (e) {
+            if (typeof console !== 'undefined') console.error('Monthly calculation error:', e);
+        }
 
         setCookie('bb_region', regionKey, 365);
     }

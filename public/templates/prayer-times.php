@@ -222,7 +222,7 @@ $l = $labels[$lang] ?? $labels['az'];
 <?php
 bb_frontend_footer([
     'extra_js' => [
-        'https://cdn.jsdelivr.net/npm/praytime/praytime.js',
+        'https://cdn.jsdelivr.net/npm/praytime/src/praytime.js',
         '/public/assets/js/prayer-times.js',
     ],
 ]);
