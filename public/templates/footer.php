@@ -96,12 +96,17 @@ function bb_frontend_footer(array $options = []): void
     </div>
 
     <!-- JS -->
-    <script src="/public/assets/js/app.js"></script>
-    <script src="/public/assets/js/header.js"></script>
-    <script src="/public/assets/js/mini-player.js"></script>
+    <?php $jsVer = '?v=' . time(); ?>
+    <script src="/public/assets/js/app.js<?= $jsVer ?>"></script>
+    <script src="/public/assets/js/header.js<?= $jsVer ?>"></script>
+    <script src="/public/assets/js/mini-player.js<?= $jsVer ?>"></script>
     <?php if (!empty($options['extra_js'])): ?>
         <?php foreach ((array)$options['extra_js'] as $js): ?>
+            <?php if (str_starts_with($js, 'http')): ?>
     <script src="<?= bb_sanitize($js) ?>"></script>
+            <?php else: ?>
+    <script src="<?= bb_sanitize($js) ?><?= $jsVer ?>"></script>
+            <?php endif; ?>
         <?php endforeach; ?>
     <?php endif; ?>
 </body>

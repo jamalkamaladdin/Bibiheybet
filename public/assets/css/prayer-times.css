@@ -1,14 +1,15 @@
 /**
  * Bibiheybet.com - Namaz Vaxtları Stilləri
  * 
- * Bu gün kartları, aylıq cədvəl, dropdown, responsive.
+ * Kompakt kartlar, aylıq cədvəl, responsive.
+ * Mobil: siyahı formatı. Desktop: grid.
  */
 
 /* ============================================
    Bölmə
    ============================================ */
 .bb-pt-section {
-    padding-top: var(--bb-space-xl);
+    padding-top: var(--bb-space-lg);
     padding-bottom: var(--bb-space-2xl);
 }
 
@@ -17,13 +18,22 @@
    ============================================ */
 .bb-pt-header {
     text-align: center;
-    max-width: 700px;
-    margin: 0 auto var(--bb-space-md);
+    max-width: 640px;
+    margin: 0 auto var(--bb-space-sm);
+}
+
+.bb-pt-header h1 {
+    font-size: 2rem;
 }
 
 .bb-pt-header .bb-separator {
     margin-left: auto;
     margin-right: auto;
+}
+
+.bb-pt-header .bb-text-muted {
+    font-size: 0.88rem;
+    margin-bottom: 0;
 }
 
 /* ============================================
@@ -34,38 +44,36 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--bb-space-md);
-    margin: var(--bb-space-xl) 0 var(--bb-space-lg);
+    margin: var(--bb-space-lg) auto;
     flex-wrap: wrap;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 520px;
 }
 
 .bb-pt-select-wrap {
     position: relative;
     flex: 1;
-    min-width: 200px;
-    max-width: 360px;
+    min-width: 180px;
+    max-width: 300px;
 }
 
 .bb-pt-select {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.9rem;
     font-family: var(--bb-font-primary);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     font-weight: 500;
     color: var(--bb-color-heading);
     background-color: var(--bb-bg-secondary);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--bb-radius-md);
+    border-radius: var(--bb-radius-sm);
     cursor: pointer;
     transition: border-color var(--bb-transition);
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a9a8a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239a9a8a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 1rem center;
-    padding-right: 2.5rem;
+    background-position: right 0.75rem center;
+    padding-right: 2rem;
 }
 
 .bb-pt-select:hover,
@@ -80,7 +88,7 @@
 }
 
 .bb-pt-date {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: var(--bb-color-muted);
     white-space: nowrap;
 }
@@ -91,12 +99,12 @@
 .bb-pt-subtitle {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.2rem;
+    gap: 0.4rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--bb-color-heading);
-    margin: var(--bb-space-2xl) 0 var(--bb-space-lg);
-    padding-bottom: var(--bb-space-sm);
+    margin: var(--bb-space-xl) 0 var(--bb-space-md);
+    padding-bottom: 0.4rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -107,64 +115,69 @@
     flex-shrink: 0;
 }
 
+.bb-pt-subtitle-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
 /* ============================================
-   Namaz vaxtları grid (Bu gün)
+   Namaz vaxtları grid (Desktop: kompakt kartlar)
    ============================================ */
 .bb-pt-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--bb-space-md);
+    gap: 8px;
 }
 
 /* ============================================
-   Kart stili
+   Kart stili (kompakt)
    ============================================ */
 .bb-pt-card {
     background-color: var(--bb-bg-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--bb-radius-md);
-    padding: var(--bb-space-lg) var(--bb-space-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--bb-radius-sm);
+    padding: 0.75rem 0.6rem;
     text-align: center;
-    transition: all var(--bb-transition);
+    transition: all var(--bb-transition-fast);
 }
 
 .bb-pt-card:hover {
-    background-color: var(--bb-bg-section);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Aktiv namaz vaxtı — qızılı vurğu */
+/* Aktiv namaz vaxtı */
 .bb-pt-card-active {
     border-color: var(--bb-color-accent);
-    background-color: rgba(201, 168, 76, 0.08);
+    background-color: rgba(201, 168, 76, 0.07);
 }
 
 .bb-pt-card-active .bb-pt-card-time {
     color: var(--bb-color-accent);
 }
 
-/* Gecə yarısı — tam eni */
+/* Gecə yarısı */
 .bb-pt-card-midnight {
     grid-column: 1 / -1;
-    max-width: 280px;
+    max-width: 200px;
     justify-self: center;
 }
 
 .bb-pt-card-label {
-    font-size: 0.85rem;
+    font-size: 0.68rem;
     font-weight: 500;
     color: var(--bb-color-muted);
-    margin-bottom: var(--bb-space-sm);
+    margin-bottom: 0.2rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
 }
 
 .bb-pt-card-time {
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--bb-color-heading);
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
 /* ============================================
@@ -174,35 +187,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--bb-space-lg);
-    margin-bottom: var(--bb-space-lg);
+    gap: var(--bb-space-md);
+    margin-bottom: var(--bb-space-md);
 }
 
 .bb-pt-month-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background-color: var(--bb-bg-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--bb-color-heading);
     cursor: pointer;
-    transition: all var(--bb-transition);
+    transition: all var(--bb-transition-fast);
 }
 
 .bb-pt-month-btn:hover {
     border-color: var(--bb-color-accent);
     color: var(--bb-color-accent);
-    background-color: rgba(201, 168, 76, 0.08);
 }
 
 .bb-pt-month-label {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--bb-color-heading);
-    min-width: 170px;
+    min-width: 140px;
     text-align: center;
 }
 
@@ -212,16 +224,16 @@
 .bb-pt-table-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border-radius: var(--bb-radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--bb-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .bb-pt-table {
     width: 100%;
-    min-width: 720px;
+    min-width: 680px;
     border-collapse: collapse;
     font-variant-numeric: tabular-nums;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
 }
 
 .bb-pt-table thead {
@@ -229,42 +241,41 @@
 }
 
 .bb-pt-table th {
-    padding: 0.85rem 0.6rem;
-    font-size: 0.72rem;
+    padding: 0.6rem 0.4rem;
+    font-size: 0.65rem;
     font-weight: 600;
     color: var(--bb-color-accent);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     white-space: nowrap;
     text-align: center;
-    border-bottom: 2px solid rgba(201, 168, 76, 0.15);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12);
 }
 
 .bb-pt-table .bb-pt-th-day {
     text-align: left;
-    padding-left: 1rem;
+    padding-left: 0.75rem;
 }
 
 .bb-pt-table td {
-    padding: 0.65rem 0.6rem;
+    padding: 0.45rem 0.4rem;
     text-align: center;
     color: var(--bb-color-ton2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     white-space: nowrap;
 }
 
-/* Alternating row colours */
 .bb-pt-table tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.015);
+    background-color: rgba(255, 255, 255, 0.012);
 }
 
 .bb-pt-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
 /* Bu gün vurğusu */
 .bb-pt-row-today {
-    background-color: rgba(201, 168, 76, 0.1) !important;
+    background-color: rgba(201, 168, 76, 0.08) !important;
 }
 
 .bb-pt-row-today td {
@@ -282,94 +293,195 @@
     font-weight: 600;
     color: var(--bb-color-heading);
     text-align: left !important;
-    padding-left: 1rem !important;
-    min-width: 42px;
+    padding-left: 0.75rem !important;
+    min-width: 32px;
 }
 
 /* ============================================
    Metod qeydi
    ============================================ */
 .bb-pt-method {
-    margin-top: var(--bb-space-xl);
-    font-size: 0.8rem;
+    margin-top: var(--bb-space-lg);
+    font-size: 0.72rem;
     color: var(--bb-color-muted);
     text-align: center;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 /* ============================================
-   Responsive
+   Desktop (1024px+)
    ============================================ */
-
-/* Tablet (768px+) */
-@media (min-width: 768px) {
-    .bb-pt-card-time {
-        font-size: 1.8rem;
-    }
-
-    .bb-pt-table {
-        font-size: 0.9rem;
-    }
-
-    .bb-pt-table th {
-        font-size: 0.75rem;
-    }
-}
-
-/* Kiçik ekranlar */
-@media (max-width: 767px) {
-    .bb-pt-controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .bb-pt-select-wrap {
-        max-width: 100%;
-    }
-
-    .bb-pt-date {
-        text-align: center;
-    }
-
-    .bb-pt-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .bb-pt-card-midnight {
-        grid-column: 1 / -1;
-        max-width: 100%;
-    }
-
-    .bb-pt-card {
-        padding: var(--bb-space-md);
+@media (min-width: 1024px) {
+    .bb-pt-header h1 {
+        font-size: 2.5rem;
     }
 
     .bb-pt-card-time {
         font-size: 1.4rem;
     }
 
-    .bb-pt-subtitle {
-        font-size: 1.05rem;
-        margin-top: var(--bb-space-xl);
-    }
-
-    .bb-pt-month-nav {
-        gap: var(--bb-space-md);
-    }
-
-    .bb-pt-month-label {
-        font-size: 1rem;
-        min-width: 140px;
+    .bb-pt-card {
+        padding: 1rem 0.75rem;
     }
 }
 
-/* Çox kiçik ekranlar */
-@media (max-width: 400px) {
-    .bb-pt-card-time {
-        font-size: 1.2rem;
+/* ============================================
+   Tablet (768px - 1023px)
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .bb-pt-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+}
+
+/* ============================================
+   Mobil (< 768px) — siyahı formatı
+   ============================================ */
+@media (max-width: 767px) {
+    .bb-pt-section {
+        padding-top: var(--bb-space-md);
+    }
+
+    .bb-pt-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .bb-pt-header .bb-text-muted {
+        font-size: 0.8rem;
+    }
+
+    .bb-pt-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        margin-top: var(--bb-space-md);
+        margin-bottom: var(--bb-space-md);
+    }
+
+    .bb-pt-select-wrap {
+        max-width: 100%;
+    }
+
+    .bb-pt-select {
+        padding: 0.55rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .bb-pt-date {
+        text-align: center;
+        font-size: 0.78rem;
+    }
+
+    .bb-pt-subtitle {
+        font-size: 0.9rem;
+        margin-top: var(--bb-space-lg);
+        margin-bottom: 0.5rem;
+    }
+
+    /* Grid → siyahı formatı */
+    .bb-pt-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background-color: rgba(255, 255, 255, 0.04);
+        border-radius: var(--bb-radius-sm);
+        overflow: hidden;
+    }
+
+    .bb-pt-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.7rem 1rem;
+        border-radius: 0;
+        border: none;
+        text-align: left;
+        background-color: var(--bb-bg-secondary);
+    }
+
+    .bb-pt-card:hover {
+        border-color: transparent;
+    }
+
+    .bb-pt-card-active {
+        background-color: rgba(201, 168, 76, 0.07);
+        border-left: 3px solid var(--bb-color-accent);
+        border-right: none;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .bb-pt-card-midnight {
+        grid-column: auto;
+        max-width: none;
+        justify-self: auto;
     }
 
     .bb-pt-card-label {
+        margin-bottom: 0;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+    }
+
+    .bb-pt-card-time {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    /* Ay naviqasiyası */
+    .bb-pt-month-nav {
+        gap: var(--bb-space-sm);
+        margin-bottom: var(--bb-space-sm);
+    }
+
+    .bb-pt-month-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .bb-pt-month-label {
+        font-size: 0.88rem;
+        min-width: 120px;
+    }
+
+    /* Cədvəl */
+    .bb-pt-table {
         font-size: 0.75rem;
+    }
+
+    .bb-pt-table th {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.6rem;
+    }
+
+    .bb-pt-table td {
+        padding: 0.4rem 0.3rem;
+    }
+
+    .bb-pt-method {
+        font-size: 0.68rem;
+        margin-top: var(--bb-space-md);
+    }
+}
+
+/* ============================================
+   Çox kiçik ekranlar (< 400px)
+   ============================================ */
+@media (max-width: 400px) {
+    .bb-pt-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .bb-pt-card {
+        padding: 0.6rem 0.8rem;
+    }
+
+    .bb-pt-card-label {
+        font-size: 0.72rem;
+    }
+
+    .bb-pt-card-time {
+        font-size: 0.92rem;
     }
 }
