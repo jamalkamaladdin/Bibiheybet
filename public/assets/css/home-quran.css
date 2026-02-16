@@ -61,12 +61,12 @@
    Player — kompakt, mərkəzli
    ============================================ */
 .bb-home-qp {
-    max-width: 520px;
+    max-width: 720px;
     margin: 2.5rem auto 0;
     background-color: var(--bb-bg-secondary);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--bb-radius-lg);
-    padding: 2rem 2rem 1.5rem;
+    padding: 2.5rem 3rem 2rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -76,21 +76,21 @@
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-    margin-bottom: 1.5rem;
-    min-height: 52px;
+    margin-bottom: 2rem;
+    min-height: 60px;
     justify-content: center;
 }
 
 .bb-home-qp-arabic {
     font-family: var(--bb-font-arabic);
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: var(--bb-color-heading);
     line-height: 1.6;
     transition: all var(--bb-transition);
 }
 
 .bb-home-qp-name {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--bb-color-muted);
     font-weight: 500;
     letter-spacing: 0.03em;
@@ -103,16 +103,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 1.25rem;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .bb-home-qp-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: none;
     border: none;
@@ -130,8 +130,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     background: linear-gradient(135deg, #c9a84c, #d4b45c);
     border: none;
@@ -165,16 +165,16 @@
 .bb-home-qp-time {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    font-size: 0.72rem;
+    gap: 0.75rem;
+    font-size: 0.82rem;
     color: var(--bb-color-muted);
     font-variant-numeric: tabular-nums;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
 }
 
 .bb-home-qp-progress {
     flex: 1;
-    height: 4px;
+    height: 5px;
     background-color: rgba(255, 255, 255, 0.08);
     border-radius: 2px;
     cursor: pointer;
@@ -199,14 +199,14 @@
    ============================================ */
 .bb-home-qp-selects {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .bb-home-qp-select {
     flex: 1;
-    padding: 0.55rem 1.8rem 0.55rem 0.75rem;
+    padding: 0.7rem 2rem 0.7rem 0.9rem;
     font-family: var(--bb-font-primary);
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     font-weight: 500;
     color: var(--bb-color-heading);
     background-color: rgba(255, 255, 255, 0.04);
@@ -290,17 +290,75 @@
     }
 
     .bb-home-quran-ornament img {
-        width: 140px;
-        height: 140px;
+        width: 160px;
+        height: 160px;
+    }
+
+    .bb-home-quran-subtitle {
+        font-size: 1rem;
+        max-width: 560px;
     }
 
     .bb-home-qp {
-        max-width: 540px;
-        padding: 2.5rem 2.5rem 2rem;
+        max-width: 800px;
+        padding: 3rem 3.5rem 2.5rem;
+    }
+
+    .bb-home-qp-display {
+        margin-bottom: 2.5rem;
+        min-height: 72px;
     }
 
     .bb-home-qp-arabic {
-        font-size: 1.7rem;
+        font-size: 2.5rem;
+    }
+
+    .bb-home-qp-name {
+        font-size: 1rem;
+    }
+
+    .bb-home-qp-controls {
+        gap: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .bb-home-qp-btn {
+        width: 52px;
+        height: 52px;
+    }
+
+    .bb-home-qp-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .bb-home-qp-play {
+        width: 80px;
+        height: 80px;
+    }
+
+    .bb-home-qp-play svg {
+        width: 34px;
+        height: 34px;
+    }
+
+    .bb-home-qp-time {
+        gap: 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    .bb-home-qp-progress {
+        height: 6px;
+    }
+
+    .bb-home-qp-selects {
+        gap: 1rem;
+    }
+
+    .bb-home-qp-select {
+        padding: 0.8rem 2.2rem 0.8rem 1rem;
+        font-size: 0.95rem;
     }
 }
 
