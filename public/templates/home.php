@@ -224,14 +224,6 @@ $ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
             <div class="bb-home-hazrat-ornament" aria-hidden="true">
                 <img src="/public/assets/img/naxis.png" alt="">
             </div>
-            <div class="bb-home-hazrat-body">
-                <p class="bb-home-hazrat-text"><?= bb_sanitize($t('hazrat_text')) ?></p>
-                <a href="<?= bb_sanitize(bb_lang_url(bb_get_route('about-hazrat', $lang) . '/', $lang)) ?>"
-                   class="bb-btn bb-btn-gold">
-                    <?= bb_sanitize($t('read_more')) ?>
-                </a>
-            </div>
-
             <?php if (!empty($xanimList)): ?>
             <div class="bb-home-xanim-subsection">
                 <h2 class="bb-home-section-title"><?= bb_sanitize($t('xanim_title')) ?></h2>

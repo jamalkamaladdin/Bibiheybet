@@ -170,6 +170,12 @@ function bb_admin_menu_items(): array
             'url'   => '/admin/pilgrimages/',
             'icon'  => '&#x1F54C;', // mosque
         ],
+        [
+            'type'  => 'link',
+            'label' => 'Xanım haqqında',
+            'url'   => '/admin/xanim-haqqinda/',
+            'icon'  => '&#x1F9D5;', // woman
+        ],
         ['type' => 'separator'],
         [
             'type'  => 'link',

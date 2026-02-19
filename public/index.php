@@ -70,6 +70,8 @@ if (empty($firstSegment)) {
                 }
                 break;
             case 'about-hazrat':
+                $pageName = 'xanim-list';
+                break;
             case 'about-mosque':
             case 'prayers':
                 $pageName = 'page';

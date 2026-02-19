@@ -28,8 +28,8 @@ $seoData = [
     'lang'             => $lang,
     'og_type'          => 'website',
     'schema_type'      => 'WebPage',
-    'canonical_url'    => bb_lang_url(bb_get_route('xanim-haqqinda', $lang) . '/', $lang),
-    'alternate_urls'   => bb_get_alternate_urls('xanim-haqqinda', []),
+    'canonical_url'    => bb_lang_url(bb_get_route('about-hazrat', $lang) . '/', $lang),
+    'alternate_urls'   => bb_get_alternate_urls('about-hazrat', []),
 ];
 
 $items = $db->query(
