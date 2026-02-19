@@ -98,6 +98,12 @@
     margin-bottom: 2rem;
 }
 
+/* Həkimə xanım haqqında alt-bölmə */
+.bb-home-xanim-subsection {
+    margin-top: 4rem;
+    width: 100%;
+}
+
 /* ============================================
    Bölmə: Məscid haqqında (açıq fon)
    ============================================ */

@@ -29,6 +29,7 @@ var bbGallery = {
 
         this.pilgrimageId = parseInt(this.grid.dataset.pilgrimageId) || 0;
         this.csrfToken = this.grid.dataset.csrf || '';
+        this.galleryBase = this.grid.dataset.galleryBase || '/admin/pilgrimages/';
 
         if (!this.pilgrimageId) return;
 
@@ -131,7 +132,7 @@ var bbGallery = {
         var placeholder = self.createPlaceholder();
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/admin/pilgrimages/gallery-upload.php', true);
+        xhr.open('POST', self.galleryBase + 'gallery-upload.php', true);
 
         xhr.onload = function () {
             placeholder.remove();
@@ -248,7 +249,7 @@ var bbGallery = {
         formData.append('csrf_token', this.csrfToken);
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/admin/pilgrimages/gallery-delete.php', true);
+        xhr.open('POST', this.galleryBase + 'gallery-delete.php', true);
 
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -367,7 +368,7 @@ var bbGallery = {
         formData.append('csrf_token', this.csrfToken);
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/admin/pilgrimages/gallery-reorder.php', true);
+        xhr.open('POST', this.galleryBase + 'gallery-reorder.php', true);
 
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -432,7 +433,7 @@ var bbGallery = {
         formData.append('csrf_token', this.csrfToken);
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/admin/pilgrimages/gallery-caption.php', true);
+        xhr.open('POST', this.galleryBase + 'gallery-caption.php', true);
 
         xhr.onload = function () {
             if (xhr.status === 200) {

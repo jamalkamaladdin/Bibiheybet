@@ -86,6 +86,16 @@ if (empty($firstSegment)) {
             case 'search':
                 $pageName = 'search';
                 break;
+            case 'xanim-haqqinda':
+                $pageName = 'xanim-list';
+                break;
+            case 'xanim':
+                $pageName = 'xanim-single';
+                $pageSlug = $secondSegment;
+                if (empty($pageSlug)) {
+                    $pageName = '404';
+                }
+                break;
             default:
                 $pageName = '404';
                 break;

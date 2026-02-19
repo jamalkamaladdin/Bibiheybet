@@ -1,19 +1,19 @@
 <?php
 /**
- * Bibiheybet.com - Ziyarətgah Formu (Ortaq Template)
- * 
+ * Bibiheybet.com - Xanım haqqında Formu (Ortaq Template)
+ *
  * create.php və edit.php tərəfindən istifadə olunur.
- * Dəyişənlər: $old, $errors, $pilgrimage (edit üçün), $galleryImages (edit üçün).
+ * Dəyişənlər: $old, $errors, $xanim (edit üçün), $galleryImages (edit üçün).
  */
 
-$isEdit = isset($pilgrimage);
-$pageLabel = $isEdit ? 'Ziyarətgah Redaktə' : 'Yeni Ziyarətgah';
+$isEdit = isset($xanim);
+$pageLabel = $isEdit ? 'Məqalə Redaktə' : 'Yeni Məqalə';
 $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
 ?>
 
 <div class="bb-page-header">
     <h2><?= bb_sanitize($pageLabel) ?></h2>
-    <a href="/admin/pilgrimages/" class="bb-btn bb-btn-outline bb-btn-sm">&larr; Geri</a>
+    <a href="/admin/xanim-haqqinda/" class="bb-btn bb-btn-outline bb-btn-sm">&larr; Geri</a>
 </div>
 
 <?php if (!empty($errors)): ?>
@@ -91,7 +91,7 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                                         <input type="file" name="og_image_<?= $lang ?>" accept="image/*" class="bb-file-input">
                                         <?php
                                             $ogField = "og_image_{$lang}";
-                                            $ogVal = $isEdit ? ($pilgrimage[$ogField] ?? '') : '';
+                                            $ogVal = $isEdit ? ($xanim[$ogField] ?? '') : '';
                                         ?>
                                         <?php if ($ogVal): ?>
                                             <div class="bb-image-preview">
@@ -117,9 +117,9 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                     </div>
 
                     <div class="bb-gallery-grid" id="bbGalleryGrid"
-                         data-pilgrimage-id="<?= (int)$pilgrimage['id'] ?>"
+                         data-pilgrimage-id="<?= (int)$xanim['id'] ?>"
                          data-csrf="<?= bb_sanitize(bb_generate_csrf_token()) ?>"
-                         data-gallery-base="/admin/pilgrimages/">
+                         data-gallery-base="/admin/xanim-haqqinda/">
                         <?php foreach ($galleryImages as $gi): ?>
                             <div class="bb-gallery-item" data-id="<?= (int)$gi['id'] ?>" draggable="true">
                                 <div class="bb-gallery-img">
@@ -179,7 +179,7 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                 <div class="bb-form-group">
                     <div class="bb-image-upload" data-field="featured_image">
                         <input type="file" name="featured_image" accept="image/*" class="bb-file-input">
-                        <?php $fi = $isEdit ? ($pilgrimage['featured_image'] ?? '') : ''; ?>
+                        <?php $fi = $isEdit ? ($xanim['featured_image'] ?? '') : ''; ?>
                         <?php if ($fi): ?>
                             <div class="bb-image-preview">
                                 <img src="/<?= bb_sanitize($fi) ?>" alt="Featured">
@@ -191,7 +191,7 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                     <label>EN üçün fərqli foto</label>
                     <div class="bb-image-upload" data-field="featured_image_en">
                         <input type="file" name="featured_image_en" accept="image/*" class="bb-file-input">
-                        <?php $fien = $isEdit ? ($pilgrimage['featured_image_en'] ?? '') : ''; ?>
+                        <?php $fien = $isEdit ? ($xanim['featured_image_en'] ?? '') : ''; ?>
                         <?php if ($fien): ?>
                             <div class="bb-image-preview">
                                 <img src="/<?= bb_sanitize($fien) ?>" alt="Featured EN">
@@ -203,7 +203,7 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                     <label>RU üçün fərqli foto</label>
                     <div class="bb-image-upload" data-field="featured_image_ru">
                         <input type="file" name="featured_image_ru" accept="image/*" class="bb-file-input">
-                        <?php $firu = $isEdit ? ($pilgrimage['featured_image_ru'] ?? '') : ''; ?>
+                        <?php $firu = $isEdit ? ($xanim['featured_image_ru'] ?? '') : ''; ?>
                         <?php if ($firu): ?>
                             <div class="bb-image-preview">
                                 <img src="/<?= bb_sanitize($firu) ?>" alt="Featured RU">
@@ -215,7 +215,7 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                     <label>AR üçün fərqli foto</label>
                     <div class="bb-image-upload" data-field="featured_image_ar">
                         <input type="file" name="featured_image_ar" accept="image/*" class="bb-file-input">
-                        <?php $fiar = $isEdit ? ($pilgrimage['featured_image_ar'] ?? '') : ''; ?>
+                        <?php $fiar = $isEdit ? ($xanim['featured_image_ar'] ?? '') : ''; ?>
                         <?php if ($fiar): ?>
                             <div class="bb-image-preview">
                                 <img src="/<?= bb_sanitize($fiar) ?>" alt="Featured AR">
@@ -227,7 +227,7 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
                     <label>FA üçün fərqli foto</label>
                     <div class="bb-image-upload" data-field="featured_image_fa">
                         <input type="file" name="featured_image_fa" accept="image/*" class="bb-file-input">
-                        <?php $fifa = $isEdit ? ($pilgrimage['featured_image_fa'] ?? '') : ''; ?>
+                        <?php $fifa = $isEdit ? ($xanim['featured_image_fa'] ?? '') : ''; ?>
                         <?php if ($fifa): ?>
                             <div class="bb-image-preview">
                                 <img src="/<?= bb_sanitize($fifa) ?>" alt="Featured FA">
@@ -239,4 +239,3 @@ $submitLabel = $isEdit ? 'Yenilə' : 'Yadda saxla';
         </div>
     </div>
 </form>
-

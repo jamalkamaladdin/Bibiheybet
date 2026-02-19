@@ -46,7 +46,11 @@ $latestArticles = $db->query(
 )->fetchAll();
 
 $pilgrimagesList = $db->query(
-    "SELECT * FROM pilgrimages WHERE status = 'published' ORDER BY sort_order ASC LIMIT 8"
+    "SELECT * FROM pilgrimages WHERE status = 'published' ORDER BY sort_order ASC LIMIT 4"
+)->fetchAll();
+
+$xanimList = $db->query(
+    "SELECT * FROM xanim_haqqinda WHERE status = 'published' ORDER BY sort_order ASC LIMIT 2"
 )->fetchAll();
 
 /** Quran bölməsi üçün etiketlər */
@@ -156,6 +160,13 @@ $_defaults = [
         'ar' => 'المقالات',
         'fa' => 'مقالات',
     ],
+    'xanim_title' => [
+        'az' => 'Həkimə xanım haqqında',
+        'en' => 'About Lady Hakima',
+        'ru' => 'О Хакиме ханым',
+        'ar' => 'عن السيدة حكيمة',
+        'fa' => 'درباره حکیمه خانم',
+    ],
 ];
 
 $_strings = bb_load_page_contents($db, 'home', $_defaults);
@@ -220,6 +231,42 @@ $ptKeys = ['fajr','sunrise','dhuhr','asr','sunset','maghrib','isha','midnight'];
                     <?= bb_sanitize($t('read_more')) ?>
                 </a>
             </div>
+
+            <?php if (!empty($xanimList)): ?>
+            <div class="bb-home-xanim-subsection">
+                <h2 class="bb-home-section-title"><?= bb_sanitize($t('xanim_title')) ?></h2>
+                <div class="bb-separator bb-separator-center"></div>
+
+                <div class="bb-home-pilgrimages-grid">
+                    <?php foreach ($xanimList as $x): ?>
+                        <?php
+                            $xName  = bb_get_field($x, 'name', $lang);
+                            $xSlug  = bb_get_field($x, 'slug', $lang);
+                            $xImage = bb_get_featured_image($x, $lang);
+                            $xUrl   = bb_lang_url(bb_get_route('xanim', $lang) . '/' . $xSlug, $lang);
+                        ?>
+                    <a href="<?= bb_sanitize($xUrl) ?>" class="bb-home-pilgrimage-item">
+                        <div class="bb-home-pilgrimage-frame">
+                            <?php if ($xImage): ?>
+                            <img class="bb-home-pilgrimage-photo"
+                                 src="/<?= bb_sanitize($xImage) ?>"
+                                 alt="<?= bb_sanitize($xName) ?>"
+                                 loading="lazy">
+                            <?php else: ?>
+                            <div class="bb-home-pilgrimage-placeholder"></div>
+                            <?php endif; ?>
+                        </div>
+                        <h3 class="bb-home-pilgrimage-title"><?= bb_sanitize($xName) ?></h3>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+
+                <a href="<?= bb_sanitize(bb_lang_url(bb_get_route('xanim-haqqinda', $lang) . '/', $lang)) ?>"
+                   class="bb-btn bb-btn-gold bb-home-more-btn">
+                    <?= bb_sanitize($t('show_more')) ?>
+                </a>
+            </div>
+            <?php endif; ?>
         </div>
     </section>
 
